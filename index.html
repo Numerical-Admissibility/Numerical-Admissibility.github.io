@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AP-1 Protocol | Numerical Admissibility</title>
-    <meta name="description" content="AP-1 is an open standard for evaluating numerical admissibility, operand provenance, and deterministic execution in AI systems.">
-    
-    <!-- Geist Font Import -->
+    <title>AP-1 | The Admissibility Protocol</title>
+    <meta name="description" content="AP-1 is an open standard for evaluating numerical admissibility, operand provenance and deterministic execution in AI systems. CC-BY 4.0.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AP-1 | The Admissibility Protocol">
+    <meta property="og:description" content="An open standard for evaluating numerical admissibility in AI systems. Free, versioned, falsifiable.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://numericaladmissibility.org/">
+
+    <!-- Geist -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-sans/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-mono/style.css">
-    
+
     <style>
         :root {
             --bg-color: #000000;
             --text-primary: #FFFFFF;
             --text-secondary: #888888;
+            --text-tertiary: #5A5A5A;
             --bronze: #C5A059;
             --bronze-dim: rgba(197, 160, 89, 0.15);
+            --bronze-faint: rgba(197, 160, 89, 0.06);
             --border-color: #222222;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Geist Sans', sans-serif;
+            font-family: 'Geist Sans', -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.6;
@@ -35,11 +39,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
 
         header {
             border-bottom: 1px solid var(--border-color);
@@ -48,163 +48,127 @@
         }
 
         .status-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            font-family: 'Geist Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--bronze);
+            display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+            font-family: 'Geist Mono', monospace; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--bronze);
+            flex-wrap: wrap;
         }
 
         .status-indicator {
-            width: 6px;
-            height: 6px;
-            background-color: var(--bronze);
-            box-shadow: 0 0 8px var(--bronze);
+            width: 6px; height: 6px; background-color: var(--bronze);
+            box-shadow: 0 0 8px var(--bronze); flex-shrink: 0;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 400;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-            color: var(--text-primary);
+            font-size: 3.5rem; font-weight: 400; letter-spacing: -0.03em;
+            margin-bottom: 16px; line-height: 1.05;
         }
 
         .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin-bottom: 32px;
-            font-weight: 300;
+            font-size: 1.25rem; color: var(--text-secondary);
+            max-width: 800px; margin-bottom: 20px; font-weight: 300;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
+        .version-note {
+            font-family: 'Geist Mono', monospace; font-size: 0.8rem;
+            color: var(--text-tertiary); margin-bottom: 32px;
+            border-left: 2px solid var(--border-color); padding-left: 14px;
+            line-height: 1.7;
         }
+        .version-note strong { color: var(--text-secondary); font-weight: 400; }
+
+        .cta-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
 
         .btn {
-            font-family: 'Geist Mono', monospace;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.05em;
-            padding: 14px 28px;
-            text-decoration: none;
-            border: 1px solid var(--bronze);
-            transition: all 0.2s ease;
-            cursor: pointer;
+            font-family: 'Geist Mono', monospace; text-transform: uppercase;
+            font-size: 0.75rem; letter-spacing: 0.05em; padding: 14px 28px;
+            text-decoration: none; border: 1px solid var(--bronze);
+            transition: all 0.2s ease; cursor: pointer; display: inline-block;
         }
-
-        .btn-primary {
-            background-color: var(--bronze);
-            color: var(--bg-color);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--bronze);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--bronze);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--bronze-dim);
-        }
+        .btn-primary { background-color: var(--bronze); color: var(--bg-color); }
+        .btn-primary:hover { background-color: transparent; color: var(--bronze); }
+        .btn-secondary { background-color: transparent; color: var(--bronze); }
+        .btn-secondary:hover { background-color: var(--bronze-dim); }
 
         h2 {
-            font-family: 'Geist Mono', monospace;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--bronze);
+            font-family: 'Geist Mono', monospace; font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--bronze);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px;
-            margin-bottom: 24px;
+            padding-bottom: 12px; margin-bottom: 24px;
         }
 
-        .section {
-            margin-bottom: 64px;
-        }
+        .section { margin-bottom: 64px; }
 
-        .prose {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 800px;
-        }
-
-        .prose strong {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
+        .prose { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; }
+        .prose strong { color: var(--text-primary); font-weight: 500; }
+        .prose + .prose { margin-top: 20px; }
 
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1px;
-            background-color: var(--border-color);
-            border: 1px solid var(--border-color);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px; background-color: var(--border-color); border: 1px solid var(--border-color);
         }
 
-        .card {
-            background-color: var(--bg-color);
-            padding: 32px;
-            transition: background-color 0.2s ease;
-        }
-
-        .card:hover {
-            background-color: var(--bronze-dim);
-        }
-
+        .card { background-color: var(--bg-color); padding: 28px; transition: background-color 0.2s ease; }
+        .card:hover { background-color: var(--bronze-dim); }
         .card h3 {
-            font-family: 'Geist Mono', monospace;
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-primary);
-            margin-bottom: 12px;
+            font-family: 'Geist Mono', monospace; font-size: 0.95rem; font-weight: 400;
+            color: var(--text-primary); margin-bottom: 10px;
         }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .card p { color: var(--text-secondary); font-size: 0.92rem; }
+        .card .tag {
+            display: inline-block; font-family: 'Geist Mono', monospace;
+            font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--bronze); border: 1px solid var(--bronze);
+            padding: 2px 6px; margin-top: 12px;
         }
 
         pre {
-            font-family: 'Geist Mono', monospace;
-            font-size: 0.85rem;
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            border-left: 2px solid var(--bronze);
-            padding: 24px;
-            color: var(--text-secondary);
-            overflow-x: auto;
+            font-family: 'Geist Mono', monospace; font-size: 0.85rem;
+            background-color: transparent; border: 1px solid var(--border-color);
+            border-left: 2px solid var(--bronze); padding: 24px;
+            color: var(--text-secondary); overflow-x: auto; line-height: 1.9;
         }
+        pre a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--text-tertiary); }
+        pre a:hover { color: var(--bronze); border-bottom-color: var(--bronze); }
 
-        .highlight {
-            color: var(--bronze);
+        .highlight { color: var(--bronze); }
+
+        .disclosure {
+            border: 1px solid var(--border-color); border-left: 2px solid var(--bronze);
+            padding: 24px; background-color: var(--bronze-faint);
         }
+        .disclosure p { color: var(--text-secondary); font-size: 0.98rem; max-width: 780px; }
+        .disclosure p + p { margin-top: 14px; }
+        .disclosure strong { color: var(--text-primary); font-weight: 500; }
+
+        .links-list { list-style: none; }
+        .links-list li {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0; display: flex; justify-content: space-between;
+            align-items: baseline; gap: 20px; flex-wrap: wrap;
+        }
+        .links-list li:last-child { border-bottom: none; }
+        .links-list .label { color: var(--text-secondary); font-size: 0.98rem; }
+        .links-list a {
+            font-family: 'Geist Mono', monospace; font-size: 0.82rem;
+            color: var(--bronze); text-decoration: none;
+            border-bottom: 1px solid transparent; transition: border-color 0.2s ease;
+            word-break: break-all;
+        }
+        .links-list a:hover { border-bottom-color: var(--bronze); }
 
         footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 32px;
-            font-family: 'Geist Mono', monospace;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            border-top: 1px solid var(--border-color); padding-top: 32px;
+            font-family: 'Geist Mono', monospace; color: var(--text-tertiary);
+            font-size: 0.72rem; display: flex; justify-content: space-between;
+            text-transform: uppercase; letter-spacing: 0.05em; gap: 20px; flex-wrap: wrap;
         }
+        footer a { color: var(--bronze); text-decoration: none; }
 
-        footer a {
-            color: var(--bronze);
-            text-decoration: none;
+        @media (max-width: 640px) {
+            h1 { font-size: 2.4rem; }
+            .container { padding: 40px 20px; }
+            .subtitle { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -214,54 +178,142 @@
     <header>
         <div class="status-bar">
             <div class="status-indicator"></div>
-            Standard Protocol / Draft v1.3 / Active
+            The Admissibility Protocol / v1.2 in force / v1.3 draft open for comment
         </div>
-        <h1>AP-1 Architecture</h1>
-        <p class="subtitle">The canonical standard for AI numerical admissibility and verifiable operand provenance in mission-critical environments.</p>
+        <h1>AP-1</h1>
+        <p class="subtitle">An open standard for evaluating numerical admissibility and operand provenance in AI systems operating in mission-critical environments.</p>
+        <div class="version-note">
+            <strong>v1.2</strong> is the version in force. <strong>v1.3</strong> is published as a draft for public comment and is not adopted.<br>
+            Comment window closes 30 September 2026.
+        </div>
         <div class="cta-buttons">
-            <a href="https://github.com/Numerical-Admissibility" class="btn btn-primary">Initialize Runner</a>
-            <a href="#spec" class="btn btn-secondary">View Spec</a>
+            <a href="https://doi.org/10.5281/zenodo.21324954" class="btn btn-primary">Read the Standard</a>
+            <a href="https://github.com/Numerical-Admissibility" class="btn btn-secondary">Reference Implementation</a>
         </div>
     </header>
 
     <div class="section">
-        <h2>Systemic Governance Challenge</h2>
+        <h2>The Governance Challenge</h2>
         <p class="prose">
-            In regulated operational environments, an agent may originate an operand itself and pass it to a correctly functioning deterministic tool. The tool-execution record remains valid, because a computation genuinely occurred. What it fails to establish is that the operand entering the computation was authoritative.<br><br>
+            In regulated operational environments, an agent may originate an operand itself and pass it to a correctly functioning deterministic tool. The tool-execution record remains valid, because a computation genuinely occurred. What it fails to establish is that the operand entering the computation was authoritative.
+        </p>
+        <p class="prose">
             Instructing a model not to originate operands is merely a <strong>policy</strong>; establishing after execution that every consequential operand can be traced to an authoritative source is a <strong>control</strong>.
+        </p>
+        <p class="prose">
+            A correct numerical output does not, by itself, establish that the deployed system executed the deterministic computation required to produce it. That property is not a property of the output, and cannot be established by inspecting the answer.
         </p>
     </div>
 
     <div class="section" id="spec">
         <h2>Evaluation Dimensions</h2>
+        <p class="prose" style="margin-bottom:24px">AP-1 defines seven dimensions. A conformant evaluation reports each separately, with sample size and evidence class. The standard produces no aggregate score and sets no pass mark.</p>
         <div class="grid">
             <div class="card">
-                <h3>01. Operand Provenance</h3>
-                <p>Detects ungoverned arithmetic. Verifies whether numerical inputs originate from authorized source data or hallucinated model intermediates.</p>
+                <h3>D1 &nbsp;Accuracy</h3>
+                <p>Whether the figure is correct against ground truth reproducible from the published fixture.</p>
             </div>
             <div class="card">
-                <h3>02. Operation Correctness</h3>
-                <p>Audits multi-step derivation routes against governed calculation engines to ensure full compliance with specified mathematical paths.</p>
+                <h3>D2 &nbsp;Determinism</h3>
+                <p>Whether an identical question returns an identical answer across repeated runs, and by what mechanism &mdash; structurally, by configuration, or merely observed.</p>
             </div>
             <div class="card">
-                <h3>03. Refusal Integrity</h3>
-                <p>Evaluates whether an agent correctly drops execution when required data context, temporal validity, or provenance cannot be established.</p>
+                <h3>D3 &nbsp;Provenance</h3>
+                <p>Whether the system can produce the source and the operation for every figure it states.</p>
+            </div>
+            <div class="card">
+                <h3>D4 &nbsp;Refusal Integrity</h3>
+                <p>Whether the system declines when the data cannot support an answer, rather than producing one.</p>
+            </div>
+            <div class="card">
+                <h3>D5 &nbsp;Adversarial Resistance</h3>
+                <p>Whether the system holds under sustained pressure to state a figure that does not exist.</p>
+            </div>
+            <div class="card">
+                <h3>D6 &nbsp;Conflicting Input</h3>
+                <p>Whether contradictory, stale, partial or out-of-range source data is detected rather than computed over silently.</p>
+            </div>
+            <div class="card">
+                <h3>D7 &nbsp;Computation Invocation</h3>
+                <p>Whether the required deterministic computation actually executed &mdash; and whether invocation is guaranteed rather than merely observed.</p>
+            </div>
+            <div class="card">
+                <h3>D7.2(a) &nbsp;Operand Provenance</h3>
+                <p>Whether every numerical operand entering a deterministic computation traces to an authoritative source or a declared transformation.</p>
+                <span class="tag">Proposed in v1.3</span>
             </div>
         </div>
     </div>
 
     <div class="section">
+        <h2>What AP-1 Is Not</h2>
+        <p class="prose">
+            AP-1 issues <strong>no certification</strong>, maintains <strong>no registry</strong>, and charges <strong>no fee</strong>. It produces a per-dimension profile, not a score, and sets no threshold &mdash; the reader of the profile determines whether the evidence is adequate for the use in question.
+        </p>
+        <p class="prose">
+            It is architecture-neutral and domain-neutral. Any system may pass; any system may fail. The standard states its own defeat condition and publishes it, so that any party may attempt refutation.
+        </p>
+        <p class="prose">
+            AP-1 addresses numerical admissibility. It does not address fairness, bias, model drift, consumer explainability, third-party risk or model lifecycle management.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Origin and Disclosure</h2>
+        <div class="disclosure">
+            <p>
+                AP-1 was authored by <strong>ZORRZ Financial Inc.</strong>, which develops systems intended to satisfy the standard. Stewardship of the standard and its reference implementation is held independently of that commercial interest.
+            </p>
+            <p>
+                That relationship is disclosed here and in the standard's own governance section, because a measurement standard whose author will not be measured by it is a brochure. AP-1 is designed to be applied to any system, including its author's, and is free permanently.
+            </p>
+            <p>
+                <strong>No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as an erratum, and whose affected results are withdrawn.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
         <h2>Reference Metadata</h2>
-        <pre><code><span class="highlight">ID:</span>          AP-1 (Admissibility Protocol 1)
-<span class="highlight">VERSION:</span>     v1.3 (Public Draft)
-<span class="highlight">LICENCE:</span>     Creative Commons Attribution 4.0 (CC-BY 4.0)
-<span class="highlight">RUNNER:</span>      Open Source Permissive
-<span class="highlight">WINDOW:</span>      Public comment disposition open through 30 SEP 2026</code></pre>
+        <pre><code><span class="highlight">ID</span>            AP-1 &mdash; The Admissibility Protocol
+<span class="highlight">IN FORCE</span>      v1.2
+<span class="highlight">DRAFT</span>         v1.3 &mdash; public comment, not adopted
+<span class="highlight">WINDOW</span>        Comment closes 30 September 2026
+<span class="highlight">LICENCE</span>       Creative Commons Attribution 4.0 (CC-BY 4.0)
+<span class="highlight">RUNNER</span>        ap1-run &mdash; open source
+<span class="highlight">DOI</span>           <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>
+<span class="highlight">STEWARD</span>       Numerical Admissibility Org</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>Resources</h2>
+        <ul class="links-list">
+            <li>
+                <span class="label">The standard &mdash; concept DOI, resolves to latest version</span>
+                <a href="https://doi.org/10.5281/zenodo.21324954">doi.org/10.5281/zenodo.21324954</a>
+            </li>
+            <li>
+                <span class="label">GitHub organisation</span>
+                <a href="https://github.com/Numerical-Admissibility">github.com/Numerical-Admissibility</a>
+            </li>
+            <li>
+                <span class="label">Reference implementation &mdash; ap1-run</span>
+                <a href="https://github.com/Numerical-Admissibility/ap1-run">github.com/Numerical-Admissibility/ap1-run</a>
+            </li>
+            <li>
+                <span class="label">Standard, evaluation, erratum and raw logs</span>
+                <a href="https://github.com/Numerical-Admissibility/admissibility-protocol">github.com/Numerical-Admissibility/admissibility-protocol</a>
+            </li>
+            <li>
+                <span class="label">Comment on the v1.3 draft &mdash; open until 30 September 2026</span>
+                <a href="https://github.com/Numerical-Admissibility/admissibility-protocol/issues">Repository issues &mdash; amendment template</a>
+            </li>
+        </ul>
     </div>
 
     <footer>
-        <div>&copy; 2026 Numerical Admissibility Org.</div>
-        <div>Independent Open Source Standard</div>
+        <div>&copy; 2026 Numerical Admissibility Org &middot; CC-BY 4.0</div>
+        <div>Open &middot; Falsifiable &middot; Author-tested</div>
     </footer>
 </div>
 
