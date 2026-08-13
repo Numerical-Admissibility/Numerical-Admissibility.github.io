@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP-1 Protocol | The Open Standard for AI Numerical Admissibility</title>
+    <meta name="description" content="AP-1 is an open standard for evaluating numerical admissibility, operand provenance, and deterministic execution in AI systems.">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --accent-blue: #38bdf8;
+            --border-color: #1f2937;
+            --code-bg: #030712;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #0f172a;
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+        }
+
+        code, pre {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background-color: var(--code-bg);
+            border-radius: 4px;
+        }
+
+        pre {
+            padding: 16px;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <span class="badge">Open Standard • Draft v1.3</span>
+        <h1>AP-1 Protocol</h1>
+        <p class="subtitle">The Open Standard for AI Numerical Admissibility and Verifiable Operand Provenance in Mission-Critical Systems.</p>
+        <div class="cta-buttons">
+            <a href="https://github.com/Numerical-Admissibility" class="btn btn-primary">View GitHub Org</a>
+            <a href="#specification" class="btn btn-secondary">Read Specification</a>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2>The Governance Challenge</h2>
+        <p>In high-stakes corporate environments, an AI agent can perform ungoverned arithmetic or pass self-originated operands into deterministic tools. While the tool execution record remains valid, the inputs entering the calculation lack established provenance.</p>
+        <p>Instructing an LLM not to originate operands is merely a <strong>policy</strong>; verifying after execution that every consequential operand traces to an authoritative source is a <strong>control</strong>.</p>
+    </div>
+
+    <div class="section" id="specification">
+        <h2>Core Dimensions Evaluated by AP-1</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Operand Provenance</h3>
+                <p>Verifies whether numerical inputs originate from authorized source data or ungoverned model calculations.</p>
+            </div>
+            <div class="card">
+                <h3>Operation Correctness</h3>
+                <p>Audits multi-step derivation routes against governed calculation engines to ensure full compliance.</p>
+            </div>
+            <div class="card">
+                <h3>Refusal Integrity</h3>
+                <p>Evaluates whether an agent correctly refuses execution when required data context or provenance is missing.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Standard & Reference Implementation</h2>
+        <pre><code># Standard Details
+Specification: AP-1 v1.3 (Public Draft)
+Licence: Creative Commons Attribution 4.0 International (CC-BY 4.0)
+Reference Runner: Open Source (Permissive Licence)
+Status: Public Comment Period open through 30 September 2026</code></pre>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Numerical Admissibility Working Group. Maintained as an open-source standard.</p>
+    </footer>
+</div>
+
+</body>
+</html>
