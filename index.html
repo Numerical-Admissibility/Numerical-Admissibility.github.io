@@ -156,6 +156,10 @@
             word-break: break-all;
         }
         .links-list a:hover { border-bottom-color: var(--bronze); }
+        .links-list .muted {
+            font-family: 'Geist Mono', monospace; font-size: 0.82rem;
+            color: var(--text-tertiary); word-break: break-all;
+        }
 
         footer {
             border-top: 1px solid var(--border-color); padding-top: 32px;
@@ -188,7 +192,7 @@
         </div>
         <div class="cta-buttons">
             <a href="https://doi.org/10.5281/zenodo.21324954" class="btn btn-primary">Read the Standard</a>
-            <a href="https://github.com/Numerical-Admissibility" class="btn btn-secondary">Reference Implementation</a>
+            <a href="https://github.com/zorrzai/admissibility-protocol" class="btn btn-secondary">Standard Repository</a>
         </div>
     </header>
 
@@ -207,7 +211,7 @@
 
     <div class="section" id="spec">
         <h2>Evaluation Dimensions</h2>
-        <p class="prose" style="margin-bottom:24px">AP-1 defines seven dimensions. A conformant evaluation reports each separately, with sample size and evidence class. The standard produces no aggregate score and sets no pass mark.</p>
+        <p class="prose" style="margin-bottom:24px">AP-1 defines seven dimensions. A conformant evaluation reports each separately, with sample size and evidence class. The standard produces no aggregate score and sets no pass mark. D7.2(a) below is a sub-measure of D7 proposed in the v1.3 draft.</p>
         <div class="grid">
             <div class="card">
                 <h3>D1 &nbsp;Accuracy</h3>
@@ -240,7 +244,7 @@
             <div class="card">
                 <h3>D7.2(a) &nbsp;Operand Provenance</h3>
                 <p>Whether every numerical operand entering a deterministic computation traces to an authoritative source or a declared transformation.</p>
-                <span class="tag">Proposed in v1.3</span>
+                <span class="tag">Sub-measure of D7 &mdash; proposed in v1.3</span>
             </div>
         </div>
     </div>
@@ -251,7 +255,7 @@
             AP-1 issues <strong>no certification</strong>, maintains <strong>no registry</strong>, and charges <strong>no fee</strong>. It produces a per-dimension profile, not a score, and sets no threshold &mdash; the reader of the profile determines whether the evidence is adequate for the use in question.
         </p>
         <p class="prose">
-            It is architecture-neutral and domain-neutral. Any system may pass; any system may fail. The standard states its own defeat condition and publishes it, so that any party may attempt refutation.
+            It defines no pass criterion for any dimension. There is no verdict to issue and no mark to award; a system is described, not graded. It is architecture-neutral and domain-neutral, and any system may be evaluated under it, including its author's. The standard states its own defeat condition and publishes it, so that any party may attempt refutation.
         </p>
         <p class="prose">
             AP-1 addresses numerical admissibility. It does not address fairness, bias, model drift, consumer explainability, third-party risk or model lifecycle management.
@@ -262,13 +266,16 @@
         <h2>Origin and Disclosure</h2>
         <div class="disclosure">
             <p>
-                AP-1 was authored by <strong>ZORRZ Financial Inc.</strong>, which develops systems intended to satisfy the standard. Stewardship of the standard and its reference implementation is held independently of that commercial interest.
+                AP-1 was authored by <strong>ZORRZ Financial Inc.</strong>, which develops systems intended to satisfy the standard. The standard and its reference implementation are published and maintained by their author. <strong>No independent steward currently holds them.</strong>
             </p>
             <p>
-                That relationship is disclosed here and in the standard's own governance section, because a measurement standard whose author will not be measured by it is a brochure. AP-1 is designed to be applied to any system, including its author's, and is free permanently.
+                That relationship is disclosed here and in the standard's own governance section, because a measurement standard whose author will not be measured by it is a brochure. AP-1 is designed to be applied to any system, including its author's, and is free permanently under CC-BY 4.0.
             </p>
             <p>
                 <strong>No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as an erratum, and whose affected results are withdrawn.
+            </p>
+            <p>
+                The reference implementation is under private technical review ahead of public release. Its fixtures and expected values were authored by an AI coding agent rather than derived from an independent source; no language model executes during an evaluation run.
             </p>
         </div>
     </div>
@@ -279,40 +286,37 @@
 <span class="highlight">IN FORCE</span>      v1.2
 <span class="highlight">DRAFT</span>         v1.3 &mdash; public comment, not adopted
 <span class="highlight">WINDOW</span>        Comment closes 30 September 2026
-<span class="highlight">LICENCE</span>       Creative Commons Attribution 4.0 (CC-BY 4.0)
-<span class="highlight">RUNNER</span>        ap1-run &mdash; open source
+<span class="highlight">LICENCE</span>       Standard &mdash; Creative Commons Attribution 4.0 (CC-BY 4.0)
+<span class="highlight">RUNNER</span>        ap1-run &mdash; private review; open licence to be applied
+              before public release
 <span class="highlight">DOI</span>           <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>
-<span class="highlight">STEWARD</span>       Numerical Admissibility Org</code></pre>
+<span class="highlight">PUBLISHER</span>     ZORRZ Financial Inc.</code></pre>
     </div>
 
     <div class="section">
         <h2>Resources</h2>
         <ul class="links-list">
             <li>
-                <span class="label">The standard &mdash; concept DOI, resolves to latest version</span>
+                <span class="label">The standard &mdash; concept DOI, resolves to the latest deposited version (currently the v1.3 draft, not adopted)</span>
                 <a href="https://doi.org/10.5281/zenodo.21324954">doi.org/10.5281/zenodo.21324954</a>
             </li>
             <li>
-                <span class="label">GitHub organisation</span>
-                <a href="https://github.com/Numerical-Admissibility">github.com/Numerical-Admissibility</a>
-            </li>
-            <li>
-                <span class="label">Reference implementation &mdash; ap1-run</span>
-                <a href="https://github.com/Numerical-Admissibility/ap1-run">github.com/Numerical-Admissibility/ap1-run</a>
-            </li>
-            <li>
                 <span class="label">Standard, evaluation, erratum and raw logs</span>
-                <a href="https://github.com/Numerical-Admissibility/admissibility-protocol">github.com/Numerical-Admissibility/admissibility-protocol</a>
+                <a href="https://github.com/zorrzai/admissibility-protocol">github.com/zorrzai/admissibility-protocol</a>
             </li>
             <li>
                 <span class="label">Comment on the v1.3 draft &mdash; open until 30 September 2026</span>
-                <a href="https://github.com/Numerical-Admissibility/admissibility-protocol/issues">Repository issues &mdash; amendment template</a>
+                <a href="https://github.com/zorrzai/admissibility-protocol/issues">Repository issues &mdash; amendment template</a>
+            </li>
+            <li>
+                <span class="label">Reference implementation &mdash; ap1-run</span>
+                <span class="muted">Private review &mdash; published before adoption of v1.3</span>
             </li>
         </ul>
     </div>
 
     <footer>
-        <div>&copy; 2026 Numerical Admissibility Org &middot; CC-BY 4.0</div>
+        <div>&copy; 2026 ZORRZ Financial Inc. &middot; Standard licensed CC-BY 4.0</div>
         <div>Open &middot; Falsifiable &middot; Author-tested</div>
     </footer>
 </div>
