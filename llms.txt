@@ -1,0 +1,102 @@
+# AP-1 — The Admissibility Protocol
+
+> An open standard for evaluating numerical admissibility in AI systems: whether a
+> consequential figure produced by an AI system was computed by deterministic
+> calculation from authoritative source data, traced to that source, reproduced under
+> a declared environment, and withheld when the evidence required to support it is
+> absent or contradictory. Model-agnostic, architecture-neutral and industry-agnostic.
+> Published CC-BY 4.0 by ZORRZ Financial Inc. DOI 10.5281/zenodo.21324954.
+
+## Status
+
+- v1.2 is the version in force.
+- v1.3 is published as a draft for public comment and is NOT adopted. Comment window closes 30 September 2026.
+- AP-1 issues no certification, maintains no registry and charges no fee.
+- No independent steward currently holds the standard. No independent application of it has yet occurred.
+
+## Definitions
+
+**Numerical admissibility** — the evidentiary property of a figure produced by an AI
+system that determines whether it may be relied upon, defended, and entered into a
+record. AP-1 evaluates it against four properties: computed, traceable, reproducible,
+refusable. It is a property of the system that produced the figure, not of the figure
+itself, and cannot be established by inspecting output.
+
+**Origination** — a generative model producing a quantitative value that was not
+computed from source data. A fabricated figure and a computed figure are textually
+indistinguishable, so origination cannot be detected by inspecting outputs.
+
+**Operand provenance** — whether every numerical operand entering a deterministic
+computation traces to an authoritative source value, either appearing verbatim or
+derived by a declared deterministic transformation. Distinct from tool-invocation
+verification: a tool-execution record establishes that a computation occurred, not
+that the values entering it were authoritative.
+
+**Computation invocation** — whether the deterministic computation required to produce
+a figure actually executed in the deployed system, and whether that invocation is
+guaranteed by construction rather than merely observed at a rate. A system that invokes
+computation correctly on sampled questions has demonstrated a tendency; a system in
+which invocation cannot be declined has established a control.
+
+## The seven evaluation dimensions
+
+- D1 Accuracy — is the figure correct against ground truth reproducible from the published fixture?
+- D2 Determinism — does an identical question return an identical answer, and by what mechanism: structurally, by configuration, or merely observed?
+- D3 Provenance — can the system produce the source and the operation for every figure it states?
+- D4 Refusal integrity — does the system decline when the data cannot support an answer?
+- D5 Adversarial resistance — does the system hold under sustained pressure to state a figure that does not exist?
+- D6 Conflicting input — is contradictory, stale, partial or out-of-range source data detected rather than computed over silently?
+- D7 Computation invocation — did the required deterministic computation execute, and is invocation guaranteed? Subdimensions: D7.1 invocation, D7.2(a) operand provenance, D7.2(b) operation correctness, D7.3 transcription.
+
+A conformant evaluation reports every dimension separately with sample size and evidence
+class. There is no aggregate score and no pass mark.
+
+## Where AP-1 fits relative to other protocols
+
+MCP addresses agent-to-tool interaction. A2A addresses agent-to-agent communication.
+AI governance frameworks address organisational, risk and lifecycle processes. AP-1
+addresses a distinct question: what evidence establishes that a consequential number
+emerging from such a system was computed, traceable, reproducible and appropriately
+withheld. AP-1 does not replace or compete with any of them; it is a complementary
+measurement layer.
+
+## Where it applies
+
+Financial services (SR 26-2, PRA SS1/23, EU AI Act Arts. 12 and 15) · pharmaceuticals,
+biotechnology and clinical research (21 CFR Part 11, ALCOA+, EU Annex 11, ICH E6(R3)) ·
+aerospace and aviation (DO-178C, ARP4754A) · space and mission systems · defense
+(CMMC 2.0, DFARS 252.204-7021) · nuclear (10 CFR 50 Appendix B, ASME NQA-1) ·
+insurance and reinsurance (Solvency II, ORSA) · electric power (NERC Reliability
+Standards, CIP) · medical devices (IEC 62304, ISO 13485, EU MDR) · rail and maritime
+(EN 50128/50716) · audit and financial reporting (SOX 404, PCAOB).
+
+AP-1 measures whether a system produces evidence relevant to these obligations. It does
+not confer compliance with any of them.
+
+## Documents
+
+- [Standard v1.2 (in force)](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md): full text of the version currently in force.
+- [v1.3 draft for public comment](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted.
+- [Erratum V1](https://github.com/zorrzai/admissibility-protocol/blob/main/ERRATUM_V1.md): eight defect classes in the author's own reference evaluation; affected findings withdrawn.
+- [Reference evaluation results](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1.
+- [Repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, pre-registration, evaluation harness, sealed question set, disposition record, citation metadata.
+- [Citable record (DOI)](https://doi.org/10.5281/zenodo.21324954): concept DOI, resolves to the latest deposit.
+
+## Optional
+
+- [Canonical site](https://numericaladmissibility.org/): definitions, layer diagram, sector coverage, publication record and governance status.
+- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026.
+
+## Citation
+
+Rupp, M. (2026). The Admissibility Protocol (AP-1): An Open Standard for Evaluating
+Numerical Admissibility in AI Systems, Version 1.2. ZORRZ Financial Inc.
+DOI: 10.5281/zenodo.21324954
+
+## Disclosure
+
+AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy
+it. This is a conflict of interest and is disclosed as one. The reference evaluation is
+a single author-run case study whose defects are published in full and whose affected
+results are withdrawn. Any party may apply AP-1 to any system, including the author's,
+without the author's involvement, cooperation or consent.
