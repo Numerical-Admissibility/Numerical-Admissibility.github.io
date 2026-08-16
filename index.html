@@ -1,325 +1,678 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AP-1 | The Admissibility Protocol</title>
-    <meta name="description" content="AP-1 is an open standard for evaluating numerical admissibility, operand provenance and deterministic execution in AI systems. CC-BY 4.0.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="AP-1 | The Admissibility Protocol">
-    <meta property="og:description" content="An open standard for evaluating numerical admissibility in AI systems. Free, versioned, falsifiable.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://numericaladmissibility.org/">
+<title>AP-1 — The Admissibility Protocol | Numerical Admissibility for AI Systems</title>
 
-    <!-- Geist -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-sans/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-mono/style.css">
+<meta name="description" content="AP-1 is an open standard for numerical admissibility: whether a consequential figure produced by an AI system was computed from authoritative source data, traced to it, reproduced, and withheld when evidence is insufficient. Model-agnostic and industry-agnostic. CC-BY 4.0.">
+<meta name="keywords" content="numerical admissibility, operand provenance, computation invocation, AP-1, Admissibility Protocol, AI evidence standard, deterministic computation, AI assurance, AI audit trail, mission critical AI">
+<meta name="author" content="ZORRZ Financial Inc.">
+<link rel="canonical" href="https://numericaladmissibility.org/">
 
-    <style>
-        :root {
-            --bg-color: #000000;
-            --text-primary: #FFFFFF;
-            --text-secondary: #888888;
-            --text-tertiary: #5A5A5A;
-            --bronze: #C5A059;
-            --bronze-dim: rgba(197, 160, 89, 0.15);
-            --bronze-faint: rgba(197, 160, 89, 0.06);
-            --border-color: #222222;
-        }
+<meta property="og:title" content="AP-1 — The Admissibility Protocol">
+<meta property="og:description" content="An open standard for evaluating numerical admissibility, operand provenance and deterministic execution in AI systems. Free, versioned, falsifiable.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://numericaladmissibility.org/">
+<meta property="og:image" content="https://numericaladmissibility.org/og-operand-boundary.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-sans/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-mono/style.css">
 
-        body {
-            font-family: 'Geist Sans', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://numericaladmissibility.org/#numerical-admissibility",
+      "name": "Numerical admissibility",
+      "alternateName": "Admissibility of a numerical output",
+      "description": "The evidentiary property of a figure produced by an AI system that determines whether it may be relied upon, defended, and entered into a record. AP-1 evaluates it against four properties: computation, traceability, reproducibility and refusal integrity. Numerical admissibility is a property of the system that produced the figure, not of the figure itself, and cannot be established by inspecting output.",
+      "inDefinedTermSet": "https://numericaladmissibility.org/#ap1",
+      "sameAs": "https://doi.org/10.5281/zenodo.21324954"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://numericaladmissibility.org/#operand-provenance",
+      "name": "Operand provenance",
+      "description": "Whether every numerical operand entering a deterministic computation traces to an authoritative source value, either appearing verbatim or derived by a declared deterministic transformation. Operand provenance is distinct from tool-invocation verification: a tool-execution record establishes that a computation occurred, not that the values entering it were authoritative.",
+      "inDefinedTermSet": "https://numericaladmissibility.org/#ap1"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://numericaladmissibility.org/#computation-invocation",
+      "name": "Computation invocation",
+      "description": "Whether the deterministic computation required to produce a figure actually executed in the deployed system, and whether that invocation is guaranteed by construction rather than merely observed at a rate. A system that invokes computation correctly on sampled questions has demonstrated a tendency; a system in which invocation cannot be declined has established a control.",
+      "inDefinedTermSet": "https://numericaladmissibility.org/#ap1"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://numericaladmissibility.org/#origination",
+      "name": "Origination",
+      "description": "A generative model producing a quantitative value that was not computed from source data. Origination cannot be detected by inspecting outputs, because a fabricated figure and a computed figure are textually indistinguishable.",
+      "inDefinedTermSet": "https://numericaladmissibility.org/#ap1"
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://numericaladmissibility.org/#ap1",
+      "name": "AP-1 — The Admissibility Protocol",
+      "description": "An open standard for evaluating numerical admissibility, operand provenance and deterministic execution in AI-assisted systems used in regulated and mission-critical environments. Seven evaluation dimensions. No aggregate score, no pass mark, no certification, no registry, no fee.",
+      "url": "https://numericaladmissibility.org/",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "identifier": "https://doi.org/10.5281/zenodo.21324954",
+      "datePublished": "2026-07",
+      "version": "1.2",
+      "publisher": { "@type": "Organization", "name": "ZORRZ Financial Inc." },
+      "author": { "@type": "Person", "name": "Marcus Rupp" },
+      "hasDefinedTerm": [
+        { "@type": "DefinedTerm", "name": "D1 Accuracy", "description": "Whether the figure is correct against ground truth reproducible from the published fixture." },
+        { "@type": "DefinedTerm", "name": "D2 Determinism", "description": "Whether an identical question returns an identical answer across repeated runs, and by what mechanism — structurally, by configuration, or merely observed." },
+        { "@type": "DefinedTerm", "name": "D3 Provenance", "description": "Whether the system can produce the source and the operation for every figure it states." },
+        { "@type": "DefinedTerm", "name": "D4 Refusal integrity", "description": "Whether the system declines when the data cannot support an answer, rather than producing one." },
+        { "@type": "DefinedTerm", "name": "D5 Adversarial resistance", "description": "Whether the system holds under sustained pressure to state a figure that does not exist." },
+        { "@type": "DefinedTerm", "name": "D6 Conflicting input", "description": "Whether contradictory, stale, partial or out-of-range source data is detected rather than computed over silently." },
+        { "@type": "DefinedTerm", "name": "D7 Computation invocation", "description": "Whether the required deterministic computation actually executed, and whether invocation is guaranteed rather than merely observed. Subdimensions cover invocation, operand provenance, operation correctness and transcription." }
+      ]
+    },
+    {
+      "@type": "TechArticle",
+      "headline": "AP-1 — The Admissibility Protocol",
+      "description": "An open standard for evaluating numerical admissibility and operand provenance in AI systems operating in regulated and mission-critical environments.",
+      "url": "https://numericaladmissibility.org/",
+      "author": { "@type": "Person", "name": "Marcus Rupp" },
+      "publisher": { "@type": "Organization", "name": "ZORRZ Financial Inc." },
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "identifier": "https://doi.org/10.5281/zenodo.21324954",
+      "datePublished": "2026-07",
+      "about": [
+        { "@type": "Thing", "name": "Financial services model risk management" },
+        { "@type": "Thing", "name": "Pharmaceutical and clinical data integrity" },
+        { "@type": "Thing", "name": "Aerospace and aviation software assurance" },
+        { "@type": "Thing", "name": "Defense software assurance" },
+        { "@type": "Thing", "name": "Insurance actuarial validation" },
+        { "@type": "Thing", "name": "Nuclear safety software quality assurance" },
+        { "@type": "Thing", "name": "Electric power reliability" },
+        { "@type": "Thing", "name": "Medical device software" },
+        { "@type": "Thing", "name": "Railway signalling software" },
+        { "@type": "Thing", "name": "Audit and financial reporting" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is numerical admissibility?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Numerical admissibility is whether a figure produced by an AI system may be relied upon, defended, and entered into a record. AP-1 evaluates it against four evidentiary properties: whether the figure was computed by deterministic calculation from source data, whether it is traceable to a specific source value and operation, whether it is reproducible under a declared execution environment, and whether it is withheld when the data required to compute it is absent or contradictory." } },
+        { "@type": "Question", "name": "Why can output inspection not establish whether an AI figure was computed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A computed figure and a fabricated figure are textually identical. A model that states a value because it computed it, and a model that states the same value because the token sequence was probable, produce the same text. The property being evaluated belongs to the process that produced the figure, not to the answer text." } },
+        { "@type": "Question", "name": "Why is tool-call logging insufficient?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tool-call logging records that a tool was invoked and with what arguments, but not where those arguments originated. A model can invoke the correct tool, the tool can execute exactly as specified, and the answer can still be wrong because the model supplied an operand appearing nowhere in the source data. Invocation checks, execution contracts, grounding checks and data lineage all pass that case." } },
+        { "@type": "Question", "name": "How does AP-1 relate to MCP and A2A?",
+          "acceptedAnswer": { "@type": "Answer", "text": "MCP addresses how a model discovers and invokes tools. A2A addresses how agents communicate with one another. AP-1 addresses a different question: what evidence establishes that a consequential numerical result emerging from such a system was computed, traceable, reproducible and appropriately withheld. AP-1 does not replace or compete with either protocol; it operates at the numerical-evidence layer." } },
+        { "@type": "Question", "name": "Which industries does AP-1 apply to?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AP-1 is model-agnostic and industry-agnostic. It applies wherever a statistical component participates in producing a number that is acted upon and a regulator or assurance regime requires that figure to be evidenced, traceable, validated or reproducible. This includes financial services, pharmaceuticals and clinical research, aerospace and aviation, defense, insurance, nuclear, electric power, medical devices, rail, maritime, and audit and financial reporting." } },
+        { "@type": "Question", "name": "Does AP-1 certify systems or issue a pass mark?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. AP-1 issues no certification, maintains no registry and charges no fee. It produces a per-dimension evidence profile rather than an aggregate score, and sets no pass threshold. The party relying on the numerical result determines what level of evidence is adequate for the particular use. A system is described, not graded." } },
+        { "@type": "Question", "name": "Who authored AP-1 and is it independent?",
+          "acceptedAnswer": { "@type": "Answer", "text": "AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy it. This is a conflict of interest and is disclosed as one. No independent steward currently holds the standard, and no independent application of it has yet occurred. The reference evaluation is a single author-run case study whose defects are published in full as an erratum and whose affected results are withdrawn." } }
+      ]
+    }
+  ]
+}
+</script>
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
+<style>
+:root{
+  --bg:#000000;
+  --panel:#07090c;
+  --panel2:#0b0e12;
+  --copper:#B98A46;
+  --copper-dim:rgba(185,138,70,.14);
+  --copper-faint:rgba(185,138,70,.05);
+  --white:#ECEAE3;
+  --sub:#9AA0AC;
+  --gray:#606672;
+  --meta:#343840;
+  --rule:#262930;
+  --max:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--white);
+  font-family:'Geist Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+a{color:var(--copper);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
 
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 48px;
-            margin-bottom: 48px;
-        }
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.navin{max-width:var(--max);margin:auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:'Geist Mono',monospace;font-weight:600;letter-spacing:.22em;font-size:.95rem}
+.navlinks{display:flex;gap:22px;font-family:'Geist Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
+.navlinks a{color:var(--sub)}
+.navlinks a:hover{color:var(--copper);text-decoration:none}
 
-        .status-bar {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
-            font-family: 'Geist Mono', monospace; font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 0.1em; color: var(--bronze);
-            flex-wrap: wrap;
-        }
+/* layout */
+.wrap{max-width:var(--max);margin:auto;padding:0 24px}
+section{padding:72px 0;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:none}
+h2{font-family:'Geist Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--copper);margin-bottom:22px}
+h3{font-size:1.45rem;font-weight:500;letter-spacing:-.02em;margin-bottom:16px;line-height:1.25}
+.prose{color:var(--sub);font-size:1.06rem;max-width:760px}
+.prose+.prose{margin-top:16px}
+.prose strong{color:var(--white);font-weight:500}
+.small{font-size:.86rem;color:var(--gray);max-width:760px}
 
-        .status-indicator {
-            width: 6px; height: 6px; background-color: var(--bronze);
-            box-shadow: 0 0 8px var(--bronze); flex-shrink: 0;
-        }
+/* hero */
+.hero{padding:84px 0 68px}
+.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'Geist Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin-bottom:26px}
+.dot{width:6px;height:6px;background:var(--copper);box-shadow:0 0 9px var(--copper);flex-shrink:0}
+h1{font-size:clamp(3.2rem,9vw,5.6rem);line-height:.94;letter-spacing:-.045em;font-weight:500;margin-bottom:22px}
+.lede{font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.35;color:var(--white);font-weight:400;max-width:820px;margin-bottom:22px}
+.hero .prose{max-width:790px}
+.vbox{font-family:'Geist Mono',monospace;font-size:.78rem;color:var(--gray);border-left:2px solid var(--rule);padding:4px 0 4px 14px;margin:28px 0 30px;line-height:1.8}
+.vbox strong{color:var(--white);font-weight:400}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:'Geist Mono',monospace;text-transform:uppercase;font-size:.7rem;letter-spacing:.09em;padding:13px 22px;border:1px solid var(--copper);display:inline-block;transition:.18s}
+.btn:hover{text-decoration:none}
+.b1{background:var(--copper);color:#000}
+.b1:hover{background:transparent;color:var(--copper)}
+.b2{color:var(--copper)}
+.b2:hover{background:var(--copper-dim)}
 
-        h1 {
-            font-size: 3.5rem; font-weight: 400; letter-spacing: -0.03em;
-            margin-bottom: 16px; line-height: 1.05;
-        }
+/* definition */
+.defbox{border:1px solid var(--rule);border-left:2px solid var(--copper);background:var(--copper-faint);padding:28px 30px;margin:26px 0}
+.defbox p{font-size:1.14rem;color:var(--white);max-width:820px}
+.defbox p+p{margin-top:14px}
 
-        .subtitle {
-            font-size: 1.25rem; color: var(--text-secondary);
-            max-width: 800px; margin-bottom: 20px; font-weight: 300;
-        }
+/* grids */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
+.card{background:var(--bg);padding:24px;transition:background .18s}
+.card:hover{background:var(--copper-faint)}
+.card h4{font-family:'Geist Mono',monospace;font-size:.92rem;font-weight:500;color:var(--white);margin-bottom:9px}
+.card p{color:var(--sub);font-size:.9rem;line-height:1.55}
+.tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);border:1px solid var(--copper);padding:3px 6px;margin-top:12px;margin-right:5px}
+.tag-mute{color:var(--gray);border-color:var(--rule)}
 
-        .version-note {
-            font-family: 'Geist Mono', monospace; font-size: 0.8rem;
-            color: var(--text-tertiary); margin-bottom: 32px;
-            border-left: 2px solid var(--border-color); padding-left: 14px;
-            line-height: 1.7;
-        }
-        .version-note strong { color: var(--text-secondary); font-weight: 400; }
+/* table */
+.tw{overflow-x:auto;margin-top:26px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:13px 14px 13px 0;text-align:left;vertical-align:top}
+th{font-family:'Geist Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);font-weight:400}
+td{color:var(--sub)}
+td strong{color:var(--white);font-weight:500}
+td.m{font-family:'Geist Mono',monospace;font-size:.8rem;color:var(--white);white-space:nowrap}
 
-        .cta-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+/* callout */
+.callout{border:1px solid var(--rule);background:var(--panel);padding:26px 28px;margin-top:26px}
+.callout p{color:var(--sub);font-size:.98rem;max-width:800px}
+.callout p+p{margin-top:12px}
+.callout strong{color:var(--white);font-weight:500}
 
-        .btn {
-            font-family: 'Geist Mono', monospace; text-transform: uppercase;
-            font-size: 0.75rem; letter-spacing: 0.05em; padding: 14px 28px;
-            text-decoration: none; border: 1px solid var(--bronze);
-            transition: all 0.2s ease; cursor: pointer; display: inline-block;
-        }
-        .btn-primary { background-color: var(--bronze); color: var(--bg-color); }
-        .btn-primary:hover { background-color: transparent; color: var(--bronze); }
-        .btn-secondary { background-color: transparent; color: var(--bronze); }
-        .btn-secondary:hover { background-color: var(--bronze-dim); }
+/* code / meta */
+pre{font-family:'Geist Mono',monospace;font-size:.8rem;border:1px solid var(--rule);border-left:2px solid var(--copper);padding:22px;color:var(--sub);overflow-x:auto;line-height:1.85;margin-top:22px}
+pre .k{color:var(--copper)}
 
-        h2 {
-            font-family: 'Geist Mono', monospace; font-size: 0.85rem;
-            text-transform: uppercase; letter-spacing: 0.1em; color: var(--bronze);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 12px; margin-bottom: 24px;
-        }
+/* details */
+details{border-bottom:1px solid var(--rule);padding:18px 0}
+details summary{cursor:pointer;font-size:1.02rem;color:var(--white);font-weight:500;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:'+';color:var(--copper);font-family:'Geist Mono',monospace;margin-right:12px}
+details[open] summary::before{content:'−'}
+details p{color:var(--sub);font-size:.97rem;max-width:800px;margin-top:12px;padding-left:26px}
 
-        .section { margin-bottom: 64px; }
+/* footer */
+footer{border-top:1px solid var(--rule);padding:44px 0 60px}
+footer .fin{font-family:'Geist Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:.05em;line-height:2}
+footer .fin a{color:var(--copper)}
 
-        .prose { color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; }
-        .prose strong { color: var(--text-primary); font-weight: 500; }
-        .prose + .prose { margin-top: 20px; }
+svg{display:block;width:100%;height:auto;margin-top:26px}
 
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1px; background-color: var(--border-color); border: 1px solid var(--border-color);
-        }
-
-        .card { background-color: var(--bg-color); padding: 28px; transition: background-color 0.2s ease; }
-        .card:hover { background-color: var(--bronze-dim); }
-        .card h3 {
-            font-family: 'Geist Mono', monospace; font-size: 0.95rem; font-weight: 400;
-            color: var(--text-primary); margin-bottom: 10px;
-        }
-        .card p { color: var(--text-secondary); font-size: 0.92rem; }
-        .card .tag {
-            display: inline-block; font-family: 'Geist Mono', monospace;
-            font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
-            color: var(--bronze); border: 1px solid var(--bronze);
-            padding: 2px 6px; margin-top: 12px;
-        }
-
-        pre {
-            font-family: 'Geist Mono', monospace; font-size: 0.85rem;
-            background-color: transparent; border: 1px solid var(--border-color);
-            border-left: 2px solid var(--bronze); padding: 24px;
-            color: var(--text-secondary); overflow-x: auto; line-height: 1.9;
-        }
-        pre a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px dotted var(--text-tertiary); }
-        pre a:hover { color: var(--bronze); border-bottom-color: var(--bronze); }
-
-        .highlight { color: var(--bronze); }
-
-        .disclosure {
-            border: 1px solid var(--border-color); border-left: 2px solid var(--bronze);
-            padding: 24px; background-color: var(--bronze-faint);
-        }
-        .disclosure p { color: var(--text-secondary); font-size: 0.98rem; max-width: 780px; }
-        .disclosure p + p { margin-top: 14px; }
-        .disclosure strong { color: var(--text-primary); font-weight: 500; }
-
-        .links-list { list-style: none; }
-        .links-list li {
-            border-bottom: 1px solid var(--border-color);
-            padding: 16px 0; display: flex; justify-content: space-between;
-            align-items: baseline; gap: 20px; flex-wrap: wrap;
-        }
-        .links-list li:last-child { border-bottom: none; }
-        .links-list .label { color: var(--text-secondary); font-size: 0.98rem; }
-        .links-list a {
-            font-family: 'Geist Mono', monospace; font-size: 0.82rem;
-            color: var(--bronze); text-decoration: none;
-            border-bottom: 1px solid transparent; transition: border-color 0.2s ease;
-            word-break: break-all;
-        }
-        .links-list a:hover { border-bottom-color: var(--bronze); }
-        .links-list .muted {
-            font-family: 'Geist Mono', monospace; font-size: 0.82rem;
-            color: var(--text-tertiary); word-break: break-all;
-        }
-
-        footer {
-            border-top: 1px solid var(--border-color); padding-top: 32px;
-            font-family: 'Geist Mono', monospace; color: var(--text-tertiary);
-            font-size: 0.72rem; display: flex; justify-content: space-between;
-            text-transform: uppercase; letter-spacing: 0.05em; gap: 20px; flex-wrap: wrap;
-        }
-        footer a { color: var(--bronze); text-decoration: none; }
-
-        @media (max-width: 640px) {
-            h1 { font-size: 2.4rem; }
-            .container { padding: 40px 20px; }
-            .subtitle { font-size: 1.1rem; }
-        }
-    </style>
+@media(max-width:720px){
+  .navlinks{display:none}
+  section{padding:52px 0}
+  .hero{padding:56px 0 44px}
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="status-bar">
-            <div class="status-indicator"></div>
-            The Admissibility Protocol / v1.2 in force / v1.3 draft open for comment
-        </div>
-        <h1>AP-1</h1>
-        <p class="subtitle">An open standard for evaluating numerical admissibility and operand provenance in AI systems operating in mission-critical environments.</p>
-        <div class="version-note">
-            <strong>v1.2</strong> is the version in force. <strong>v1.3</strong> is published as a draft for public comment and is not adopted.<br>
-            Comment window closes 30 September 2026.
-        </div>
-        <div class="cta-buttons">
-            <a href="https://doi.org/10.5281/zenodo.21324954" class="btn btn-primary">Read the Standard</a>
-            <a href="https://github.com/zorrzai/admissibility-protocol" class="btn btn-secondary">Standard Repository</a>
-        </div>
-    </header>
-
-    <div class="section">
-        <h2>The Governance Challenge</h2>
-        <p class="prose">
-            In regulated operational environments, an agent may originate an operand itself and pass it to a correctly functioning deterministic tool. The tool-execution record remains valid, because a computation genuinely occurred. What it fails to establish is that the operand entering the computation was authoritative.
-        </p>
-        <p class="prose">
-            Instructing a model not to originate operands is merely a <strong>policy</strong>; establishing after execution that every consequential operand can be traced to an authoritative source is a <strong>control</strong>.
-        </p>
-        <p class="prose">
-            A correct numerical output does not, by itself, establish that the deployed system executed the deterministic computation required to produce it. That property is not a property of the output, and cannot be established by inspecting the answer.
-        </p>
+<nav>
+  <div class="navin">
+    <div class="brand">AP&#8209;1</div>
+    <div class="navlinks">
+      <a href="#definition">Definition</a>
+      <a href="#stack">Where it fits</a>
+      <a href="#dimensions">Dimensions</a>
+      <a href="#sectors">Applications</a>
+      <a href="#precedence">Record</a>
+      <a href="#governance">Governance</a>
+      <a href="#faq">FAQ</a>
     </div>
+  </div>
+</nav>
 
-    <div class="section" id="spec">
-        <h2>Evaluation Dimensions</h2>
-        <p class="prose" style="margin-bottom:24px">AP-1 defines seven dimensions. A conformant evaluation reports each separately, with sample size and evidence class. The standard produces no aggregate score and sets no pass mark. D7.2(a) below is a sub-measure of D7 proposed in the v1.3 draft.</p>
-        <div class="grid">
-            <div class="card">
-                <h3>D1 &nbsp;Accuracy</h3>
-                <p>Whether the figure is correct against ground truth reproducible from the published fixture.</p>
-            </div>
-            <div class="card">
-                <h3>D2 &nbsp;Determinism</h3>
-                <p>Whether an identical question returns an identical answer across repeated runs, and by what mechanism &mdash; structurally, by configuration, or merely observed.</p>
-            </div>
-            <div class="card">
-                <h3>D3 &nbsp;Provenance</h3>
-                <p>Whether the system can produce the source and the operation for every figure it states.</p>
-            </div>
-            <div class="card">
-                <h3>D4 &nbsp;Refusal Integrity</h3>
-                <p>Whether the system declines when the data cannot support an answer, rather than producing one.</p>
-            </div>
-            <div class="card">
-                <h3>D5 &nbsp;Adversarial Resistance</h3>
-                <p>Whether the system holds under sustained pressure to state a figure that does not exist.</p>
-            </div>
-            <div class="card">
-                <h3>D6 &nbsp;Conflicting Input</h3>
-                <p>Whether contradictory, stale, partial or out-of-range source data is detected rather than computed over silently.</p>
-            </div>
-            <div class="card">
-                <h3>D7 &nbsp;Computation Invocation</h3>
-                <p>Whether the required deterministic computation actually executed &mdash; and whether invocation is guaranteed rather than merely observed.</p>
-            </div>
-            <div class="card">
-                <h3>D7.2(a) &nbsp;Operand Provenance</h3>
-                <p>Whether every numerical operand entering a deterministic computation traces to an authoritative source or a declared transformation.</p>
-                <span class="tag">Sub-measure of D7 &mdash; proposed in v1.3</span>
-            </div>
-        </div>
-    </div>
+<main>
 
-    <div class="section">
-        <h2>What AP-1 Is Not</h2>
-        <p class="prose">
-            AP-1 issues <strong>no certification</strong>, maintains <strong>no registry</strong>, and charges <strong>no fee</strong>. It produces a per-dimension profile, not a score, and sets no threshold &mdash; the reader of the profile determines whether the evidence is adequate for the use in question.
-        </p>
-        <p class="prose">
-            It defines no pass criterion for any dimension. There is no verdict to issue and no mark to award; a system is described, not graded. It is architecture-neutral and domain-neutral, and any system may be evaluated under it, including its author's. The standard states its own defeat condition and publishes it, so that any party may attempt refutation.
-        </p>
-        <p class="prose">
-            AP-1 addresses numerical admissibility. It does not address fairness, bias, model drift, consumer explainability, third-party risk or model lifecycle management.
-        </p>
-    </div>
+<!-- ─────────────────────────── HERO -->
+<div class="wrap">
+<section class="hero">
+  <div class="status">
+    <div class="dot"></div>
+    The Admissibility Protocol &nbsp;·&nbsp; v1.2 in force &nbsp;·&nbsp; v1.3 draft open for comment
+  </div>
 
-    <div class="section">
-        <h2>Origin and Disclosure</h2>
-        <div class="disclosure">
-            <p>
-                AP-1 was authored by <strong>ZORRZ Financial Inc.</strong>, which develops systems intended to satisfy the standard. The standard and its reference implementation are published and maintained by their author. <strong>No independent steward currently holds them.</strong>
-            </p>
-            <p>
-                That relationship is disclosed here and in the standard's own governance section, because a measurement standard whose author will not be measured by it is a brochure. AP-1 is designed to be applied to any system, including its author's, and is free permanently under CC-BY 4.0.
-            </p>
-            <p>
-                <strong>No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as an erratum, and whose affected results are withdrawn.
-            </p>
-            <p>
-                The reference implementation is under private technical review ahead of public release. Its fixtures and expected values were authored by an AI coding agent rather than derived from an independent source; no language model executes during an evaluation run.
-            </p>
-        </div>
-    </div>
+  <h1>Numerical<br>Admissibility.</h1>
 
-    <div class="section">
-        <h2>Reference Metadata</h2>
-        <pre><code><span class="highlight">ID</span>            AP-1 &mdash; The Admissibility Protocol
-<span class="highlight">IN FORCE</span>      v1.2
-<span class="highlight">DRAFT</span>         v1.3 &mdash; public comment, not adopted
-<span class="highlight">WINDOW</span>        Comment closes 30 September 2026
-<span class="highlight">LICENCE</span>       Standard &mdash; Creative Commons Attribution 4.0 (CC-BY 4.0)
-<span class="highlight">RUNNER</span>        ap1-run &mdash; private review; open licence to be applied
-              before public release
-<span class="highlight">DOI</span>           <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>
-<span class="highlight">PUBLISHER</span>     ZORRZ Financial Inc.</code></pre>
-    </div>
+  <p class="lede">An open standard for evaluating whether a consequential number produced by an AI system can actually be evidenced.</p>
 
-    <div class="section">
-        <h2>Resources</h2>
-        <ul class="links-list">
-            <li>
-                <span class="label">The standard &mdash; concept DOI, resolves to the latest deposited version (currently the v1.3 draft, not adopted)</span>
-                <a href="https://doi.org/10.5281/zenodo.21324954">doi.org/10.5281/zenodo.21324954</a>
-            </li>
-            <li>
-                <span class="label">Standard, evaluation, erratum and raw logs</span>
-                <a href="https://github.com/zorrzai/admissibility-protocol">github.com/zorrzai/admissibility-protocol</a>
-            </li>
-            <li>
-                <span class="label">Comment on the v1.3 draft &mdash; open until 30 September 2026</span>
-                <a href="https://github.com/zorrzai/admissibility-protocol/issues">Repository issues &mdash; amendment template</a>
-            </li>
-            <li>
-                <span class="label">Reference implementation &mdash; ap1-run</span>
-                <span class="muted">Private review &mdash; published before adoption of v1.3</span>
-            </li>
-        </ul>
-    </div>
+  <p class="prose">AP-1 evaluates whether a numerical result was computed rather than generated, whether the operands entering that computation trace to authoritative source data, whether execution is reproducible under a declared environment, and whether unsupported results are withheld. It is model-agnostic, architecture-neutral and industry-agnostic.</p>
 
-    <footer>
-        <div>&copy; 2026 ZORRZ Financial Inc. &middot; Standard licensed CC-BY 4.0</div>
-        <div>Open &middot; Falsifiable &middot; Author-tested</div>
-    </footer>
+  <div class="vbox">
+    <strong>v1.2</strong> is the version in force. <strong>v1.3</strong> is published as a draft for public comment and is <strong>not adopted</strong>.<br>
+    Comment window closes 30 September 2026. Published CC-BY 4.0 — free to use, cite, implement and apply to any system, including its author's.
+  </div>
+
+  <div class="btns">
+    <a class="btn b1" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md">Read v1.2 — in force</a>
+    <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md">v1.3 draft</a>
+    <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol">Repository</a>
+  </div>
+</section>
 </div>
+
+<!-- ─────────────────────────── DEFINITION -->
+<div class="wrap">
+<section id="definition">
+  <h2>What is numerical admissibility?</h2>
+
+  <div class="defbox">
+    <p><strong>Numerical admissibility</strong> is the evidentiary property of a figure produced by an AI system that determines whether it may be relied upon, defended, and entered into a record.</p>
+    <p>AP-1 evaluates it against four evidentiary properties: whether the figure was <strong>computed</strong> by deterministic calculation from source data; whether it is <strong>traceable</strong> to a specific source value and operation; whether it is <strong>reproducible</strong> under a declared execution environment; and whether it is <strong>refusable</strong> — withheld when the data required to compute it is absent or contradictory.</p>
+  </div>
+
+  <p class="prose">A computed figure and a generated figure can be textually identical. A model may state the correct number because it performed the required computation, or because that number was probable. Inspecting the answer cannot distinguish the two, because the property in question belongs to the process, not to the text.</p>
+
+  <p class="prose">AP-1 therefore evaluates the evidence surrounding the production of a number rather than treating the answer as proof of its own derivation. <strong>Admissibility is a property of the system that produced the figure, not of the figure itself.</strong></p>
+
+  <div class="callout">
+    <p><strong>AP-1 defines no pass mark.</strong></p>
+    <p>The protocol produces a per-dimension evidence profile with declared denominators, evidence classes and limitations. The party relying on the numerical result determines what level of evidence is adequate for the particular use. A system is described, not graded.</p>
+  </div>
+</section>
+</div>
+
+<!-- ─────────────────────────── WHERE IT FITS -->
+<div class="wrap">
+<section id="stack">
+  <h2>Where AP-1 fits</h2>
+  <h3>Interoperability protocols establish what happened. AP-1 establishes what the number is worth.</h3>
+
+  <p class="prose">Modern AI systems are assembled from models, agents, tools and data sources. Different protocols address different parts of that assembly. AP-1 addresses a distinct question: when such a system emits a consequential number, what evidence establishes how that number was produced?</p>
+
+  <svg viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Layer diagram: an AI or agent layer sits above A2A agent-to-agent communication and MCP agent-to-tool interaction, above the tool, data and computation layer. A consequential number then passes through the AP-1 numerical evidence layer before reaching the mission, business or safety system that relies on it.">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#606672" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect x="40" y="8" width="620" height="58" fill="none" stroke="#262930"/>
+    <text x="350" y="32" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">AI · FOUNDATION MODEL · AGENT</text>
+    <text x="350" y="52" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">Interpretation, selection, inference</text>
+    <line x1="350" y1="66" x2="350" y2="86" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+
+    <rect x="40" y="90" width="300" height="54" fill="none" stroke="#262930"/>
+    <text x="190" y="112" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12.5" letter-spacing="2">A2A</text>
+    <text x="190" y="131" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Agent ↔ agent communication</text>
+
+    <rect x="360" y="90" width="300" height="54" fill="none" stroke="#262930"/>
+    <text x="510" y="112" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12.5" letter-spacing="2">MCP</text>
+    <text x="510" y="131" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Agent ↔ tool and context</text>
+
+    <line x1="350" y1="144" x2="350" y2="164" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+
+    <rect x="40" y="168" width="620" height="58" fill="none" stroke="#262930"/>
+    <text x="350" y="192" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">TOOL · DATA · DETERMINISTIC COMPUTATION</text>
+    <text x="350" y="212" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">APIs, databases, calculators, engines</text>
+
+    <line x1="350" y1="226" x2="350" y2="252" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+    <text x="360" y="245" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11" font-style="italic">a consequential number</text>
+
+    <rect x="40" y="256" width="620" height="122" fill="rgba(185,138,70,.05)" stroke="#B98A46" stroke-width="1.6"/>
+    <text x="350" y="286" text-anchor="middle" fill="#B98A46" font-family="Geist Mono,monospace" font-size="15" letter-spacing="5">AP-1</text>
+    <text x="350" y="309" text-anchor="middle" fill="#ECEAE3" font-family="Geist Sans,sans-serif" font-size="12.5">The numerical evidence layer</text>
+    <line x1="120" y1="325" x2="580" y2="325" stroke="#262930"/>
+    <text x="350" y="348" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="11.5" letter-spacing="1.5">COMPUTED · TRACEABLE · REPRODUCIBLE · REFUSABLE</text>
+    <text x="350" y="367" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Did the computation run, and were its operands authoritative?</text>
+
+    <line x1="350" y1="378" x2="350" y2="398" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+
+    <rect x="40" y="402" width="620" height="58" fill="none" stroke="#262930"/>
+    <text x="350" y="426" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">MISSION · BUSINESS · SAFETY SYSTEM</text>
+    <text x="350" y="446" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">A number acted upon, recorded, regulated or relied upon</text>
+  </svg>
+
+  <div class="callout">
+    <p><strong>MCP can establish that a tool was called. A2A can establish that agents communicated.</strong></p>
+    <p>Neither establishes where the numerical values entering that computation originated, nor whether the computation was required to run at all. That is the question AP-1 measures.</p>
+    <p class="small" style="margin-top:14px">AP-1 does not replace or compete with MCP, A2A, AI governance frameworks, security controls, model-risk frameworks or domain-specific assurance standards. It is a complementary measurement layer.</p>
+  </div>
+</section>
+</div>
+
+<!-- ─────────────────────────── OPERAND BOUNDARY -->
+<div class="wrap">
+<section id="boundary">
+  <h2>The operand boundary</h2>
+  <h3>A deterministic tool can execute perfectly and still produce an unsupported result.</h3>
+
+  <p class="prose">In one recorded case, the source data was clean, the correct deterministic tool was invoked, and it executed exactly as specified. The answer was still wrong — because the model supplied an operand that appeared nowhere in the source data.</p>
+
+  <div class="defbox">
+    <p><strong>Tool execution proves that a computation occurred. It does not, by itself, prove that the operands entering it were authoritative.</strong></p>
+  </div>
+
+  <p class="prose">Invocation verification passed that case: the tool was called. Execution contracts passed it: the call was valid. Grounding and entailment checks passed it: a computed figure is not present in retrieved context, so entailment has no purchase. Data lineage passed it: the warehouse was clean. Output review passed it: the result was arithmetically consistent with its inputs.</p>
+
+  <p class="prose">The failure crosses a boundary none of those controls watch. AP-1 therefore separates <strong>computation invocation</strong> — did the required computation run — from <strong>operand provenance</strong> — did every value entering it have an evidentiary basis.</p>
+
+  <p class="small" style="margin-top:18px">One observation in twenty-two invocations, with no recurrence in a twenty-run follow-up. Evidence of existence, not of prevalence. The full record is published in the reference evaluation.</p>
+</section>
+</div>
+
+<!-- ─────────────────────────── DIMENSIONS -->
+<div class="wrap">
+<section id="dimensions">
+  <h2>Evaluation dimensions</h2>
+  <h3>Seven dimensions, reported separately.</h3>
+  <p class="prose">A conformant evaluation reports every dimension with its sample size and evidence class. There is no aggregate score, so a strong result on one dimension cannot conceal a failure on another.</p>
+
+  <div class="grid">
+    <div class="card"><h4>D1 &nbsp;Accuracy</h4><p>Whether the figure is correct against ground truth reproducible from the published fixture.</p></div>
+    <div class="card"><h4>D2 &nbsp;Determinism</h4><p>Whether an identical question returns an identical answer across repeated runs — and by what mechanism: structurally, by configuration, or merely observed.</p></div>
+    <div class="card"><h4>D3 &nbsp;Provenance</h4><p>Whether the system can produce the source and the operation for every figure it states.</p></div>
+    <div class="card"><h4>D4 &nbsp;Refusal integrity</h4><p>Whether the system declines when the data cannot support an answer, rather than producing one.</p></div>
+    <div class="card"><h4>D5 &nbsp;Adversarial resistance</h4><p>Whether the system holds under sustained pressure to state a figure that does not exist.</p></div>
+    <div class="card"><h4>D6 &nbsp;Conflicting input</h4><p>Whether contradictory, stale, partial or out-of-range source data is detected rather than computed over silently.</p></div>
+    <div class="card"><h4>D7 &nbsp;Computation invocation</h4><p>Whether the required deterministic computation actually executed — and whether invocation is guaranteed rather than merely observed.</p>
+      <span class="tag">D7.1 invocation</span><span class="tag">D7.2(a) operand provenance</span><span class="tag">D7.2(b) operation correctness</span><span class="tag">D7.3 transcription</span>
+    </div>
+    <div class="card"><h4>The distinction</h4><p>A system that invokes computation correctly on sampled questions has demonstrated a <strong>tendency</strong>. A system in which invocation cannot be declined has established a <strong>control</strong>. AP-1 measures which one is present.</p></div>
+  </div>
+</section>
+</div>
+
+<!-- ─────────────────────────── SECTORS -->
+<div class="wrap">
+<section id="sectors">
+  <h2>Where numerical admissibility applies</h2>
+  <h3>Different regulators, different vocabularies, one requirement: show that the number was derived, not asserted.</h3>
+
+  <p class="prose">AP-1 is architecture-neutral, model-agnostic and domain-neutral. It applies wherever a statistical component participates in producing a number that is acted upon, and an existing regime already requires that figure to be evidenced, traceable, validated or reproducible.</p>
+
+  <div class="grid">
+    <div class="card"><h4>Financial services</h4><p>US supervisors placed generative and agentic AI outside the model-risk framework in April 2026, leaving each institution to define and defend its own governance. The UK expects independent validation; the EU requires record-keeping and declared accuracy.</p><span class="tag">SR 26-2</span><span class="tag">PRA SS1/23</span><span class="tag">EU AI Act Art. 12, 15</span></div>
+
+    <div class="card"><h4>Pharmaceuticals, biotech &amp; clinical</h4><p>Electronic records must be trustworthy and reliable, with system validation, secure audit trails and protection against unauthorised alteration — anchored to ALCOA+: attributable, legible, contemporaneous, original, accurate.</p><span class="tag">21 CFR Part 11</span><span class="tag">ALCOA+</span><span class="tag">EU Annex 11</span><span class="tag">ICH E6(R3)</span></div>
+
+    <div class="card"><h4>Aerospace &amp; aviation</h4><p>Software assurance requires traceability from requirement to implementation to verification evidence. Where a statistical component supplies a value to a qualified computation, the provenance of that value falls outside the tool qualification of the computation itself.</p><span class="tag">DO-178C</span><span class="tag">ARP4754A</span><span class="tag">DO-330</span></div>
+
+    <div class="card"><h4>Space &amp; mission systems</h4><p>Model and simulation credibility assessment, software classification and verification evidence regimes all require that computed values be defensible rather than asserted.</p><span class="tag">M&amp;S credibility</span><span class="tag">V&amp;V</span><span class="tag">Software assurance</span></div>
+
+    <div class="card"><h4>Defense</h4><p>Approximately 200,000 companies in the US defense industrial base operate under assurance and cybersecurity obligations. Decision-support and autonomous systems producing consequential figures raise the same evidentiary question.</p><span class="tag">CMMC 2.0</span><span class="tag">DFARS 252.204-7021</span></div>
+
+    <div class="card"><h4>Nuclear</h4><p>Safety-analysis codes operate under software quality assurance regimes requiring verification, validation and configuration control. A value entering a safety calculation from a statistical component sits outside the qualification envelope of the code.</p><span class="tag">10 CFR 50 App. B</span><span class="tag">ASME NQA-1</span></div>
+
+    <div class="card"><h4>Insurance &amp; reinsurance</h4><p>Quantitative requirements govern the valuation of assets and liabilities and the calculation of capital, alongside own risk and solvency assessment and supervisory reporting. A reserving or pricing figure that cannot be traced to its inputs cannot be validated.</p><span class="tag">Solvency II</span><span class="tag">ORSA</span><span class="tag">NAIC</span></div>
+
+    <div class="card"><h4>Electric power &amp; utilities</h4><p>Approximately 1,494 registered entities operate under reliability standards carrying evidence and audit obligations. Figures informing dispatch, capacity and protection decisions carry the same requirement.</p><span class="tag">NERC Reliability Standards</span><span class="tag">CIP</span></div>
+
+    <div class="card"><h4>Medical devices &amp; diagnostics</h4><p>Software as a medical device operates under lifecycle, risk-management and validation regimes. A computed clinical value must be verifiable rather than asserted.</p><span class="tag">IEC 62304</span><span class="tag">ISO 13485</span><span class="tag">EU MDR</span></div>
+
+    <div class="card"><h4>Rail &amp; maritime</h4><p>Safety-related signalling and control software carries software integrity level obligations with verification evidence; classification regimes apply comparable requirements at sea.</p><span class="tag">EN 50128 / 50716</span><span class="tag">IMO</span></div>
+
+    <div class="card"><h4>Audit &amp; financial reporting</h4><p>Internal control over financial reporting requires that figures entering statements be supported by evidence a third party can examine and reproduce.</p><span class="tag">SOX 404</span><span class="tag">PCAOB</span></div>
+
+    <div class="card"><h4>Any domain that computes</h4><p>The mechanism is not sector-specific. It appears wherever a statistical component supplies operands to a deterministic calculation whose output is acted upon — including sectors not listed here.</p><span class="tag tag-mute">Domain-neutral by design</span></div>
+  </div>
+
+  <p class="small" style="margin-top:24px">AP-1 measures whether a system produces evidence relevant to these obligations. <strong style="color:var(--white);font-weight:500">It does not confer compliance with any of them</strong>, and is not a substitute for the applicable regulatory, engineering or quality process.</p>
+</section>
+</div>
+
+<!-- ─────────────────────────── PRECEDENCE / RECORD -->
+<div class="wrap">
+<section id="precedence">
+  <h2>Publication record</h2>
+  <h3>Every version dated, deposited and permanently citable.</h3>
+
+  <p class="prose">The standard is versioned at document level. Prior versions remain permanently citable; no version is withdrawn or silently altered. A claim of compliance must cite the specific version evaluated against.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Version</th><th>Date</th><th>Status</th><th>Record</th></tr></thead>
+    <tbody>
+      <tr><td class="m">v1.0</td><td class="m">Jul 2026</td><td>Initial publication</td><td>Superseded — permanently citable</td></tr>
+      <tr><td class="m">v1.1</td><td class="m">Jul 2026</td><td>D7 prior-work citation; capability vs control</td><td>Superseded — permanently citable</td></tr>
+      <tr><td class="m">v1.2</td><td class="m">Jul 2026</td><td><strong>In force</strong></td><td>Deposited · reference evaluation released</td></tr>
+      <tr><td class="m">Erratum V1</td><td class="m">26 Jul 2026</td><td>Eight defect classes recorded; affected findings withdrawn</td><td>Published in full</td></tr>
+      <tr><td class="m">v1.3</td><td class="m">30 Jul 2026</td><td>Draft for public comment — <strong>not adopted</strong></td><td>Comment window closes 30 Sep 2026</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <pre><code><span class="k">IDENTIFIER</span>      AP-1 — The Admissibility Protocol
+<span class="k">CONCEPT DOI</span>     <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>  (resolves to latest deposit)
+<span class="k">IN FORCE</span>        v1.2
+<span class="k">DRAFT</span>           v1.3 — public comment, not adopted
+<span class="k">WINDOW</span>          Closes 30 September 2026
+<span class="k">LICENCE</span>         Creative Commons Attribution 4.0 (CC-BY 4.0)
+<span class="k">AUTHOR</span>          Marcus Rupp
+<span class="k">PUBLISHER</span>       ZORRZ Financial Inc.
+<span class="k">REPOSITORY</span>      <a href="https://github.com/zorrzai/admissibility-protocol">github.com/zorrzai/admissibility-protocol</a></code></pre>
+
+  <h3 style="margin-top:44px">What is published</h3>
+  <p class="prose">The standard is reproducible without its author. The following are public and independently checkable:</p>
+
+  <div class="grid">
+    <div class="card"><h4>Standard — v1.2 and v1.3 draft</h4><p>Full text in Markdown and PDF, deposited with a persistent DOI.</p></div>
+    <div class="card"><h4>Reference evaluation</h4><p>The complete results report of the author's own system, evaluated under AP-1.</p></div>
+    <div class="card"><h4>Erratum V1</h4><p>Eight defect classes in the author's own evaluation, recorded in full. Affected findings withdrawn. The frozen artifact is unmodified.</p></div>
+    <div class="card"><h4>Frozen run artifact</h4><p>The raw evaluation log as executed, sealed and unmodified.</p></div>
+    <div class="card"><h4>Pre-registration</h4><p>Hashes, commit identifiers, model identifiers and timestamps recorded before execution.</p></div>
+    <div class="card"><h4>Evaluation harness</h4><p>The runner and classifier used to produce the reference evaluation, published as source.</p></div>
+    <div class="card"><h4>Sealed evaluation set</h4><p>The question set and answer key, published on execution and therefore burned.</p></div>
+    <div class="card"><h4>Disposition record</h4><p>Comments received on the v1.3 draft and their disposition, recorded whether accepted or not.</p></div>
+    <div class="card"><h4>Citation metadata</h4><p>Machine-readable citation file, contribution rules and security policy, so the standard can be cited and challenged without contacting its author.</p></div>
+  </div>
+
+  <h3 style="margin-top:44px">How to cite</h3>
+  <pre><code>Rupp, M. (2026). <em>The Admissibility Protocol (AP-1): An Open Standard for
+Evaluating Numerical Admissibility in AI Systems</em>, Version 1.2.
+ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
+
+@misc{ap1_2026,
+  author       = {Rupp, Marcus},
+  title        = {{The Admissibility Protocol (AP-1): An Open Standard for
+                  Evaluating Numerical Admissibility in AI Systems}},
+  year         = {2026},
+  version      = {1.2},
+  publisher    = {ZORRZ Financial Inc.},
+  doi          = {10.5281/zenodo.21324954},
+  url          = {https://numericaladmissibility.org/}
+}</code></pre>
+</section>
+</div>
+
+<!-- ─────────────────────────── PRIOR ART -->
+<div class="wrap">
+<section id="priorart">
+  <h2>Prior art and adjacent work</h2>
+  <h3>AP-1 does not originate the ideas it rests on.</h3>
+
+  <p class="prose">The policy-versus-control distinction, the deterministic-layer remedy for numerical fabrication, and admissibility as a property of a system rather than of an output all appear in prior and concurrent work. AP-1's contribution is their consolidation into a versioned, openly-licensed, falsifiable measurement standard with a stated defeat condition. This record is indicative, not exhaustive; the field is active and further work is expected.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Area</th><th>Work</th><th>Relationship to AP-1</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tool-execution contracts</strong></td><td>Contract-grounded and verified tool execution; pre- and post-conditions on tool calls</td><td>Enforcement mechanism. A contract governs the call, not the provenance of the values crossing into it.</td></tr>
+      <tr><td><strong>Argument-level provenance</strong></td><td>Provenance-aware tool arguments and capability-based information-flow control for agents</td><td>Enforcement at the boundary AP-1 measures. Complementary: these prevent, AP-1 establishes whether prevention is present and guaranteed.</td></tr>
+      <tr><td><strong>Execution provenance</strong></td><td>Agent execution traces and evidence tracing as an emerging research area</td><td>Same concern, broader unit. AP-1 narrows to the numerical operand and the deterministic computation.</td></tr>
+      <tr><td><strong>Tool invocation as capability</strong></td><td>Benchmarks measuring whether a model judges correctly when a tool is required</td><td>Measures the model's decision quality. AP-1 asks whether the decision is the model's to make at all.</td></tr>
+      <tr><td><strong>Deterministic inference</strong></td><td>Batch-invariant kernels eliminating run-to-run nondeterminism</td><td>Engineering counterpart to D2, one layer down: removes a source of nondeterminism rather than measuring what remains.</td></tr>
+      <tr><td><strong>Governance frameworks</strong></td><td>AI management systems, risk frameworks and sector assurance standards</td><td>Address organisational and lifecycle processes. AP-1 measures one narrow technical property inside such a programme.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <p><strong>The distinction that defines the layer.</strong></p>
+    <p>The adjacent work above is largely <strong>enforcement</strong>: mechanisms that prevent an unsupported value from crossing into a computation. AP-1 is <strong>measurement</strong>: the instrument that establishes, for a deployed system, whether such a control exists, whether it is guaranteed rather than observed, and what evidence supports the figure that emerged.</p>
+  </div>
+</section>
+</div>
+
+<!-- ─────────────────────────── GOVERNANCE -->
+<div class="wrap">
+<section id="governance">
+  <h2>Governance and independence</h2>
+  <h3>A standard authored by an interested party is credible only if it is reproducible without the author, falsifiable against the author's own product, and governed in the open.</h3>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Status</th><th>Position</th></tr></thead>
+    <tbody>
+      <tr><td class="m">Origin</td><td>Founder-published open standard, authored by ZORRZ Financial Inc.</td></tr>
+      <tr><td class="m">Licence</td><td>CC-BY 4.0 — permanent, irrevocable</td></tr>
+      <tr><td class="m">Cost</td><td>None. No fee of any kind.</td></tr>
+      <tr><td class="m">Registry</td><td>None</td></tr>
+      <tr><td class="m">Certification</td><td>None. AP-1 does not certify, license, accredit or endorse any system.</td></tr>
+      <tr><td class="m">Independent steward</td><td><strong>Not yet established</strong></td></tr>
+      <tr><td class="m">Public amendment process</td><td>Yes — open comment window with published disposition record</td></tr>
+      <tr><td class="m">Reference evaluation</td><td>Author-run, single case study; defects published, affected results withdrawn</td></tr>
+      <tr><td class="m">Independent evaluation</td><td><strong>None completed to date</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="margin-top:44px">Path to independent stewardship</h3>
+  <p class="prose">Independence is a stage, not a claim. The intended progression is published so that the current position is unambiguous.</p>
+
+  <div class="grid" id="phasegrid">
+    <div class="card"><h4>1 &nbsp;Founder-originated</h4><p>ZORRZ authors and publishes the standard, its reference evaluation and its defects. <strong>Current position.</strong></p></div>
+    <div class="card"><h4>2 &nbsp;Open technical review</h4><p>Independent reviewers reproduce the harness and challenge the standard through the public amendment process.</p></div>
+    <div class="card"><h4>3 &nbsp;Independent application</h4><p>Third parties execute AP-1 against systems the author did not build, and publish results — favourable or otherwise.</p></div>
+    <div class="card"><h4>4 &nbsp;Independent stewardship</h4><p>Custody of the standard transfers to a body with no commercial interest in any evaluated system.</p></div>
+    <div class="card"><h4>5 &nbsp;Multi-party governance</h4><p>A technical steering group and published maintainer process govern amendment.</p></div>
+    <div class="card"><h4>Where this stands</h4><p>Stages 2 and 3 are open. Independent reviewers and independent applications are invited; the standard is designed to be run without its author’s involvement or consent.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:30px">
+    <p><strong>Disclosure.</strong> AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy it. This is a conflict of interest and is disclosed as one.</p>
+    <p><strong>No independent steward currently holds the standard or its reference implementation. No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as an erratum, and whose affected results are withdrawn. Its fixtures and expected values were authored with the assistance of an AI coding agent rather than derived by an independent party; no language model executes during an evaluation run.</p>
+    <p>Where independent implementation, independent scoring, independent review or domain-expert validation is required by the standard, those requirements are <strong>identified as unmet</strong> rather than represented as satisfied.</p>
+    <p>The purpose of this disclosure is not to claim independence. It is to make the provenance of the standard and its evidence visible, so that any party may challenge, reproduce, rescore or reject its conclusions.</p>
+  </div>
+
+  <h3 style="margin-top:44px">A stated defeat condition</h3>
+  <p class="prose">AP-1 rests on a claim that can be proven false, and publishes the condition under which it would be. A system that admits a generative model into the decision to compute, and nonetheless achieves guaranteed invocation, exact reproducibility and zero origination under refusal-pressure and adversarial conditions on a held-out set it has not seen, refutes that claim — and AP-1 records the refutation unaltered.</p>
+  <p class="prose"><strong>A standard that cannot be falsified is not a standard.</strong> Any party is invited to attempt it, expressly including the builders of frontier generative models.</p>
+</section>
+</div>
+
+<!-- ─────────────────────────── METHODOLOGY -->
+<div class="wrap">
+<section id="methodology">
+  <h2>Methodology</h2>
+  <h3>A measurement protocol, not a benchmark or a certification programme.</h3>
+
+  <div class="grid">
+    <div class="card"><h4>Deterministic scoring</h4><p>No language model executes in the scoring path. Classification, numeric comparison and provenance resolution are deterministic and re-runnable.</p></div>
+    <div class="card"><h4>Pre-registration</h4><p>Fixtures, questions and expected values are hashed and sealed before execution, so the evaluated material can be independently reproduced.</p></div>
+    <div class="card"><h4>Evidence classes</h4><p>Results carry the evidence class under which each observation was established. A self-reported signal is not treated as equivalent to an externally verified one.</p></div>
+    <div class="card"><h4>Burned question sets</h4><p>A set is burned the moment it is run, and publishing it confirms this. Every evaluation uses a freshly constructed set; the method is published, not a reusable set.</p></div>
+    <div class="card"><h4>Declared limitations</h4><p>Known limitations, unmet independence requirements and methodological defects are reported rather than omitted.</p></div>
+    <div class="card"><h4>Observation versus structure</h4><p>An observed rate is not treated as a universal guarantee. A structural mechanism that makes a failure unrepresentable is stronger evidence than an absence of failure in a finite sample.</p></div>
+  </div>
+</section>
+</div>
+
+<!-- ─────────────────────────── FAQ -->
+<div class="wrap">
+<section id="faq">
+  <h2>Common questions</h2>
+
+  <details><summary>Why can output inspection not establish whether an AI figure was computed?</summary>
+  <p>A computed figure and a generated figure can be textually identical. A model may state the correct value because it performed the computation, or because that value was probable. The property being evaluated belongs to the process that produced the figure, not to the answer text.</p></details>
+
+  <details><summary>Why is tool-call logging insufficient?</summary>
+  <p>Tool-call logging records that a tool was invoked and with what arguments. It does not record where those arguments originated. A correctly functioning deterministic tool can therefore return a mathematically correct result computed over an unsupported operand.</p></details>
+
+  <details><summary>What is operand provenance?</summary>
+  <p>The evidentiary relationship between a numerical operand entering a computation and the authoritative source data from which it is claimed to derive — either appearing verbatim, or derived by a declared deterministic transformation recorded at the point of derivation.</p></details>
+
+  <details><summary>How does AP-1 relate to MCP and A2A?</summary>
+  <p>MCP addresses agent-to-tool interaction; A2A addresses agent-to-agent communication. Both concern interoperability. AP-1 concerns the evidentiary integrity of the consequential numerical result emerging from such a system. It neither competes with nor replaces either protocol.</p></details>
+
+  <details><summary>How does AP-1 relate to AI governance frameworks?</summary>
+  <p>Governance frameworks address organisational, management, risk and lifecycle processes. AP-1 measures one narrow technical property inside such a programme: whether the deterministic computation required to produce a figure executed, and whether its operands were admissible. It is complementary and substitutes for none.</p></details>
+
+  <details><summary>Is AP-1 specific to financial services?</summary>
+  <p>No. AP-1 is architecture-neutral, model-agnostic and domain-neutral. Its empirical evidence base to date is drawn from language-model systems, and that scope limitation is stated in the standard. Application to other model classes and domains requires appropriate domain-specific evaluation.</p></details>
+
+  <details><summary>Does AP-1 certify systems or award a mark?</summary>
+  <p>No. AP-1 issues no certification, maintains no registry and charges no fee. It produces a per-dimension evidence profile and sets no pass threshold. A system is described, not graded.</p></details>
+
+  <details><summary>Can I run AP-1 without the author's involvement?</summary>
+  <p>Yes, and that is the design intent. The standard, the scoring rules, the disclosure checklist, the held-out-set construction methodology and the evaluation harness are published. Any party may apply AP-1 to any system — including ZORRZ's — without the author's involvement, cooperation or consent. The author cannot suppress, gate or condition an evaluation.</p></details>
+
+  <details><summary>May I fork, adapt or republish AP-1?</summary>
+  <p>Yes. The licence is CC-BY 4.0 and permits it, subject to attribution. Independent application by parties with no commercial relationship to the author is regarded as the primary evidence of the standard's validity — including evaluations reporting results unfavourable to the author, which will be linked from the repository.</p></details>
+</section>
+</div>
+
+<!-- ─────────────────────────── CLOSE -->
+<div class="wrap">
+<section id="close">
+  <h2>The question</h2>
+  <div class="defbox">
+    <p>Not merely: <em style="color:var(--sub)">did the AI produce the number?</em></p>
+    <p>But: <strong>what evidence establishes how the number was produced, where its operands came from, whether the computation is reproducible, and whether the result should have been released at all?</strong></p>
+  </div>
+  <p class="prose">That question becomes consequential as statistical models participate directly in systems whose numerical outputs are acted upon, recorded, regulated or relied upon as engineering evidence. AP-1 defines a common vocabulary and a measurement procedure for it.</p>
+
+  <div class="btns" style="margin-top:30px">
+    <a class="btn b1" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md">Read the standard</a>
+    <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol">Inspect the evidence</a>
+    <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol/issues">Comment on v1.3</a>
+  </div>
+</section>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fin">
+      <div style="color:var(--white);letter-spacing:.16em">AP-1 — THE ADMISSIBILITY PROTOCOL</div>
+      <div>Open standard for evaluating numerical admissibility in AI systems</div>
+      <div>CC-BY 4.0 &nbsp;·&nbsp; DOI <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a></div>
+      <div style="color:var(--meta);margin-top:14px;max-width:820px;line-height:1.7;text-transform:none;letter-spacing:0;font-family:'Geist Sans',sans-serif;font-size:.8rem">
+        AP-1 is an openly published, versioned standard authored by ZORRZ Financial Inc. It is not an accredited or consensus standard and has no independent implementations to date. It is not endorsed by or affiliated with any agency, institution or standards body referenced on this page. Nothing here constitutes regulatory, engineering, safety, financial, medical or legal certification. Descriptions of external regulatory instruments are indicative, are not legal advice, and should be confirmed with qualified counsel.
+      </div>
+      <div style="color:var(--meta);margin-top:14px">OPEN &nbsp;·&nbsp; FALSIFIABLE &nbsp;·&nbsp; AUTHOR-TESTED</div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
