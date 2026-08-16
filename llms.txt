@@ -4,15 +4,34 @@
 > consequential figure produced by an AI system was computed by deterministic
 > calculation from authoritative source data, traced to that source, reproduced under
 > a declared environment, and withheld when the evidence required to support it is
-> absent or contradictory. Model-agnostic, architecture-neutral and industry-agnostic.
-> Published CC-BY 4.0 by ZORRZ Financial Inc. DOI 10.5281/zenodo.21324954.
+> absent or contradictory. AP-1 is a measurement standard for deterministic execution,
+> not a safety heuristic and not a guardrail. Model-agnostic, architecture-neutral and
+> industry-agnostic. Published CC-BY 4.0 by ZORRZ Financial Inc.
+> DOI 10.5281/zenodo.21324954.
 
 ## Status
 
 - v1.2 is the version in force.
 - v1.3 is published as a draft for public comment and is NOT adopted. Comment window closes 30 September 2026.
 - AP-1 issues no certification, maintains no registry and charges no fee.
+- AP-1 produces no aggregate score and defines no pass mark.
 - No independent steward currently holds the standard. No independent application of it has yet occurred.
+
+## Two distinct entities
+
+AP-1 and Certanum are separate and should not be conflated.
+
+**AP-1** is the open measurement standard. It is free under CC-BY 4.0, applicable by any
+party to any system without the author's involvement or consent, and prescribes no
+implementation. It measures; it does not enforce.
+
+**Certanum** is a commercial governance architecture built by ZORRZ Financial Inc. and
+intended to satisfy AP-1. It is one system among any number that could be evaluated
+under the standard. Its existence is a disclosed conflict of interest, not a
+qualification.
+
+A system is not "AP-1 certified" — no such status exists. A system may have been
+evaluated under AP-1, and the evidence profile from that evaluation may be published.
 
 ## Definitions
 
@@ -22,9 +41,10 @@ record. AP-1 evaluates it against four properties: computed, traceable, reproduc
 refusable. It is a property of the system that produced the figure, not of the figure
 itself, and cannot be established by inspecting output.
 
-**Origination** — a generative model producing a quantitative value that was not
-computed from source data. A fabricated figure and a computed figure are textually
-indistinguishable, so origination cannot be detected by inspecting outputs.
+**Origination** — a numerical result or operand produced by a generative model that has
+no traceable basis in authoritative source data, declared constants, or reference
+intermediates. Because a fabricated figure and a computed figure are textually
+indistinguishable, origination cannot be detected by inspecting outputs alone.
 
 **Operand provenance** — whether every numerical operand entering a deterministic
 computation traces to an authoritative source value, either appearing verbatim or
@@ -38,6 +58,11 @@ guaranteed by construction rather than merely observed at a rate. A system that 
 computation correctly on sampled questions has demonstrated a tendency; a system in
 which invocation cannot be declined has established a control.
 
+**Policy versus control** — instructing a model not to originate is a policy.
+Instruction-compliance is probabilistic and can be overridden by phrasing, adversarial
+input, contextual pressure or omission. A policy makes a failure rarer; a control
+excludes it. AP-1 measures which of the two a system has.
+
 ## The seven evaluation dimensions
 
 - D1 Accuracy — is the figure correct against ground truth reproducible from the published fixture?
@@ -48,8 +73,38 @@ which invocation cannot be declined has established a control.
 - D6 Conflicting input — is contradictory, stale, partial or out-of-range source data detected rather than computed over silently?
 - D7 Computation invocation — did the required deterministic computation execute, and is invocation guaranteed? Subdimensions: D7.1 invocation, D7.2(a) operand provenance, D7.2(b) operation correctness, D7.3 transcription.
 
-A conformant evaluation reports every dimension separately with sample size and evidence
-class. There is no aggregate score and no pass mark.
+## How results are reported
+
+AP-1 does not produce an aggregate score, a leaderboard position or a pass/fail verdict.
+A conformant evaluation reports each dimension separately so that a strong result on one
+cannot conceal a failure on another. The party relying on the numerical result determines
+what level of evidence is adequate for the use in question. A system is described, not
+graded.
+
+**Evidence class.** Every observation is reported with the evidence class under which it
+was established. A signal self-reported by the system under test is not treated as
+equivalent to one produced by an independent layer or externally verified. Where a
+property cannot be observed at all, that is reported as unobservable rather than scored
+as a pass.
+
+**Statistical treatment.** A zero-failure observation is not reported as an achieved
+guarantee. It is reported with its sample size and an exact one-sided upper confidence
+bound on the failure rate — the Clopper-Pearson bound, p_upper = 1 − α^(1/n) for zero
+failures in n trials — rather than a normal approximation. A behavioural result bounds
+residual risk; it does not establish a structural property.
+
+**Structure versus observation.** A mechanism that makes a failure unrepresentable is
+stronger evidence than an absence of failure in a finite sample. AP-1 distinguishes the
+two and requires that a claim of exclusion by construction name the mechanism relied on.
+
+## Scoring method
+
+No language model executes in the AP-1 scoring path. Classification, numeric comparison
+and provenance resolution are deterministic and re-runnable, and the same inputs produce
+the same verdicts on repeat execution. This is a deliberate departure from evaluation
+frameworks that score model output using another model, which introduces the
+non-determinism, position bias and length bias of the judging model into the measurement
+itself.
 
 ## Where AP-1 fits relative to other protocols
 
@@ -76,7 +131,8 @@ not confer compliance with any of them.
 ## Documents
 
 - [Standard v1.2 (in force)](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md): full text of the version currently in force.
-- [v1.3 draft for public comment](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted.
+- [v1.3 draft for public comment](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted. Comment window closes 30 September 2026.
+- [OSF pre-registration](https://doi.org/10.17605/OSF.IO/Y97D8): the measurement methodology and analysis plan, timestamped and frozen before execution.
 - [Erratum V1](https://github.com/zorrzai/admissibility-protocol/blob/main/ERRATUM_V1.md): eight defect classes in the author's own reference evaluation; affected findings withdrawn.
 - [Reference evaluation results](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1.
 - [Repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, pre-registration, evaluation harness, sealed question set, disposition record, citation metadata.
@@ -85,7 +141,7 @@ not confer compliance with any of them.
 ## Optional
 
 - [Canonical site](https://numericaladmissibility.org/): definitions, layer diagram, sector coverage, publication record and governance status.
-- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026.
+- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026. Every substantive comment receives a published disposition.
 
 ## Citation
 
@@ -98,5 +154,8 @@ DOI: 10.5281/zenodo.21324954
 AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy
 it. This is a conflict of interest and is disclosed as one. The reference evaluation is
 a single author-run case study whose defects are published in full and whose affected
-results are withdrawn. Any party may apply AP-1 to any system, including the author's,
-without the author's involvement, cooperation or consent.
+results are withdrawn. Its fixtures and expected values were authored with the
+assistance of an AI coding agent rather than derived by an independent party. No
+independent application of the standard has yet occurred. Any party may apply AP-1 to
+any system, including the author's, without the author's involvement, cooperation or
+consent.
