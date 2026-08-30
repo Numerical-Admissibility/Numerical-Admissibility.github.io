@@ -80,6 +80,17 @@
       ]
     },
     {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://numericaladmissibility.org/#runner",
+      "name": "AP-1 reference runner",
+      "description": "The reference instrument implementing AP-1. Thirteen test suites, 381 checks. Its conformance to the standard is itself executable: one test per clause, quoting the clause from a hash-sealed copy of the standard text. Executable by any party against any system without the author's involvement.",
+      "codeRepository": "https://github.com/zorrzai/ap1-run",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": "Python",
+      "author": { "@type": "Person", "name": "Marcus Rupp" },
+      "publisher": { "@type": "Organization", "name": "ZORRZ Financial Inc." }
+    },
+    {
       "@type": "TechArticle",
       "headline": "AP-1 — The Admissibility Protocol",
       "description": "An open standard for evaluating numerical admissibility and operand provenance in AI systems operating in regulated and mission-critical environments.",
@@ -111,6 +122,8 @@
           "acceptedAnswer": { "@type": "Answer", "text": "A computed figure and a fabricated figure are textually identical. A model that states a value because it computed it, and a model that states the same value because the token sequence was probable, produce the same text. The property being evaluated belongs to the process that produced the figure, not to the answer text." } },
         { "@type": "Question", "name": "Why is tool-call logging insufficient?",
           "acceptedAnswer": { "@type": "Answer", "text": "Tool-call logging records that a tool was invoked and with what arguments, but not where those arguments originated. A model can invoke the correct tool, the tool can execute exactly as specified, and the answer can still be wrong because the model supplied an operand appearing nowhere in the source data. Invocation checks, execution contracts, grounding checks and data lineage all pass that case." } },
+        { "@type": "Question", "name": "Is the reference instrument public?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The AP-1 reference runner is published at github.com/zorrzai/ap1-run under the MIT licence. It comprises thirteen test suites and 381 checks, and its conformance to the standard is itself executable, with one test per clause quoting the clause from a hash-sealed copy of the standard text. Any party may run it against any system without the author's involvement. Note that a run against the fixture shipped with the runner is a demonstration rather than a conformant evaluation, because a question set is burned once it is published." } },
         { "@type": "Question", "name": "How does AP-1 relate to MCP and A2A?",
           "acceptedAnswer": { "@type": "Answer", "text": "MCP addresses how a model discovers and invokes tools. A2A addresses how agents communicate with one another. AP-1 addresses a different question: what evidence establishes that a consequential numerical result emerging from such a system was computed, traceable, reproducible and appropriately withheld. AP-1 does not replace or compete with either protocol; it operates at the numerical-evidence layer." } },
         { "@type": "Question", "name": "Which industries does AP-1 apply to?",
@@ -118,7 +131,7 @@
         { "@type": "Question", "name": "Does AP-1 certify systems or issue a pass mark?",
           "acceptedAnswer": { "@type": "Answer", "text": "No. AP-1 issues no certification, maintains no registry and charges no fee. It produces a per-dimension evidence profile rather than an aggregate score, and sets no pass threshold. The party relying on the numerical result determines what level of evidence is adequate for the particular use. A system is described, not graded." } },
         { "@type": "Question", "name": "Who authored AP-1 and is it independent?",
-          "acceptedAnswer": { "@type": "Answer", "text": "AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy it. This is a conflict of interest and is disclosed as one. No independent steward currently holds the standard, and no independent application of it has yet occurred. The reference evaluation is a single author-run case study whose defects are published in full as an erratum and whose affected results are withdrawn." } }
+          "acceptedAnswer": { "@type": "Answer", "text": "AP-1 was authored by ZORRZ Financial Inc. The author holds a commercial interest in systems designed to satisfy the standard. This is a conflict of interest and is disclosed as one. No independent steward currently holds the standard, and no independent application of it has yet occurred. The reference evaluation is a single author-run case study whose defects are published in full as errata and whose affected results are withdrawn." } }
       ]
     }
   ]
@@ -250,6 +263,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <div class="navlinks">
       <a href="#definition">Definition</a>
       <a href="#stack">Where it fits</a>
+      <a href="#instrument">Instrument</a>
       <a href="#dimensions">Dimensions</a>
       <a href="#sectors">Applications</a>
       <a href="#precedence">Record</a>
@@ -267,7 +281,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 <section class="hero">
   <div class="status">
     <div class="dot"></div>
-    The Admissibility Protocol &nbsp;·&nbsp; v1.2 in force &nbsp;·&nbsp; v1.3 draft open for comment
+    The Admissibility Protocol &nbsp;·&nbsp; v1.2 in force &nbsp;·&nbsp; v1.3 draft open for comment &nbsp;·&nbsp; Reference runner public
   </div>
 
   <h1>Numerical<br>Admissibility.</h1>
@@ -278,13 +292,15 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <div class="vbox">
     <strong>v1.2</strong> is the version in force. <strong>v1.3</strong> is published as a draft for public comment and is <strong>not adopted</strong>.<br>
-    Comment window closes 30 September 2026. Published CC-BY 4.0 — free to use, cite, implement and apply to any system, including its author's.
+    Comment window closes 30 September 2026. Published CC-BY 4.0 — free to use, cite, implement and apply to any system, including its author's.<br>
+    The <strong>reference runner</strong> is public and MIT-licensed — executable by any party, against any system, without the author.
   </div>
 
   <div class="btns">
     <a class="btn b1" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md">Read v1.2 — in force</a>
     <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md">v1.3 draft</a>
     <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol">Repository</a>
+    <a class="btn b2" href="https://github.com/zorrzai/ap1-run">Reference runner</a>
   </div>
 </section>
 </div>
@@ -385,7 +401,36 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <p class="prose">The failure crosses a boundary none of those controls watch. AP-1 therefore separates <strong>computation invocation</strong> — did the required computation run — from <strong>operand provenance</strong> — did every value entering it have an evidentiary basis.</p>
 
-  <p class="small" style="margin-top:18px">One observation in twenty-two invocations, with no recurrence in a twenty-run follow-up. Evidence of existence, not of prevalence. The full record is published in the reference evaluation.</p>
+  <p class="small" style="margin-top:18px">The quantitative operand-provenance findings from the reference evaluation are <strong style="color:var(--white);font-weight:500">withdrawn under Erratum V3</strong> pending re-execution against a tagged release. The mechanism described above is not in question; the measured rates are, and no figure for them is asserted here. See the publication record below.</p>
+</section>
+</div>
+
+<!-- ─────────────────────────── THE INSTRUMENT -->
+<div class="wrap">
+<section id="instrument">
+  <h2>The reference instrument</h2>
+  <h3>Public, MIT-licensed, and executable against any system without its author.</h3>
+
+  <p class="prose">A standard is only as checkable as the instrument that applies it. The reference runner is published in full: thirteen test suites and 381 checks, green on Linux, macOS and Windows across two Python versions. Its conformance to the standard is itself executable — one test per clause, quoting the clause from a hash-sealed copy of the standard text.</p>
+
+  <pre><code><span class="k">REPOSITORY</span>  <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a>
+<span class="k">LICENCE</span>     MIT
+<span class="k">SUITES</span>      13
+<span class="k">CHECKS</span>      381  (one is a counted skip where inspect-ai is absent)
+<span class="k">PLATFORMS</span>   Linux · macOS · Windows, two Python versions
+<span class="k">SCORING</span>     Deterministic — no language model executes in the scoring path</code></pre>
+
+  <div class="callout">
+    <p><strong>A run against the published fixture is a demonstration, not a conformant evaluation.</strong></p>
+    <p>A question set is burned the moment it is run, and publishing it confirms the burn. The fixture shipped with the runner is published, and is therefore burned. It exists so that the instrument can be exercised and inspected — not so that a result can be claimed. <strong>No figure produced from it is an AP-1 result</strong>, whoever runs it, including its author.</p>
+    <p>A conformant evaluation requires a freshly constructed set built to the published method, with the per-dimension minima met and the independence requirements satisfied.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card"><h4>Run it against anything</h4><p>Including systems the author did not build, and including the author's own. No involvement, cooperation or consent is required, and none can be withheld.</p></div>
+    <div class="card"><h4>Executable conformance</h4><p>One test per clause of the standard, each quoting the clause it tests from a hash-sealed copy of the text. The instrument's agreement with the standard is machine-checkable rather than asserted.</p></div>
+    <div class="card"><h4>Planted-defect suite</h4><p>A set of deliberately introduced defects used to characterise what the instrument does and does not catch, so its own detection behaviour is measured rather than assumed.</p></div>
+  </div>
 </section>
 </div>
 
@@ -467,6 +512,9 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
       <tr><td class="m">Pre-registration</td><td class="m">2026</td><td>Measurement methodology and analysis plan, frozen before execution</td><td><a href="https://osf.io/y97d8">OSF · timestamped, immutable</a></td></tr>
       <tr><td class="m">Erratum V1</td><td class="m">26 Jul 2026</td><td>Eight defect classes recorded; affected findings withdrawn</td><td>Published in full</td></tr>
       <tr><td class="m">v1.3</td><td class="m">30 Jul 2026</td><td>Draft for public comment — <strong>not adopted</strong></td><td>Comment window closes 30 Sep 2026</td></tr>
+      <tr><td class="m">Erratum V2</td><td class="m">[DATE]</td><td>Decoding parameters not transmitted to either arm; parameter echo not verified during execution</td><td>Published in full</td></tr>
+      <tr><td class="m">Erratum V3</td><td class="m">[DATE]</td><td>D7.2(a) operand-provenance findings <strong>withdrawn</strong> for both runs. A declared constant was treated as grounding an operand it did not feed; the magnitude cannot be recovered from stored artifacts because the classification code changed after the seal. Re-execution required under §5.8, not re-scoring.</td><td>Published in full</td></tr>
+      <tr><td class="m">Reference runner</td><td class="m">[DATE]</td><td>Published under MIT licence — 13 suites, 381 checks</td><td><a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a></td></tr>
     </tbody>
   </table>
   </div>
@@ -480,7 +528,8 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 <span class="k">LICENCE</span>         Creative Commons Attribution 4.0 (CC-BY 4.0)
 <span class="k">AUTHOR</span>          Marcus Rupp
 <span class="k">PUBLISHER</span>       ZORRZ Financial Inc.
-<span class="k">REPOSITORY</span>      <a href="https://github.com/zorrzai/admissibility-protocol">github.com/zorrzai/admissibility-protocol</a></code></pre>
+<span class="k">REPOSITORY</span>      <a href="https://github.com/zorrzai/admissibility-protocol">github.com/zorrzai/admissibility-protocol</a>
+<span class="k">INSTRUMENT</span>      <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a>  (MIT)</code></pre>
 
   <h3 style="margin-top:44px">What is published</h3>
   <p class="prose">The standard is reproducible without its author. The following are public and independently checkable:</p>
@@ -488,10 +537,10 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   <div class="grid">
     <div class="card"><h4>Standard — v1.2 and v1.3 draft</h4><p>Full text in Markdown and PDF, deposited with a persistent DOI.</p></div>
     <div class="card"><h4>Reference evaluation</h4><p>The complete results report of the author's own system, evaluated under AP-1.</p></div>
-    <div class="card"><h4>Erratum V1</h4><p>Eight defect classes in the author's own evaluation, recorded in full. Affected findings withdrawn. The frozen artifact is unmodified.</p></div>
+    <div class="card"><h4>Errata V1–V3</h4><p>Defects in the author's own evaluation, recorded in full. Affected findings withdrawn rather than restated. The frozen artifacts are unmodified.</p></div>
     <div class="card"><h4>Frozen run artifact</h4><p>The raw evaluation log as executed, sealed and unmodified.</p></div>
     <div class="card"><h4>Pre-registration</h4><p>Hashes, commit identifiers, model identifiers and timestamps recorded before execution.</p></div>
-    <div class="card"><h4>Evaluation harness</h4><p>The runner and classifier used to produce the reference evaluation, published as source.</p></div>
+    <div class="card"><h4>Evaluation harness</h4><p>The runner and classifier used to produce the reference evaluation, published in full under MIT licence. Thirteen suites, 381 checks, runnable in one command against any system.</p></div>
     <div class="card"><h4>Pre-registered methodology</h4><p>The measurement methodology and analysis plan, deposited on the Open Science Framework and frozen before execution &mdash; timestamped and immutable.</p></div>
     <div class="card"><h4>Sealed evaluation set</h4><p>The question set and answer key, published on execution and therefore burned.</p></div>
     <div class="card"><h4>Disposition record</h4><p>Comments received on the v1.3 draft and their disposition, recorded whether accepted or not.</p></div>
@@ -562,6 +611,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
       <tr><td class="m">Cost</td><td>None. No fee of any kind.</td></tr>
       <tr><td class="m">Registry</td><td>None</td></tr>
       <tr><td class="m">Certification</td><td>None. AP-1 does not certify, license, accredit or endorse any system.</td></tr>
+      <tr><td class="m">Reference instrument</td><td>Published under MIT licence — executable by any party, against any system, without the author</td></tr>
       <tr><td class="m">Independent steward</td><td><strong>Not yet established</strong></td></tr>
       <tr><td class="m">Public amendment process</td><td>Yes — open comment window with published disposition record</td></tr>
       <tr><td class="m">Reference evaluation</td><td>Author-run, single case study; defects published, affected results withdrawn</td></tr>
@@ -575,16 +625,16 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
 
   <div class="grid" id="phasegrid">
     <div class="card"><h4>1 &nbsp;Founder-originated</h4><p>ZORRZ authors and publishes the standard, its reference evaluation and its defects. <strong>Current position.</strong></p></div>
-    <div class="card"><h4>2 &nbsp;Open technical review</h4><p>Independent reviewers reproduce the harness and challenge the standard through the public amendment process.</p></div>
+    <div class="card"><h4>2 &nbsp;Open technical review</h4><p>Independent reviewers reproduce the harness and challenge the standard through the public amendment process. <strong>Now possible without the author: the instrument is public.</strong></p></div>
     <div class="card"><h4>3 &nbsp;Independent application</h4><p>Third parties execute AP-1 against systems the author did not build, and publish results — favourable or otherwise.</p></div>
     <div class="card"><h4>4 &nbsp;Independent stewardship</h4><p>Custody of the standard transfers to a body with no commercial interest in any evaluated system.</p></div>
     <div class="card"><h4>5 &nbsp;Multi-party governance</h4><p>A technical steering group and published maintainer process govern amendment.</p></div>
-    <div class="card"><h4>Where this stands</h4><p>Stages 2 and 3 are open. Independent reviewers and independent applications are invited; the standard is designed to be run without its author’s involvement or consent.</p></div>
+    <div class="card"><h4>Where this stands</h4><p>Stages 2 and 3 are open. Independent reviewers and independent applications are invited; the standard and its instrument are designed to be run without the author's involvement or consent.</p></div>
   </div>
 
   <div class="callout" style="margin-top:30px">
-    <p><strong>Disclosure.</strong> AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy it. This is a conflict of interest and is disclosed as one.</p>
-    <p><strong>No independent steward currently holds the standard or its reference implementation. No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as an erratum, and whose affected results are withdrawn. Its fixtures and expected values were authored with the assistance of an AI coding agent rather than derived by an independent party; no language model executes during an evaluation run.</p>
+    <p><strong>Disclosure.</strong> AP-1 was authored by ZORRZ Financial Inc. The author holds a commercial interest in systems designed to satisfy the standard. This is a conflict of interest and is disclosed as one.</p>
+    <p><strong>No independent steward currently holds the standard or its reference implementation. No independent application of the standard has yet occurred.</strong> The reference evaluation is a single author-run case study whose defects are published in full as errata, and whose affected results are withdrawn. Its fixtures and expected values were authored with the assistance of an AI coding agent rather than derived by an independent party; no language model executes during an evaluation run.</p>
     <p>Where independent implementation, independent scoring, independent review or domain-expert validation is required by the standard, those requirements are <strong>identified as unmet</strong> rather than represented as satisfied.</p>
     <p>The purpose of this disclosure is not to claim independence. It is to make the provenance of the standard and its evidence visible, so that any party may challenge, reproduce, rescore or reject its conclusions.</p>
   </div>
@@ -608,6 +658,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
     <div class="card"><h4>Burned question sets</h4><p>A set is burned the moment it is run, and publishing it confirms this. Every evaluation uses a freshly constructed set; the method is published, not a reusable set.</p></div>
     <div class="card"><h4>Declared limitations</h4><p>Known limitations, unmet independence requirements and methodological defects are reported rather than omitted.</p></div>
     <div class="card"><h4>Observation versus structure</h4><p>An observed rate is not treated as a universal guarantee. A structural mechanism that makes a failure unrepresentable is stronger evidence than an absence of failure in a finite sample.</p></div>
+    <div class="card"><h4>Re-execution, not re-scoring</h4><p>Results are not portable across a revision of the ground truth. Where the fixture or its expected values change after a seal, the correct remedy is re-execution — as applied to the author's own withdrawn findings.</p></div>
   </div>
 </section>
 </div>
@@ -626,6 +677,9 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   <details><summary>What is operand provenance?</summary>
   <p>The evidentiary relationship between a numerical operand entering a computation and the authoritative source data from which it is claimed to derive — either appearing verbatim, or derived by a declared deterministic transformation recorded at the point of derivation.</p></details>
 
+  <details><summary>Is the reference instrument public?</summary>
+  <p>Yes. The runner is published at <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a> under the MIT licence: thirteen test suites, 381 checks, one command to run. Its conformance to the standard is itself executable, with one test per clause quoting the clause from a hash-sealed copy of the text. Note that a run against the fixture shipped with it is a demonstration rather than a conformant evaluation, because a published question set is burned.</p></details>
+
   <details><summary>How does AP-1 relate to MCP and A2A?</summary>
   <p>MCP addresses agent-to-tool interaction; A2A addresses agent-to-agent communication. Both concern interoperability. AP-1 concerns the evidentiary integrity of the consequential numerical result emerging from such a system. It neither competes with nor replaces either protocol.</p></details>
 
@@ -639,7 +693,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   <p>No. AP-1 issues no certification, maintains no registry and charges no fee. It produces a per-dimension evidence profile and sets no pass threshold. A system is described, not graded.</p></details>
 
   <details><summary>Can I run AP-1 without the author's involvement?</summary>
-  <p>Yes, and that is the design intent. The standard, the scoring rules, the disclosure checklist, the held-out-set construction methodology and the evaluation harness are published. Any party may apply AP-1 to any system — including ZORRZ's — without the author's involvement, cooperation or consent. The author cannot suppress, gate or condition an evaluation.</p></details>
+  <p>Yes, and that is the design intent. The standard, the scoring rules, the disclosure checklist, the held-out-set construction methodology and the evaluation harness are published. The runner is at <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a> under MIT licence and runs in one command. Any party may apply AP-1 to any system — including ZORRZ's — without the author's involvement, cooperation or consent. The author cannot suppress, gate or condition an evaluation.</p></details>
 
   <details><summary>May I fork, adapt or republish AP-1?</summary>
   <p>Yes. The licence is CC-BY 4.0 and permits it, subject to attribution. Independent application by parties with no commercial relationship to the author is regarded as the primary evidence of the standard's validity — including evaluations reporting results unfavourable to the author, which will be linked from the repository.</p></details>
@@ -718,7 +772,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
 
   <div class="btns" style="margin-top:30px">
     <a class="btn b1" href="https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md">Read the standard</a>
-    <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol">Inspect the evidence</a>
+    <a class="btn b2" href="https://github.com/zorrzai/ap1-run">Run the instrument</a>
     <a class="btn b2" href="https://github.com/zorrzai/admissibility-protocol/issues">Comment on v1.3</a>
   </div>
 </section>
@@ -731,7 +785,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
     <div class="fin">
       <div style="color:var(--white);letter-spacing:.16em">AP-1 — THE ADMISSIBILITY PROTOCOL</div>
       <div>Open standard for evaluating numerical admissibility in AI systems</div>
-      <div>CC-BY 4.0 &nbsp;·&nbsp; DOI <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a></div>
+      <div>CC-BY 4.0 &nbsp;·&nbsp; DOI <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/ap1-run">Instrument (MIT)</a></div>
       <div style="color:var(--meta);margin-top:14px;max-width:820px;line-height:1.7;text-transform:none;letter-spacing:0;font-family:'Geist Sans',sans-serif;font-size:.8rem">
         AP-1 is an openly published, versioned standard authored by ZORRZ Financial Inc. It is not an accredited or consensus standard and has no independent implementations to date. It is not endorsed by or affiliated with any agency, institution or standards body referenced on this page. Nothing here constitutes regulatory, engineering, safety, financial, medical or legal certification. Descriptions of external regulatory instruments are indicative, are not legal advice, and should be confirmed with qualified counsel.
       </div>
