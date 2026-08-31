@@ -124,6 +124,8 @@
           "acceptedAnswer": { "@type": "Answer", "text": "Tool-call logging records that a tool was invoked and with what arguments, but not where those arguments originated. A model can invoke the correct tool, the tool can execute exactly as specified, and the answer can still be wrong because the model supplied an operand appearing nowhere in the source data. Invocation checks, execution contracts, grounding checks and data lineage all pass that case." } },
         { "@type": "Question", "name": "Is the reference instrument public?",
           "acceptedAnswer": { "@type": "Answer", "text": "Yes. The AP-1 reference runner is published at github.com/zorrzai/ap1-run under the MIT licence. Its conformance to the standard is itself executable, with one test per clause quoting the clause from a hash-sealed copy of the standard text, and the runner reports its own suite and check totals at execution. Any party may run it against any system without the author's involvement. Note that a run against the fixture shipped with the runner is a demonstration rather than a conformant evaluation, because a question set is burned once it is published." } },
+        { "@type": "Question", "name": "Who decides which sources are authoritative?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not AP-1. The relying system, the domain authority or the evaluation fixture must declare the source hierarchy, the permitted transformations and any declared constants before execution. AP-1 measures whether the released figure conforms to that declared evidence chain. It does not adjudicate whether a designated source is itself correct, current or complete. Where sources conflict, are stale, are partial or fall out of range, that is measured under D6 as a property of the system's handling rather than resolved by the protocol." } },
         { "@type": "Question", "name": "How does AP-1 relate to MCP and A2A?",
           "acceptedAnswer": { "@type": "Answer", "text": "MCP addresses how a model discovers and invokes tools. A2A addresses how agents communicate with one another. AP-1 addresses a different question: what evidence establishes that a consequential numerical result emerging from such a system was computed, traceable, reproducible and appropriately withheld. AP-1 does not replace or compete with either protocol; it operates at the numerical-evidence layer." } },
         { "@type": "Question", "name": "Which industries does AP-1 apply to?",
@@ -380,7 +382,8 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   </svg>
 
   <div class="callout">
-    <p><strong>MCP can establish that a tool was called. A2A can establish that agents communicated.</strong></p>
+    <p><strong>An MCP implementation can provide evidence that a tool was called. An A2A implementation can provide evidence that agents communicated.</strong></p>
+    <p>A protocol defines an interaction. Whether a record of that interaction is admissible evidence depends on the implementation, the logging and the trust boundary — which is why AP-1 grades invocation evidence by independence and verifiability rather than by format.</p>
     <p>Neither establishes where the numerical values entering that computation originated, nor whether the computation was required to run at all. That is the question AP-1 measures.</p>
     <p class="small" style="margin-top:14px">MCP was contributed by Anthropic to the Linux Foundation&rsquo;s Agentic AI Foundation in December 2025; A2A was contributed by Google to the Linux Foundation in June 2025 and became a hosted AAIF project in August 2026. Both are vendor-neutral, community-governed protocols. AP-1 is neither affiliated with nor endorsed by either project, the Agentic AI Foundation or the Linux Foundation.</p>
     <p class="small" style="margin-top:10px">AP-1 does not replace or compete with MCP, A2A, AI governance frameworks, security controls, model-risk frameworks or domain-specific assurance standards. It is a complementary measurement layer, and unlike an interoperability protocol it defines nothing to implement: it is applied to a system from outside.</p>
@@ -414,7 +417,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   <h2>The reference instrument</h2>
   <h3>Public, MIT-licensed, and executable against any system without its author.</h3>
 
-  <p class="prose">A standard is only as checkable as the instrument that applies it. The reference runner is published in full and is green on Linux, macOS and Windows across two Python versions. It reports its own suite and check totals when executed, so no count is asserted here that the instrument does not itself produce. Its conformance to the standard is executable — one test per clause, quoting the clause from a hash-sealed copy of the standard text.</p>
+  <p class="prose">A standard is only as checkable as the instrument that applies it. The reference runner is published in full and passes on Linux, macOS and Windows across two Python versions. It reports its own suite and check totals when executed, so no count is asserted here that the instrument does not itself produce. Its conformance to the standard is executable: a machine-checkable trace from each normative clause to a test asserting the behaviour that clause requires, quoting the clause from a hash-sealed copy of the standard text. This establishes traceability from clause to test, not semantic completeness of the implementation.</p>
 
   <pre><code><span class="k">REPOSITORY</span>  <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a>
 <span class="k">LICENCE</span>     MIT
@@ -428,11 +431,12 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <p><strong>A run against the published fixture is a demonstration, not a conformant evaluation.</strong></p>
     <p>A question set is burned the moment it is run, and publishing it confirms the burn. The fixture shipped with the runner is published, and is therefore burned. It exists so that the instrument can be exercised and inspected — not so that a result can be claimed. <strong>No figure produced from it is an AP-1 result</strong>, whoever runs it, including its author.</p>
     <p>A conformant evaluation requires a freshly constructed set built to the published method, with the per-dimension minima met and the independence requirements satisfied.</p>
+    <p>The burn rule governs conformance evidence, not instrument development. Published fixtures remain useful for testing, regression, demonstration and independent inspection; they cannot support a held-out conformance claim.</p>
   </div>
 
   <div class="grid">
     <div class="card"><h4>Run it against anything</h4><p>Including systems the author did not build, and including the author's own. No involvement, cooperation or consent is required, and none can be withheld.</p></div>
-    <div class="card"><h4>Executable conformance</h4><p>One test per clause of the standard, each quoting the clause it tests from a hash-sealed copy of the text. The instrument's agreement with the standard is machine-checkable rather than asserted.</p></div>
+    <div class="card"><h4>Executable conformance</h4><p>A machine-checkable trace from each normative clause to an executable test asserting the behaviour that clause requires, quoting the clause from a hash-sealed copy of the text. Traceability is established mechanically rather than asserted; it is not a claim of semantic completeness.</p></div>
     <div class="card"><h4>Planted-defect suite</h4><p>A set of deliberately introduced defects used to characterise what the instrument does and does not catch, so its own detection behaviour is measured rather than assumed.</p></div>
   </div>
 </section>
@@ -597,7 +601,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   <div class="callout">
     <p><strong>Why E3 was withdrawn rather than corrected.</strong></p>
     <p>The obvious remedy is to re-score the stored transcripts against the corrected constant set. That remedy is not available. The provenance classifier changed across three commits since the runs, one of them during the second run's execution, so re-scoring would apply the constant correction and every classifier change since, and could not separate them. The classifier's tool-call grouping also changed, which alters the invocation population itself rather than only the per-invocation outcome. Two re-scoring attempts produced materially different results, and one produced a grounded-plus-originated total exceeding the invocation population.</p>
-    <p>AP-1 §5.8 requires re-execution rather than re-scoring across a ground-truth revision. That clause was applied to the publisher's own evaluation, at the cost of its most quotable numbers.</p>
+    <p>AP-1 §5.8 requires re-execution rather than re-scoring across a ground-truth revision. That clause was applied to the publisher's own evaluation, at the cost of withdrawing the most prominent quantitative findings from the published record.</p>
   </div>
 
   <div class="callout">
@@ -616,7 +620,7 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   <h2>Prior art and adjacent work</h2>
   <h3>AP-1 does not originate the ideas it rests on.</h3>
 
-  <p class="prose">The policy-versus-control distinction, the deterministic-layer remedy for numerical fabrication, and admissibility as a property of a system rather than of an output all appear in prior and concurrent work. AP-1's contribution is their consolidation into a versioned, openly-licensed, falsifiable measurement standard with a stated defeat condition. This record is indicative, not exhaustive; the field is active and further work is expected.</p>
+  <p class="prose">The policy-versus-control distinction, the deterministic-layer remedy for numerical fabrication, and admissibility as a property of a system rather than of an output all appear in prior and concurrent work. AP-1's contribution is a versioned, openly licensed measurement protocol that operationalises these distinctions at the level of an individual consequential numerical output, with declared evidence classes, declared denominators, held-out evaluation requirements and a stated defeat condition. This record is indicative, not exhaustive; the field is active and further work is expected.</p>
 
   <div class="tw">
   <table>
@@ -683,7 +687,11 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   </div>
 
   <h3 style="margin-top:44px">A stated defeat condition</h3>
-  <p class="prose">AP-1 rests on a claim that can be proven false, and publishes the condition under which it would be. A system that admits a generative model into the decision to compute, and nonetheless achieves guaranteed invocation, exact reproducibility and zero origination under refusal-pressure and adversarial conditions on a held-out set it has not seen, refutes that claim — and AP-1 records the refutation unaltered.</p>
+  <p class="prose">AP-1 rests on a claim that can be proven false, and publishes the condition under which it would be. The claim is not that no generative system could ever behave admissibly. It is that <strong>where a generative component retains unconstrained authority over whether, what and how to compute, admissibility cannot be guaranteed by observed behaviour alone.</strong></p>
+
+  <p class="prose">A system that admits a generative model into the decision to compute, and nonetheless demonstrates invocation guaranteed by construction, exact reproducibility, and no observed origination under refusal-pressure and adversarial conditions on a held-out set it has not seen, is a counterexample to that claim — and AP-1 records it unaltered.</p>
+
+  <p class="small" style="margin-top:14px">Stated in the instrument's own terms rather than as an absolute: a finite sample with no failures does not establish that the failure rate is zero. Such a result is reported with its denominator and its one-sided upper bound on the failure rate, as the runner requires of every other result, including the publisher's.</p>
   <p class="prose"><strong>A standard that cannot be falsified is not a standard.</strong> Any party is invited to attempt it, expressly including the builders of frontier generative models.</p>
 </section>
 </div>
@@ -701,6 +709,8 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
     <div class="card"><h4>Burned question sets</h4><p>A set is burned the moment it is run, and publishing it confirms this. Every evaluation uses a freshly constructed set; the method is published, not a reusable set.</p></div>
     <div class="card"><h4>Declared limitations</h4><p>Known limitations, unmet independence requirements and methodological defects are reported rather than omitted.</p></div>
     <div class="card"><h4>Observation versus structure</h4><p>An observed rate is not treated as a universal guarantee. A structural mechanism that makes a failure unrepresentable is stronger evidence than an absence of failure in a finite sample.</p></div>
+    <div class="card"><h4>Ground truth is a separate question</h4><p>Deterministic scoring does not imply independent ground truth. The expected values in the published fixture were authored with AI coding assistance, not derived by an independent party. Independent construction of expected values is therefore treated as a separate conformance requirement, and is currently unmet.</p></div>
+    <div class="card"><h4>Declared authority, measured conformance</h4><p>AP-1 does not designate which sources are authoritative, nor does it establish whether a source is correct. The source hierarchy, permitted transformations and declared constants must be fixed before execution; AP-1 measures conformance to that declared evidence chain.</p></div>
     <div class="card"><h4>Re-execution, not re-scoring</h4><p>Results are not portable across a revision of the ground truth. Where the fixture or its expected values change after a seal, the correct remedy is re-execution — as applied to the author's own withdrawn findings.</p></div>
   </div>
 </section>
@@ -722,6 +732,10 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
 
   <details><summary>Is the reference instrument public?</summary>
   <p>Yes. The runner is published at <a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a> under the MIT licence and runs in one command, reporting its own suite and check totals at execution. Its conformance to the standard is itself executable, with one test per clause quoting the clause from a hash-sealed copy of the text. Note that a run against the fixture shipped with it is a demonstration rather than a conformant evaluation, because a published question set is burned.</p></details>
+
+  <details><summary>Who decides which sources are authoritative?</summary>
+  <p>Not AP-1. The relying system, the domain authority or the evaluation fixture must declare the source hierarchy, the permitted transformations and any declared constants before execution. AP-1 measures whether the released figure conforms to that declared evidence chain. It does not adjudicate whether a designated source is itself correct, current or complete, and it is not a theory of what makes data authoritative. Where two sources conflict, are stale, are partial or fall out of range, that is measured under D6 as a property of the system's handling, not resolved by the protocol.</p>
+  <p>This boundary is deliberate. A measurement standard that also decided what counts as truth would be unfalsifiable, and could not be applied to domains its author does not understand.</p></details>
 
   <details><summary>How does AP-1 relate to MCP and A2A?</summary>
   <p>MCP addresses agent-to-tool interaction; A2A addresses agent-to-agent communication. Both concern interoperability. AP-1 concerns the evidentiary integrity of the consequential numerical result emerging from such a system. It neither competes with nor replaces either protocol.</p></details>
