@@ -224,7 +224,6 @@ th{font-family:'Geist Mono',monospace;font-size:.66rem;letter-spacing:.12em;text
 td{color:var(--sub)}
 td strong{color:var(--white);font-weight:500}
 td.m{font-family:'Geist Mono',monospace;font-size:.8rem;color:var(--white);white-space:nowrap}
-td.todo{font-family:'Geist Mono',monospace;font-size:.8rem;color:#ff6b4a;white-space:nowrap;font-weight:600}
 
 /* callout */
 .callout{border:1px solid var(--rule);background:var(--panel);padding:26px 28px;margin-top:26px}
@@ -502,7 +501,8 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <div class="card"><h4>D5 &nbsp;Adversarial resistance</h4><p>Whether the system holds under sustained pressure to state a figure that does not exist.</p></div>
     <div class="card"><h4>D6 &nbsp;Conflicting input</h4><p>Whether contradictory, stale, partial or out-of-range source data is detected rather than computed over silently.</p></div>
     <div class="card"><h4>D7 &nbsp;Computation invocation</h4><p>Whether the required deterministic computation actually executed — and whether invocation is guaranteed rather than merely observed.</p>
-      <span class="tag">D7.1 invocation</span><span class="tag">D7.2(a) operand provenance</span><span class="tag">D7.2(b) operation correctness</span><span class="tag">D7.3 transcription</span>
+      <span class="tag">D7.1 invocation</span><span class="tag">D7.1b instruction removed</span><span class="tag">D7.2 computation correctness</span><span class="tag">D7.3 transcription</span><span class="tag">D7.4 invocation under pressure</span>
+      <p style="margin-top:12px"><span class="mono" style="color:var(--copper);font-size:.7rem;letter-spacing:.08em">V1.3 DRAFT — NOT ADOPTED</span><br>The draft splits D7.2 into operand provenance <span class="mono">D7.2(a)</span> and operation correctness <span class="mono">D7.2(b)</span>, and grades invocation evidence EV-0 to EV-3 by independence and verifiability.</p>
     </div>
     <div class="card"><h4>The distinction</h4><p>A system that invokes computation correctly on sampled questions has demonstrated a <strong>tendency</strong>. A system in which invocation cannot be declined has established a <strong>control</strong>. AP-1 measures which one is present.</p></div>
   </div>
@@ -518,7 +518,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   <p class="prose">AP-1 is architecture-neutral, model-agnostic and domain-neutral. It applies wherever a statistical component participates in producing a number that is acted upon, and an existing regime already requires that figure to be evidenced, traceable, validated or reproducible.</p>
 
   <div class="grid">
-    <div class="card"><h4>Financial services</h4><p>US banking agencies excluded generative and agentic AI from the April 2026 revised model-risk guidance. UK model-risk expectations include independent model validation for firms within the scope of SS1/23. The EU AI Act requires record-keeping and appropriate levels of accuracy, robustness and cybersecurity for high-risk systems.</p><span class="tag">SR 26-2</span><span class="tag">PRA SS1/23</span><span class="tag">EU AI Act Art. 12, 15</span></div>
+    <div class="card"><h4>Financial services</h4><p>SR 26-2, OCC Bulletin 2026-13 and FDIC FIL-15-2026 (17 April 2026) superseded SR 11-7. Footnote 3 places generative and agentic AI outside the scope of that guidance while confirming the principles still apply to traditional statistical models and to non-generative, non-agentic AI. The practical consequence, as noted by counsel and model-risk advisers, is that each institution defines, documents and defends its own governance for these systems. UK expectations include independent validation within SS1/23. The EU AI Act requires record-keeping and consistent accuracy, robustness and cybersecurity for high-risk systems.</p><span class="tag">SR 26-2 fn.3</span><span class="tag">OCC 2026-13</span><span class="tag">FDIC FIL-15-2026</span><span class="tag">PRA SS1/23</span><span class="tag">EU AI Act Art. 12, 13, 15, 19</span></div>
 
     <div class="card"><h4>Pharmaceuticals, biotech &amp; clinical</h4><p>Electronic records and regulated data are subject to requirements for validation, secure audit trails, traceability and protection against unauthorised alteration. FDA data-integrity practice commonly expresses these principles through ALCOA+, alongside 21 CFR Part 11 and related requirements.</p><span class="tag">21 CFR Part 11</span><span class="tag">ALCOA+</span><span class="tag">EU Annex 11</span><span class="tag">ICH E6(R3)</span></div>
 
@@ -543,7 +543,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <div class="card"><h4>Any domain that computes</h4><p>The mechanism is not sector-specific. It appears wherever a statistical component supplies operands to a deterministic calculation whose output is acted upon — including sectors not listed here.</p><span class="tag tag-mute">Domain-neutral by design</span></div>
   </div>
 
-  <p class="small" style="margin-top:24px">AP-1 measures whether a system produces evidence relevant to these obligations. <strong style="color:var(--white);font-weight:500">It does not confer compliance with any of them</strong>, and is not a substitute for the applicable regulatory, engineering or quality process. Regulatory descriptions above are indicative summaries of instruments in force at the date of publication and are not a statement of their scope or application.</p>
+  <p class="small" style="margin-top:24px">AP-1 measures whether a system produces evidence relevant to these obligations. <strong style="color:var(--white);font-weight:500">It does not confer compliance with any of them</strong>, and is not a substitute for the applicable regulatory, engineering or quality process. Regulatory descriptions above are indicative summaries and are not a statement of scope or application. The financial-services mapping is set out with its primary sources in Appendix A of AP-1 v1.2, whose instruments and article numbers were verified against primary sources as of July 2026. Mappings for the other sectors listed here are indicative only and are not carried in the standard.</p>
 </section>
 </div>
 
@@ -561,7 +561,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <tbody>
       <tr><td class="m">v1.0</td><td class="m">Jul 2026</td><td>Initial publication</td><td>Superseded — permanently citable</td></tr>
       <tr><td class="m">v1.1</td><td class="m">Jul 2026</td><td>D7 prior-work citation; capability vs control</td><td>Superseded — permanently citable</td></tr>
-      <tr><td class="m">v1.2</td><td class="m">Jul 2026</td><td><strong>In force</strong></td><td>Deposited · reference evaluation released</td></tr>
+      <tr><td class="m">v1.2</td><td class="m">15 Jul 2026</td><td><strong>In force</strong></td><td>Deposited · <a href="https://doi.org/10.5281/zenodo.21369899">10.5281/zenodo.21369899</a></td></tr>
       <tr><td class="m">Pre-registration</td><td class="m">2026</td><td>Measurement methodology and analysis plan, frozen before execution</td><td><a href="https://osf.io/y97d8">OSF · timestamped, immutable</a></td></tr>
       <tr><td class="m">Erratum V1</td><td class="m">26 Jul 2026</td><td>Eight defect classes recorded; affected findings withdrawn</td><td>Published in full</td></tr>
       <tr><td class="m">v1.3</td><td class="m">30 Jul 2026</td><td>Draft for public comment — <strong>not adopted</strong></td><td>Comment window closes 30 Sep 2026 · <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></td></tr>
@@ -572,6 +572,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <pre><code><span class="k">IDENTIFIER</span>      AP-1 — The Admissibility Protocol
 <span class="k">CONCEPT DOI</span>     <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>  (resolves to latest deposit)
+<span class="k">V1.2 DEPOSIT</span>    <a href="https://doi.org/10.5281/zenodo.21369899">10.5281/zenodo.21369899</a>  (in force — cite this)
 <span class="k">V1.3 DEPOSIT</span>    <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a>  (draft for comment, not adopted)
 <span class="k">PRE-REGISTRATION</span> <a href="https://osf.io/y97d8">osf.io/y97d8</a>  (methodology frozen before execution)
 <span class="k">IN FORCE</span>        v1.2
@@ -605,8 +606,8 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   <pre><code>Rupp, M. (2026). <em>The Admissibility Protocol (AP-1): An Open Standard for
 Evaluating Numerical Admissibility in AI Systems</em>, Version 1.2.
 ZORRZ Financial Inc.
-Version DOI: <span style="color:#ff6b4a">[v1.2 VERSION DOI — RETRIEVE FROM ZENODO VERSIONS LIST]</span>
-Concept DOI: 10.5281/zenodo.21324954
+Version DOI: <a href="https://doi.org/10.5281/zenodo.21369899">10.5281/zenodo.21369899</a>   (v1.2 — the exact text)
+Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a>   (resolves to latest deposit)
 
 @misc{ap1_2026,
   author       = {Rupp, Marcus},
@@ -615,7 +616,7 @@ Concept DOI: 10.5281/zenodo.21324954
   year         = {2026},
   version      = {1.2},
   publisher    = {ZORRZ Financial Inc.},
-  doi          = {<span style="color:#ff6b4a">[v1.2 VERSION DOI]</span>},
+  doi          = {10.5281/zenodo.21369899},
   note         = {Concept DOI 10.5281/zenodo.21324954 resolves to the latest deposit},
   url          = {https://numericaladmissibility.org/}
 }</code></pre>
@@ -742,16 +743,16 @@ Concept DOI: 10.5281/zenodo.21324954
   </div>
 
   <h3 style="margin-top:44px">A stated defeat condition</h3>
-  <p class="prose">AP-1 rests on a claim that can be proven false, and publishes the condition under which it would be. The claim is not that no generative system could ever behave admissibly. It is that <strong>where a generative component retains unconstrained authority over whether, what and how to compute, admissibility cannot be guaranteed by observed behaviour alone.</strong></p>
+  <p class="prose">AP-1 rests on a claim that can be proven false, and publishes the condition under which it would be. As stated in §2.5 of the version in force: a system relying on probabilistic generation to decide whether to compute, to decide which values enter the computation, or to transcribe the result, cannot guarantee admissibility.</p>
 
-  <p class="prose">A system that admits a generative model into the decision to compute, and nonetheless demonstrates invocation guaranteed by construction, exact reproducibility, and no observed origination under refusal-pressure and adversarial conditions on a held-out set it has not seen, is a counterexample to that claim — and AP-1 records it unaltered.</p>
+  <p class="prose">It is falsified by a single counterexample. Any system that admits a generative model into the decision to compute and nonetheless achieves, on a held-out set it has not seen, <strong>100% invocation of deterministic computation on computable questions</strong> including with any facilitating instruction removed, <strong>exact reproducibility</strong> across repeated execution, and <strong>zero origination</strong> across the refusal-pressure and adversarial conditions, has refuted the claim — and AP-1 records that refutation unaltered.</p>
 
   <p class="small" style="margin-top:14px">Stated in the instrument's own terms rather than as an absolute: a finite sample with no failures does not establish that the failure rate is zero. Such a result is reported with its denominator and its one-sided upper bound on the failure rate, as the runner requires of every other result, including the publisher's.</p>
   <p class="prose"><strong>A standard that cannot be falsified is not a standard.</strong> Any party is invited to attempt it, expressly including the builders of frontier generative models.</p>
 
   <div class="callout">
     <p><strong>The defeat condition is itself under challenge — filed by the publisher.</strong></p>
-    <p>Comment C-12 against the v1.3 draft argues that §2.5&rsquo;s defeat condition cannot be satisfied as written. §2.5(a) requires invocation guaranteed rather than observed, achieved by generative means alone and without any deterministic containment mechanism. But D7.5 holds that no observed rate, including 100% at any n, establishes a guarantee, and that only the structural evidence of §6.3(b) converts an estimate into a control claim &mdash; and §6.3(b) requires a named architectural mechanism making origination unrepresentable, which is deterministic containment, the thing §2.5(a) excludes.</p>
+    <p>The condition above is v1.2&rsquo;s, the version in force. The v1.3 draft reformulates it, and comment C-12 &mdash; filed by the publisher against its own draft &mdash; argues that the reformulation cannot be satisfied. The draft&rsquo;s §2.5(a) requires invocation guaranteed rather than observed, achieved by generative means alone and without any deterministic containment mechanism. But D7.5 holds that no observed rate, including 100% at any n, establishes a guarantee, and that only the structural evidence of §6.3(b) converts an estimate into a control claim &mdash; and §6.3(b) requires a named architectural mechanism making origination unrepresentable, which is deterministic containment, the thing §2.5(a) excludes.</p>
     <p>Condition (e) compounds it. &ldquo;Zero origination&rdquo; is asked of a finite sample: at D5&rsquo;s minimum of twenty items, a sample with no failures yields a one-sided 95% upper bound near 14%. The refutation route is closed by the standard&rsquo;s own machinery, and on that reading the invitation to refute is generous in tone and empty in logic.</p>
     <p>The proposed resolution for v1.4 is to restate (a) as a threshold achievable in principle &mdash; invocation established at EV-2 or better across a stated n, with the bound reported &mdash; or to withdraw the falsifiability claim. The second is preferable to a claim that cannot be met. Until v1.4 is adopted, this section describes an aspiration whose current formulation the publisher has argued against in the open comment record.</p>
   </div>
@@ -904,7 +905,7 @@ Concept DOI: 10.5281/zenodo.21324954
     <div class="fin">
       <div style="color:var(--white);letter-spacing:.16em">AP-1 — THE ADMISSIBILITY PROTOCOL</div>
       <div>Open standard for evaluating numerical admissibility in AI systems</div>
-      <div>CC-BY 4.0 &nbsp;·&nbsp; DOI <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/ap1-run">Instrument (MIT)</a></div>
+      <div>CC-BY 4.0 &nbsp;·&nbsp; v1.2 <a href="https://doi.org/10.5281/zenodo.21369899">10.5281/zenodo.21369899</a> &nbsp;·&nbsp; concept <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/ap1-run">Instrument (MIT)</a></div>
       <div style="color:var(--meta);margin-top:14px;max-width:820px;line-height:1.7;text-transform:none;letter-spacing:0;font-family:'Geist Sans',sans-serif;font-size:.8rem">
         AP-1 is an openly published, versioned standard authored by ZORRZ Financial Inc. It is not an accredited or consensus standard and has no independent implementations to date. It is not endorsed by or affiliated with any agency, institution or standards body referenced on this page. Nothing here constitutes regulatory, engineering, safety, financial, medical or legal certification. Descriptions of external regulatory instruments are indicative, are not legal advice, and should be confirmed with qualified counsel.
       </div>
