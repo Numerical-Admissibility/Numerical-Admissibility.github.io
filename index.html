@@ -407,6 +407,51 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <p class="prose">The failure crosses a boundary none of those controls watch. AP-1 therefore separates <strong>computation invocation</strong> — did the required computation run — from <strong>operand provenance</strong> — did every value entering it have an evidentiary basis.</p>
 
+  <svg viewBox="0 0 700 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the operand boundary. Source data supplies one operand and the model supplies a second operand that appears nowhere in the source. Both cross into a deterministic tool, which executes correctly and returns an arithmetically correct but evidentially unsupported result. Five existing controls — invocation verification, execution contracts, entailment checking, data lineage and output review — all pass, because none of them watches the boundary the second operand crosses.">
+    <defs>
+      <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#606672" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="aoc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#B98A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect x="18" y="8" width="300" height="52" fill="none" stroke="#262930"/>
+    <text x="168" y="30" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">AUTHORITATIVE SOURCE DATA</text>
+    <text x="168" y="48" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Clean. Lineage intact. Not the failure.</text>
+
+    <rect x="342" y="8" width="300" height="52" fill="none" stroke="#B98A46"/>
+    <text x="492" y="30" text-anchor="middle" fill="#B98A46" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">GENERATIVE MODEL</text>
+    <text x="492" y="48" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Selects the values it passes onward</text>
+
+    <line x1="168" y1="60" x2="168" y2="150" stroke="#606672" stroke-width="1.4" marker-end="url(#ao)"/>
+    <text x="178" y="98" fill="#606672" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1">operand A</text>
+    <text x="178" y="114" fill="#606672" font-family="Geist Sans,sans-serif" font-size="10.5">appears in the source</text>
+
+    <line x1="492" y1="60" x2="492" y2="150" stroke="#B98A46" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#aoc)"/>
+    <text x="502" y="98" fill="#B98A46" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1">operand B</text>
+    <text x="502" y="114" fill="#B98A46" font-family="Geist Sans,sans-serif" font-size="10.5">appears nowhere in the source</text>
+
+    <line x1="18" y1="152" x2="642" y2="152" stroke="#B98A46" stroke-width="1.4"/>
+    <text x="18" y="144" fill="#B98A46" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="2.4">THE OPERAND BOUNDARY</text>
+
+    <rect x="18" y="166" width="624" height="56" fill="none" stroke="#262930"/>
+    <text x="330" y="189" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">DETERMINISTIC COMPUTATION</text>
+    <text x="330" y="208" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Invoked correctly. Executes exactly as specified. Arithmetic is exact.</text>
+
+    <line x1="330" y1="222" x2="330" y2="246" stroke="#606672" stroke-width="1.4" marker-end="url(#ao)"/>
+
+    <rect x="18" y="250" width="624" height="56" fill="rgba(185,138,70,.05)" stroke="#B98A46" stroke-width="1.4"/>
+    <text x="330" y="273" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">RELEASED FIGURE</text>
+    <text x="330" y="292" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Arithmetically consistent with its inputs. Evidentially unsupported.</text>
+
+    <line x1="18" y1="330" x2="642" y2="330" stroke="#262930"/>
+    <text x="18" y="352" fill="#606672" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1.6">CONTROLS THAT PASS THIS CASE</text>
+    <text x="18" y="374" fill="#9AA0AC" font-family="Geist Sans,sans-serif" font-size="11">Invocation verification · Execution contracts · Grounding and entailment · Data lineage · Output review</text>
+    <text x="18" y="390" fill="#606672" font-family="Geist Sans,sans-serif" font-size="10.5" font-style="italic">Each is correct within its own scope. None watches the boundary operand B crosses.</text>
+  </svg>
+
   <p class="small" style="margin-top:18px">The quantitative operand-provenance findings from the reference evaluation are <strong style="color:var(--white);font-weight:500">withdrawn under Erratum E3</strong> pending re-execution against the corrected ground truth. The mechanism described above is not in question; the measured rates are, and no figure for them is asserted here. See the publication record below.</p>
 </section>
 </div>
