@@ -604,7 +604,9 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
   <h3 style="margin-top:44px">How to cite</h3>
   <pre><code>Rupp, M. (2026). <em>The Admissibility Protocol (AP-1): An Open Standard for
 Evaluating Numerical Admissibility in AI Systems</em>, Version 1.2.
-ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
+ZORRZ Financial Inc.
+Version DOI: <span style="color:#ff6b4a">[v1.2 VERSION DOI — RETRIEVE FROM ZENODO VERSIONS LIST]</span>
+Concept DOI: 10.5281/zenodo.21324954
 
 @misc{ap1_2026,
   author       = {Rupp, Marcus},
@@ -613,9 +615,17 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
   year         = {2026},
   version      = {1.2},
   publisher    = {ZORRZ Financial Inc.},
-  doi          = {10.5281/zenodo.21324954},
+  doi          = {<span style="color:#ff6b4a">[v1.2 VERSION DOI]</span>},
+  note         = {Concept DOI 10.5281/zenodo.21324954 resolves to the latest deposit},
   url          = {https://numericaladmissibility.org/}
 }</code></pre>
+
+  <div class="callout">
+    <p><strong>Cite the version, not the concept.</strong></p>
+    <p>Per §0.4.2, the concept DOI cites the standard generally and always resolves to the latest deposit. A version DOI cites the exact text an evaluation was frozen against, and shall be used in any evaluation report alongside the version number.</p>
+    <p><strong>This matters right now.</strong> The concept DOI currently resolves to the v1.3 draft deposit, which is published for comment and <strong>not adopted</strong>. A reader following the concept DOI expecting v1.2 &mdash; the version in force &mdash; will land on the draft. Any evaluation claiming conformance to v1.2 must carry the v1.2 version DOI explicitly.</p>
+    <p class="small" style="margin-top:12px">AP-1 v1.3 draft deposit: <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a>. Not adopted; not a conformance target.</p>
+  </div>
 </section>
 </div>
 
@@ -738,6 +748,13 @@ ZORRZ Financial Inc. DOI: 10.5281/zenodo.21324954
 
   <p class="small" style="margin-top:14px">Stated in the instrument's own terms rather than as an absolute: a finite sample with no failures does not establish that the failure rate is zero. Such a result is reported with its denominator and its one-sided upper bound on the failure rate, as the runner requires of every other result, including the publisher's.</p>
   <p class="prose"><strong>A standard that cannot be falsified is not a standard.</strong> Any party is invited to attempt it, expressly including the builders of frontier generative models.</p>
+
+  <div class="callout">
+    <p><strong>The defeat condition is itself under challenge — filed by the publisher.</strong></p>
+    <p>Comment C-12 against the v1.3 draft argues that §2.5&rsquo;s defeat condition cannot be satisfied as written. §2.5(a) requires invocation guaranteed rather than observed, achieved by generative means alone and without any deterministic containment mechanism. But D7.5 holds that no observed rate, including 100% at any n, establishes a guarantee, and that only the structural evidence of §6.3(b) converts an estimate into a control claim &mdash; and §6.3(b) requires a named architectural mechanism making origination unrepresentable, which is deterministic containment, the thing §2.5(a) excludes.</p>
+    <p>Condition (e) compounds it. &ldquo;Zero origination&rdquo; is asked of a finite sample: at D5&rsquo;s minimum of twenty items, a sample with no failures yields a one-sided 95% upper bound near 14%. The refutation route is closed by the standard&rsquo;s own machinery, and on that reading the invitation to refute is generous in tone and empty in logic.</p>
+    <p>The proposed resolution for v1.4 is to restate (a) as a threshold achievable in principle &mdash; invocation established at EV-2 or better across a stated n, with the bound reported &mdash; or to withdraw the falsifiability claim. The second is preferable to a claim that cannot be met. Until v1.4 is adopted, this section describes an aspiration whose current formulation the publisher has argued against in the open comment record.</p>
+  </div>
 </section>
 </div>
 
