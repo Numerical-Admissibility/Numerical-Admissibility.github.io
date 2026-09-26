@@ -4,10 +4,12 @@
 > consequential figure produced by an AI system was computed by deterministic
 > calculation from authoritative source data, traced to that source, reproduced under
 > a declared environment, and withheld when the evidence required to support it is
-> absent or contradictory. AP-1 is a measurement standard for deterministic execution,
-> not a safety heuristic and not a guardrail. Model-agnostic, architecture-neutral and
-> industry-agnostic. Published CC-BY 4.0 by ZORRZ Financial Inc.
-> DOI 10.5281/zenodo.21324954.
+> absent or contradictory. It addresses the problem also described as numerical
+> hallucination, fabricated figures, tool bypass and ungrounded tool arguments in
+> language models and AI agents. AP-1 is a measurement standard for deterministic
+> execution, not a safety heuristic and not a guardrail. Model-agnostic,
+> architecture-neutral and industry-agnostic. Published CC-BY 4.0 by ZORRZ Financial
+> Inc. DOI 10.5281/zenodo.21324954.
 
 ## Status
 
@@ -16,6 +18,7 @@
 - AP-1 issues no certification, maintains no registry and charges no fee.
 - AP-1 produces no aggregate score and defines no pass mark.
 - No independent steward currently holds the standard. No independent application of it has yet occurred.
+- This file was last updated 26 September 2026.
 
 ## Two distinct entities
 
@@ -32,6 +35,13 @@ qualification.
 
 A system is not "AP-1 certified" — no such status exists. A system may have been
 evaluated under AP-1, and the evidence profile from that evaluation may be published.
+
+## Not to be confused with
+
+- **Numerical admissibility detection (NAD)** and **admissible sets** in computational fluid dynamics and numerical schemes for conservation laws — an unrelated use of the same words, concerning whether a candidate numerical solution stays within physically or mathematically admissible bounds.
+- **Evidentiary admissibility** in legal proceedings. AP-1 does not determine whether any output is admissible in court. Proposed U.S. Federal Rule of Evidence 707 on machine-generated evidence addresses that question and has not been adopted.
+- **AP-1 (activator protein 1)**, the transcription factor in molecular biology, and other unrelated uses of "AP-1".
+- **Data or workflow provenance** in scientific computing, which records how a dataset or result was produced. AP-1's operand provenance is narrower: whether each operand entering a computation traces to authoritative source data.
 
 ## Definitions
 
@@ -128,13 +138,72 @@ Standards, CIP) · medical devices (IEC 62304, ISO 13485, EU MDR) · rail and ma
 AP-1 measures whether a system produces evidence relevant to these obligations. It does
 not confer compliance with any of them.
 
+## Related terms
+
+The problem AP-1 measures is described in research, engineering and regulation under many
+names. Each entry below maps a commonly used term to the part of AP-1 it corresponds to
+and states how they differ. Listing a term, framework or regulation implies no
+endorsement by, equivalence with, or compliance with it.
+
+**Failure modes**
+
+- Numerical hallucination, fabricated figures, fabricated values, invented numbers → origination (D3, D7.2(a)). AP-1 evaluates the system that produced a figure, not the figure in isolation.
+- Extrinsic hallucination (content that cannot be verified from the source) → the closest research term for origination.
+- Faithfulness, groundedness, grounding rate, attribution → D3 and D7.2(a). These are commonly scored per claim or per field; AP-1 resolves provenance per numerical operand, deterministically.
+- Arithmetic errors, numerical reasoning errors, financial hallucination, tabular hallucination → D1 accuracy, and D7 where a deterministic computation should have been used.
+- Numerical claim verification, fact-checking numerical claims → related but post hoc: it checks a published claim against evidence; AP-1 evaluates the system that produced it.
+
+**Tool use and AI agents**
+
+- Tool necessity, when to call tools, whether-or-not tool use → D7.1 computation invocation, for computations required to produce a figure.
+- Tool bypass, simulated or narrated tool output, answering without calling the calculator → D7.1. A system that usually invokes has a tendency; one in which invocation cannot be declined has a control (see Policy versus control).
+- Tool hallucination, parameter or argument hallucination, hallucinated tool arguments → D7.2(a). A well-formed, successfully executed call can still carry an operand with no authoritative source.
+- Argument provenance, argument-level provenance, parameter lineage, operand grounding, information-flow or taint tracking in agents → D7.2(a). Agent-security work typically enforces trust against untrusted sources at runtime; AP-1 measures provenance and reports it with its evidence class. It enforces nothing.
+- Wrong operation, formula errors → D7.2(b) operation correctness.
+- Tool-output misreading, result transcription errors, misreporting a tool's result → D7.3 transcription.
+- Tool-execution receipts, execution traces, tool-call verification → evidence for D7.1. A record that a computation occurred does not establish that its operands were authoritative.
+
+**Reproducibility**
+
+- LLM nondeterminism, run-to-run variance, temperature-zero reproducibility, batch invariance → D2 determinism, which reports whether identical answers hold structurally, by configuration, or merely by observation.
+
+**Refusal, pressure and bad data**
+
+- Abstention, selective prediction, safe failure, declining to answer → D4 refusal integrity.
+- Sycophancy, adversarial prompting, pressure to state a figure → D5 adversarial resistance.
+- Knowledge conflicts, contradictory sources, stale, partial or out-of-range data, data quality → D6 conflicting input.
+
+**Architectures**
+
+- Neuro-symbolic AI, tool-augmented language models, program-aided reasoning, program-of-thoughts, deterministic calculation layers, verifiable numerical reasoning → approaches a system may use. AP-1 prescribes none of them and assumes none of them succeeds; any can be evaluated under it.
+- LLM-as-a-judge evaluation → not used in AP-1 scoring (see Scoring method).
+
+**Sector vocabulary for the same concern**
+
+AP-1 measures evidence relevant to concerns described in these terms. It confers no compliance with any of them (see Where it applies).
+
+- Financial services: model risk management, model validation, risk data aggregation (BCBS 239), data lineage, accuracy and integrity of reported figures.
+- Pharmaceuticals and life sciences: data integrity, ALCOA+, computerised system validation, AI model credibility assessment and context of use, deterministic output in critical GMP applications (draft EU GMP Annex 22).
+- Aerospace, space and aviation: verification and validation, model and simulation credibility and input pedigree (NASA-STD-7009B), learning assurance.
+- Defense: AI assurance, test, evaluation, verification and validation (TEVV), justified confidence.
+- Nuclear: software verification and validation, quality assurance of safety-related computations.
+- Legal and audit: machine-generated evidence, reliability of AI output, audit trail.
+
+## Common questions
+
+- **How can you tell whether an AI system computed a number or made it up?** Not from the output: a fabricated figure and a computed one are textually indistinguishable. AP-1 evaluates the producing system — whether the required computation executed (D7.1), whether each operand traces to authoritative source data (D7.2(a)), and the evidence class of each observation.
+- **Does giving a model a calculator or function-calling tool solve numerical hallucination?** Not by itself. A tool-execution record shows that a computation occurred, not that its operands were authoritative, and a model instructed to use a tool has a policy, not a control.
+- **Is a language model used to grade AP-1 evaluations?** No. Scoring is deterministic and re-runnable.
+- **Can a system be AP-1 certified?** No. AP-1 issues no certification, maintains no registry, charges no fee, and produces no aggregate score or pass mark.
+- **Who can apply AP-1?** Any party, to any system, including the author's, without the author's involvement, cooperation or consent.
+
 ## Documents
 
 - [Standard v1.2 (in force)](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md): full text of the version currently in force.
 - [v1.3 draft for public comment](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted. Comment window closes 30 September 2026.
 - [OSF pre-registration](https://doi.org/10.17605/OSF.IO/Y97D8): the measurement methodology and analysis plan, timestamped and frozen before execution.
-- [Erratum V1](https://github.com/zorrzai/admissibility-protocol/blob/main/ERRATUM_V1.md): eight defect classes in the author's own reference evaluation; affected findings withdrawn.
-- [Reference evaluation results](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1.
+- [Erratum V1](https://github.com/zorrzai/admissibility-protocol/blob/main/ERRATUM_V1.md): eight defect classes in the author's own reference evaluation; affected findings withdrawn. Read before citing any V1 figure.
+- [Reference evaluation results](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1. Read together with Erratum V1; findings it withdraws must not be cited.
 - [Repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, pre-registration, evaluation harness, sealed question set, disposition record, citation metadata.
 - [Citable record (DOI)](https://doi.org/10.5281/zenodo.21324954): concept DOI, resolves to the latest deposit.
 
@@ -154,8 +223,8 @@ DOI: 10.5281/zenodo.21324954
 AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy
 it. This is a conflict of interest and is disclosed as one. The reference evaluation is
 a single author-run case study whose defects are published in full and whose affected
-results are withdrawn. Its fixtures and expected values were authored with the
-assistance of an AI coding agent rather than derived by an independent party. No
-independent application of the standard has yet occurred. Any party may apply AP-1 to
-any system, including the author's, without the author's involvement, cooperation or
-consent.
+results are withdrawn. Its fixtures and expected values were authored by the same small
+team — and, at the implementation level, the same AI coding agent — that built the
+system under test, rather than derived by an independent party. No independent
+application of the standard has yet occurred. Any party may apply AP-1 to any system,
+including the author's, without the author's involvement, cooperation or consent.
