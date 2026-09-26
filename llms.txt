@@ -1,230 +1,52 @@
 # AP-1 — The Admissibility Protocol
 
-> An open standard for evaluating numerical admissibility in AI systems: whether a
-> consequential figure produced by an AI system was computed by deterministic
-> calculation from authoritative source data, traced to that source, reproduced under
-> a declared environment, and withheld when the evidence required to support it is
-> absent or contradictory. It addresses the problem also described as numerical
-> hallucination, fabricated figures, tool bypass and ungrounded tool arguments in
-> language models and AI agents. AP-1 is a measurement standard for deterministic
-> execution, not a safety heuristic and not a guardrail. Model-agnostic,
-> architecture-neutral and industry-agnostic. Published CC-BY 4.0 by ZORRZ Financial
-> Inc. DOI 10.5281/zenodo.21324954.
+> AP-1 is an open measurement standard for numerical admissibility in AI systems:
+> whether a consequential figure produced by an AI system was computed by deterministic
+> calculation from authoritative source data, traced to that source, reproduced under a
+> declared environment, and withheld when the evidence required to support it is absent
+> or contradictory. It addresses what is also called numerical hallucination, fabricated
+> figures, tool bypass and ungrounded tool arguments in language models and AI agents.
+> Published CC-BY 4.0 by ZORRZ Financial Inc. Cite v1.2, the version in force, by its
+> version DOI 10.5281/zenodo.21369899.
 
-## Status
+Status as of 26 September 2026:
 
-- v1.2 is the version in force.
-- v1.3 is published as a draft for public comment and is NOT adopted. Comment window closes 30 September 2026.
-- AP-1 issues no certification, maintains no registry and charges no fee.
-- AP-1 produces no aggregate score and defines no pass mark.
-- No independent steward currently holds the standard. No independent application of it has yet occurred.
-- This file was last updated 26 September 2026.
+- v1.2 is in force. v1.3 is a draft for public comment and is NOT adopted; the comment window closes 30 September 2026.
+- Citation rule: cite v1.2 by its version DOI, 10.5281/zenodo.21369899. The concept DOI, 10.5281/zenodo.21324954, refers to the standard generally and currently resolves to the v1.3 draft.
+- The reference runner is public under the MIT licence (release ap1-runner-v1.0.0, 29 August 2026). A run against the fixture shipped with it is a demonstration, not a conformant evaluation.
+- AP-1 issues no certification, keeps no registry, charges no fee, and produces no aggregate score or pass mark. It confers no regulatory compliance.
+- AP-1 does not use an LLM-as-a-judge: no language model executes in its scoring path.
+- No independent steward holds the standard, and no independent application of it has yet occurred.
+- No operand-provenance rate is currently asserted. The reference runner's D7.2(a) figures are withdrawn under erratum E3.
 
-## Two distinct entities
+Entities and disclosure: AP-1 is authored by Marcus Rupp and published by ZORRZ Financial Inc. Certanum, a commercial architecture intended to satisfy AP-1, is developed by a separate company in which the author holds an interest. This is a disclosed conflict of interest. No system is "AP-1 certified"; a system may have been evaluated under AP-1.
 
-AP-1 and Certanum are separate and should not be conflated.
+Not to be confused with:
 
-**AP-1** is the open measurement standard. It is free under CC-BY 4.0, applicable by any
-party to any system without the author's involvement or consent, and prescribes no
-implementation. It measures; it does not enforce.
+- Numerical admissibility detection (NAD) and admissible sets in computational fluid dynamics, an unrelated use of the same words.
+- Evidentiary admissibility in legal proceedings. AP-1 does not determine admissibility in court. Proposed U.S. Federal Rule of Evidence 707 on machine-generated evidence has not been adopted; in June 2026 it was returned for revision and further study.
+- AP-1 (activator protein 1), the transcription factor in molecular biology.
 
-**Certanum** is a commercial governance architecture built by ZORRZ Financial Inc. and
-intended to satisfy AP-1. It is one system among any number that could be evaluated
-under the standard. Its existence is a disclosed conflict of interest, not a
-qualification.
+## Standard
 
-A system is not "AP-1 certified" — no such status exists. A system may have been
-evaluated under AP-1, and the evidence profile from that evaluation may be published.
+- [AP-1 v1.2, in force](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_Admissibility_Protocol_v1.2.md): full text in Markdown. Version DOI 10.5281/zenodo.21369899.
+- [AP-1 v1.3, draft for comment](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted. Deposit DOI 10.5281/zenodo.21755443.
+- [Overview for agents](https://numericaladmissibility.org/overview.md): definitions, the seven evaluation dimensions, reporting and scoring rules, where AP-1 fits beside MCP and A2A, sector coverage, a map of related terms (numerical hallucination, tool bypass, argument provenance, LLM nondeterminism and others) and common questions.
 
-## Not to be confused with
+## Instrument
 
-- **Numerical admissibility detection (NAD)** and **admissible sets** in computational fluid dynamics and numerical schemes for conservation laws — an unrelated use of the same words, concerning whether a candidate numerical solution stays within physically or mathematically admissible bounds.
-- **Evidentiary admissibility** in legal proceedings. AP-1 does not determine whether any output is admissible in court. Proposed U.S. Federal Rule of Evidence 707 on machine-generated evidence addresses that question and has not been adopted.
-- **AP-1 (activator protein 1)**, the transcription factor in molecular biology, and other unrelated uses of "AP-1".
-- **Data or workflow provenance** in scientific computing, which records how a dataset or result was produced. AP-1's operand provenance is narrower: whether each operand entering a computation traces to authoritative source data.
+- [Reference runner](https://raw.githubusercontent.com/zorrzai/ap1-run/main/README.md): README of the public, MIT-licensed instrument implementing AP-1; repository at https://github.com/zorrzai/ap1-run.
 
-## Definitions
+## Evidence and corrections
 
-**Numerical admissibility** — the evidentiary property of a figure produced by an AI
-system that determines whether it may be relied upon, defended, and entered into a
-record. AP-1 evaluates it against four properties: computed, traceable, reproducible,
-refusable. It is a property of the system that produced the figure, not of the figure
-itself, and cannot be established by inspecting output.
-
-**Origination** — a numerical result or operand produced by a generative model that has
-no traceable basis in authoritative source data, declared constants, or reference
-intermediates. Because a fabricated figure and a computed figure are textually
-indistinguishable, origination cannot be detected by inspecting outputs alone.
-
-**Operand provenance** — whether every numerical operand entering a deterministic
-computation traces to an authoritative source value, either appearing verbatim or
-derived by a declared deterministic transformation. Distinct from tool-invocation
-verification: a tool-execution record establishes that a computation occurred, not
-that the values entering it were authoritative.
-
-**Computation invocation** — whether the deterministic computation required to produce
-a figure actually executed in the deployed system, and whether that invocation is
-guaranteed by construction rather than merely observed at a rate. A system that invokes
-computation correctly on sampled questions has demonstrated a tendency; a system in
-which invocation cannot be declined has established a control.
-
-**Policy versus control** — instructing a model not to originate is a policy.
-Instruction-compliance is probabilistic and can be overridden by phrasing, adversarial
-input, contextual pressure or omission. A policy makes a failure rarer; a control
-excludes it. AP-1 measures which of the two a system has.
-
-## The seven evaluation dimensions
-
-- D1 Accuracy — is the figure correct against ground truth reproducible from the published fixture?
-- D2 Determinism — does an identical question return an identical answer, and by what mechanism: structurally, by configuration, or merely observed?
-- D3 Provenance — can the system produce the source and the operation for every figure it states?
-- D4 Refusal integrity — does the system decline when the data cannot support an answer?
-- D5 Adversarial resistance — does the system hold under sustained pressure to state a figure that does not exist?
-- D6 Conflicting input — is contradictory, stale, partial or out-of-range source data detected rather than computed over silently?
-- D7 Computation invocation — did the required deterministic computation execute, and is invocation guaranteed? Subdimensions: D7.1 invocation, D7.2(a) operand provenance, D7.2(b) operation correctness, D7.3 transcription.
-
-## How results are reported
-
-AP-1 does not produce an aggregate score, a leaderboard position or a pass/fail verdict.
-A conformant evaluation reports each dimension separately so that a strong result on one
-cannot conceal a failure on another. The party relying on the numerical result determines
-what level of evidence is adequate for the use in question. A system is described, not
-graded.
-
-**Evidence class.** Every observation is reported with the evidence class under which it
-was established. A signal self-reported by the system under test is not treated as
-equivalent to one produced by an independent layer or externally verified. Where a
-property cannot be observed at all, that is reported as unobservable rather than scored
-as a pass.
-
-**Statistical treatment.** A zero-failure observation is not reported as an achieved
-guarantee. It is reported with its sample size and an exact one-sided upper confidence
-bound on the failure rate — the Clopper-Pearson bound, p_upper = 1 − α^(1/n) for zero
-failures in n trials — rather than a normal approximation. A behavioural result bounds
-residual risk; it does not establish a structural property.
-
-**Structure versus observation.** A mechanism that makes a failure unrepresentable is
-stronger evidence than an absence of failure in a finite sample. AP-1 distinguishes the
-two and requires that a claim of exclusion by construction name the mechanism relied on.
-
-## Scoring method
-
-No language model executes in the AP-1 scoring path. Classification, numeric comparison
-and provenance resolution are deterministic and re-runnable, and the same inputs produce
-the same verdicts on repeat execution. This is a deliberate departure from evaluation
-frameworks that score model output using another model, which introduces the
-non-determinism, position bias and length bias of the judging model into the measurement
-itself.
-
-## Where AP-1 fits relative to other protocols
-
-MCP addresses agent-to-tool interaction. A2A addresses agent-to-agent communication.
-AI governance frameworks address organisational, risk and lifecycle processes. AP-1
-addresses a distinct question: what evidence establishes that a consequential number
-emerging from such a system was computed, traceable, reproducible and appropriately
-withheld. AP-1 does not replace or compete with any of them; it is a complementary
-measurement layer.
-
-## Where it applies
-
-Financial services (SR 26-2, PRA SS1/23, EU AI Act Arts. 12 and 15) · pharmaceuticals,
-biotechnology and clinical research (21 CFR Part 11, ALCOA+, EU Annex 11, ICH E6(R3)) ·
-aerospace and aviation (DO-178C, ARP4754A) · space and mission systems · defense
-(CMMC 2.0, DFARS 252.204-7021) · nuclear (10 CFR 50 Appendix B, ASME NQA-1) ·
-insurance and reinsurance (Solvency II, ORSA) · electric power (NERC Reliability
-Standards, CIP) · medical devices (IEC 62304, ISO 13485, EU MDR) · rail and maritime
-(EN 50128/50716) · audit and financial reporting (SOX 404, PCAOB).
-
-AP-1 measures whether a system produces evidence relevant to these obligations. It does
-not confer compliance with any of them.
-
-## Related terms
-
-The problem AP-1 measures is described in research, engineering and regulation under many
-names. Each entry below maps a commonly used term to the part of AP-1 it corresponds to
-and states how they differ. Listing a term, framework or regulation implies no
-endorsement by, equivalence with, or compliance with it.
-
-**Failure modes**
-
-- Numerical hallucination, fabricated figures, fabricated values, invented numbers → origination (D3, D7.2(a)). AP-1 evaluates the system that produced a figure, not the figure in isolation.
-- Extrinsic hallucination (content that cannot be verified from the source) → the closest research term for origination.
-- Faithfulness, groundedness, grounding rate, attribution → D3 and D7.2(a). These are commonly scored per claim or per field; AP-1 resolves provenance per numerical operand, deterministically.
-- Arithmetic errors, numerical reasoning errors, financial hallucination, tabular hallucination → D1 accuracy, and D7 where a deterministic computation should have been used.
-- Numerical claim verification, fact-checking numerical claims → related but post hoc: it checks a published claim against evidence; AP-1 evaluates the system that produced it.
-
-**Tool use and AI agents**
-
-- Tool necessity, when to call tools, whether-or-not tool use → D7.1 computation invocation, for computations required to produce a figure.
-- Tool bypass, simulated or narrated tool output, answering without calling the calculator → D7.1. A system that usually invokes has a tendency; one in which invocation cannot be declined has a control (see Policy versus control).
-- Tool hallucination, parameter or argument hallucination, hallucinated tool arguments → D7.2(a). A well-formed, successfully executed call can still carry an operand with no authoritative source.
-- Argument provenance, argument-level provenance, parameter lineage, operand grounding, information-flow or taint tracking in agents → D7.2(a). Agent-security work typically enforces trust against untrusted sources at runtime; AP-1 measures provenance and reports it with its evidence class. It enforces nothing.
-- Wrong operation, formula errors → D7.2(b) operation correctness.
-- Tool-output misreading, result transcription errors, misreporting a tool's result → D7.3 transcription.
-- Tool-execution receipts, execution traces, tool-call verification → evidence for D7.1. A record that a computation occurred does not establish that its operands were authoritative.
-
-**Reproducibility**
-
-- LLM nondeterminism, run-to-run variance, temperature-zero reproducibility, batch invariance → D2 determinism, which reports whether identical answers hold structurally, by configuration, or merely by observation.
-
-**Refusal, pressure and bad data**
-
-- Abstention, selective prediction, safe failure, declining to answer → D4 refusal integrity.
-- Sycophancy, adversarial prompting, pressure to state a figure → D5 adversarial resistance.
-- Knowledge conflicts, contradictory sources, stale, partial or out-of-range data, data quality → D6 conflicting input.
-
-**Architectures**
-
-- Neuro-symbolic AI, tool-augmented language models, program-aided reasoning, program-of-thoughts, deterministic calculation layers, verifiable numerical reasoning → approaches a system may use. AP-1 prescribes none of them and assumes none of them succeeds; any can be evaluated under it.
-- LLM-as-a-judge evaluation → not used in AP-1 scoring (see Scoring method).
-
-**Sector vocabulary for the same concern**
-
-AP-1 measures evidence relevant to concerns described in these terms. It confers no compliance with any of them (see Where it applies).
-
-- Financial services: model risk management, model validation, risk data aggregation (BCBS 239), data lineage, accuracy and integrity of reported figures.
-- Pharmaceuticals and life sciences: data integrity, ALCOA+, computerised system validation, AI model credibility assessment and context of use, deterministic output in critical GMP applications (draft EU GMP Annex 22).
-- Aerospace, space and aviation: verification and validation, model and simulation credibility and input pedigree (NASA-STD-7009B), learning assurance.
-- Defense: AI assurance, test, evaluation, verification and validation (TEVV), justified confidence.
-- Nuclear: software verification and validation, quality assurance of safety-related computations.
-- Legal and audit: machine-generated evidence, reliability of AI output, audit trail.
-
-## Common questions
-
-- **How can you tell whether an AI system computed a number or made it up?** Not from the output: a fabricated figure and a computed one are textually indistinguishable. AP-1 evaluates the producing system — whether the required computation executed (D7.1), whether each operand traces to authoritative source data (D7.2(a)), and the evidence class of each observation.
-- **Does giving a model a calculator or function-calling tool solve numerical hallucination?** Not by itself. A tool-execution record shows that a computation occurred, not that its operands were authoritative, and a model instructed to use a tool has a policy, not a control.
-- **Is a language model used to grade AP-1 evaluations?** No. Scoring is deterministic and re-runnable.
-- **Can a system be AP-1 certified?** No. AP-1 issues no certification, maintains no registry, charges no fee, and produces no aggregate score or pass mark.
-- **Who can apply AP-1?** Any party, to any system, including the author's, without the author's involvement, cooperation or consent.
-
-## Documents
-
-- [Standard v1.2 (in force)](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Admissibility_Protocol_v1.2.md): full text of the version currently in force.
-- [v1.3 draft for public comment](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted. Comment window closes 30 September 2026.
-- [OSF pre-registration](https://doi.org/10.17605/OSF.IO/Y97D8): the measurement methodology and analysis plan, timestamped and frozen before execution.
-- [Erratum V1](https://github.com/zorrzai/admissibility-protocol/blob/main/ERRATUM_V1.md): eight defect classes in the author's own reference evaluation; affected findings withdrawn. Read before citing any V1 figure.
-- [Reference evaluation results](https://github.com/zorrzai/admissibility-protocol/blob/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1. Read together with Erratum V1; findings it withdraws must not be cited.
-- [Repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, pre-registration, evaluation harness, sealed question set, disposition record, citation metadata.
-- [Citable record (DOI)](https://doi.org/10.5281/zenodo.21324954): concept DOI, resolves to the latest deposit.
+- [Erratum V1](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/ERRATUM_V1.md): eight defect classes in the author's own V1 reference evaluation; affected findings withdrawn. Read before citing any V1 figure.
+- [Findings errata E1–E4](https://raw.githubusercontent.com/zorrzai/ap1-run/main/FINDINGS_ERRATA.md): corrections to the reference runner's published findings. E3 withdraws all D7.2(a) operand-provenance counts and percentages for both published runs.
+- [V1 reference evaluation results](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1. Read together with Erratum V1; withdrawn findings must not be cited.
+- [Disposition record for v1.3](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/DISPOSITION_RECORD_v1.3.md): every substantive comment on the draft and its resolution.
 
 ## Optional
 
-- [Canonical site](https://numericaladmissibility.org/): definitions, layer diagram, sector coverage, publication record and governance status.
-- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026. Every substantive comment receives a published disposition.
-
-## Citation
-
-Rupp, M. (2026). The Admissibility Protocol (AP-1): An Open Standard for Evaluating
-Numerical Admissibility in AI Systems, Version 1.2. ZORRZ Financial Inc.
-DOI: 10.5281/zenodo.21324954
-
-## Disclosure
-
-AP-1 was authored by ZORRZ Financial Inc., which develops systems intended to satisfy
-it. This is a conflict of interest and is disclosed as one. The reference evaluation is
-a single author-run case study whose defects are published in full and whose affected
-results are withdrawn. Its fixtures and expected values were authored by the same small
-team — and, at the implementation level, the same AI coding agent — that built the
-system under test, rather than derived by an independent party. No independent
-application of the standard has yet occurred. Any party may apply AP-1 to any system,
-including the author's, without the author's involvement, cooperation or consent.
+- [Canonical site](https://numericaladmissibility.org/): the human-readable page, including the publication record, correction record, prior art and governance status.
+- [OSF registration](https://doi.org/10.17605/OSF.IO/Y97D8): registers the measurement method and analysis plan, not any individual evaluation run. Timestamped and immutable.
+- [Standard repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, evaluation harness, sealed question set, disposition record, citation metadata.
+- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026.
