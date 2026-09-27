@@ -7,17 +7,17 @@
 > or contradictory. It addresses what is also called numerical hallucination, fabricated
 > figures, tool bypass and ungrounded tool arguments in language models and AI agents.
 > Published CC-BY 4.0 by ZORRZ Financial Inc. Cite v1.2, the version in force, by its
-> version DOI 10.5281/zenodo.21369899.
+> version DOI 10.5281/zenodo.21371684.
 
-Status as of 26 September 2026:
+Status as of 27 September 2026:
 
 - v1.2 is in force. v1.3 is a draft for public comment and is NOT adopted; the comment window closes 30 September 2026.
-- Citation rule: cite v1.2 by its version DOI, 10.5281/zenodo.21369899. The concept DOI, 10.5281/zenodo.21324954, refers to the standard generally and currently resolves to the v1.3 draft.
+- Citation rule: cite v1.2 by its version DOI, 10.5281/zenodo.21371684. The concept DOI, 10.5281/zenodo.21324954, refers to the standard generally and currently resolves to the v1.3 draft.
 - The reference runner is public under the MIT licence (release ap1-runner-v1.0.0, 29 August 2026). A run against the fixture shipped with it is a demonstration, not a conformant evaluation.
 - AP-1 issues no certification, keeps no registry, charges no fee, and produces no aggregate score or pass mark. It confers no regulatory compliance.
 - AP-1 does not use an LLM-as-a-judge: no language model executes in its scoring path.
 - No independent steward holds the standard, and no independent application of it has yet occurred.
-- No operand-provenance rate is currently asserted. The reference runner's D7.2(a) figures are withdrawn under erratum E3.
+- No operand-provenance rate is currently asserted. The quantitative operand-provenance findings remain withdrawn under Erratum E3. Corrected figures will be published only once they can be reproduced from a published release.
 
 Entities and disclosure: AP-1 is authored by Marcus Rupp and published by ZORRZ Financial Inc. Certanum, a commercial architecture intended to satisfy AP-1, is developed by a separate company in which the author holds an interest. This is a disclosed conflict of interest. No system is "AP-1 certified"; a system may have been evaluated under AP-1.
 
@@ -29,7 +29,7 @@ Not to be confused with:
 
 ## Standard
 
-- [AP-1 v1.2, in force](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_Admissibility_Protocol_v1.2.md): full text in Markdown. Version DOI 10.5281/zenodo.21369899.
+- [AP-1 v1.2, in force](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_Admissibility_Protocol_v1.2.md): full text in Markdown. Version DOI 10.5281/zenodo.21371684.
 - [AP-1 v1.3, draft for comment](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_v1.3_DRAFT_FOR_COMMENT.md): proposed revision, not adopted. Deposit DOI 10.5281/zenodo.21755443.
 - [Overview for agents](https://numericaladmissibility.org/overview.md): definitions, the seven evaluation dimensions, reporting and scoring rules, where AP-1 fits beside MCP and A2A, sector coverage, a map of related terms (numerical hallucination, tool bypass, argument provenance, LLM nondeterminism and others) and common questions.
 
@@ -40,13 +40,13 @@ Not to be confused with:
 ## Evidence and corrections
 
 - [Erratum V1](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/ERRATUM_V1.md): eight defect classes in the author's own V1 reference evaluation; affected findings withdrawn. Read before citing any V1 figure.
-- [Findings errata E1–E4](https://raw.githubusercontent.com/zorrzai/ap1-run/main/FINDINGS_ERRATA.md): corrections to the reference runner's published findings. E3 withdraws all D7.2(a) operand-provenance counts and percentages for both published runs.
+- [Findings errata E1–E7, E3 Addendum, F10–F11](https://raw.githubusercontent.com/zorrzai/ap1-run/main/FINDINGS_ERRATA.md): corrections and amendments to the reference runner's published findings. E3 withdraws all D7.2(a) operand-provenance counts and percentages for both published runs, and the withdrawal stands. E5 covers the D7.2(b) classifier, E6 calculator operator precedence, and E7 the D7.3 check absent from the run path.
 - [V1 reference evaluation results](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/AP-1_Evaluation_V1_Results.md): the author's own system evaluated under AP-1. Read together with Erratum V1; withdrawn findings must not be cited.
 - [Disposition record for v1.3](https://raw.githubusercontent.com/zorrzai/admissibility-protocol/main/DISPOSITION_RECORD_v1.3.md): every substantive comment on the draft and its resolution.
 
 ## Optional
 
 - [Canonical site](https://numericaladmissibility.org/): the human-readable page, including the publication record, correction record, prior art and governance status.
-- [OSF registration](https://doi.org/10.17605/OSF.IO/Y97D8): registers the measurement method and analysis plan, not any individual evaluation run. Timestamped and immutable.
+- [OSF registration](https://doi.org/10.17605/OSF.IO/Y97D8): registers the measurement method and analysis plan, not any individual evaluation run. Filed 15 August 2026, after the V1 and reference runs. Timestamped and immutable.
 - [Standard repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, evaluation harness, sealed question set, disposition record, citation metadata.
 - [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026.
