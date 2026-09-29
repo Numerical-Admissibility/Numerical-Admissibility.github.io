@@ -21,9 +21,6 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-sans/style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.3/dist/fonts/geist-mono/style.css">
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -146,120 +143,139 @@
 }
 </script>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap">
+<meta name="theme-color" content="#ffffff">
 <style>
 :root{
-  --bg:#000000;
-  --panel:#07090c;
-  --panel2:#0b0e12;
-  --copper:#B98A46;
-  --copper-dim:rgba(185,138,70,.14);
-  --copper-faint:rgba(185,138,70,.05);
-  --white:#ECEAE3;
-  --sub:#9AA0AC;
-  --gray:#606672;
-  --meta:#343840;
-  --rule:#262930;
-  --max:1080px;
+  --bg:#FFFFFF;
+  --panel:#F6F6F4;
+  --panel2:#F0F0EE;
+  --copper:#111111;
+  --copper-dim:#EAEAEA;
+  --copper-faint:#F6F6F4;
+  --white:#111111;
+  --sub:#333333;
+  --gray:#666666;
+  --meta:#777777;
+  --rule:#D6D6D6;
+  --max:1000px;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  --serif:'IBM Plex Serif',Georgia,'Times New Roman',serif;
+  --monof:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--white);
-  font-family:'Geist Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-}
-a{color:var(--copper);text-decoration:none}
-a:hover{text-decoration:underline}
-.mono{font-family:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+body{background:var(--bg);color:var(--white);font-family:var(--serif);line-height:1.65;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;counter-reset:sec}
+a{color:#111;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;text-decoration-color:#999}
+a:hover{text-decoration-color:#111}
+.mono{font-family:var(--monof)}
 
 /* nav */
-nav{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
-.navin{max-width:var(--max);margin:auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
-.brand{font-family:'Geist Mono',monospace;font-weight:600;letter-spacing:.22em;font-size:.95rem}
-.navlinks{display:flex;gap:22px;font-family:'Geist Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}
-.navlinks a{color:var(--sub)}
-.navlinks a:hover{color:var(--copper);text-decoration:none}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.navin{max-width:var(--max);margin:auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.brand{font-family:var(--monof);font-weight:500;letter-spacing:.14em;font-size:.9rem;color:#111}
+.navlinks{display:flex;gap:18px;font-family:var(--sans);font-size:.78rem}
+.navlinks a{color:#444;text-decoration:none}
+.navlinks a:hover{color:#111;text-decoration:underline}
 
 /* layout */
 .wrap{max-width:var(--max);margin:auto;padding:0 24px}
-section{padding:72px 0;border-top:1px solid var(--rule)}
+section{padding:64px 0;border-top:1px solid var(--rule)}
 section:first-of-type{border-top:none}
-h2{font-family:'Geist Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:var(--copper);margin-bottom:22px}
-h3{font-size:1.45rem;font-weight:500;letter-spacing:-.02em;margin-bottom:16px;line-height:1.25}
-.prose{color:var(--sub);font-size:1.06rem;max-width:760px}
+h2{font-family:var(--monof);font-size:.74rem;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:#111;margin-bottom:20px}
+section[id] h2::before{counter-increment:sec;content:counter(sec,decimal-leading-zero) "\00a0\00a0";color:#888}
+h3{font-family:var(--sans);font-size:1.45rem;font-weight:500;letter-spacing:-.01em;margin-bottom:16px;line-height:1.3}
+h4{font-family:var(--sans)}
+.prose{color:var(--sub);font-size:1.05rem;max-width:740px}
 .prose+.prose{margin-top:16px}
-.prose strong{color:var(--white);font-weight:500}
-.small{font-size:.86rem;color:var(--gray);max-width:760px}
+.prose strong{color:#111;font-weight:500}
+.small{font-size:.88rem;color:var(--gray);max-width:740px}
 
-/* hero */
-.hero{padding:84px 0 68px}
-.status{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:'Geist Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);margin-bottom:26px}
-.dot{width:6px;height:6px;background:var(--copper);box-shadow:0 0 9px var(--copper);flex-shrink:0}
-h1{font-size:clamp(3.2rem,9vw,5.6rem);line-height:.94;letter-spacing:-.045em;font-weight:500;margin-bottom:22px}
-.lede{font-size:clamp(1.2rem,2.6vw,1.6rem);line-height:1.35;color:var(--white);font-weight:400;max-width:820px;margin-bottom:22px}
-.hero .prose{max-width:790px}
-.vbox{font-family:'Geist Mono',monospace;font-size:.78rem;color:var(--gray);border-left:2px solid var(--rule);padding:4px 0 4px 14px;margin:28px 0 30px;line-height:1.8}
-.vbox strong{color:var(--white);font-weight:400}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{font-family:'Geist Mono',monospace;text-transform:uppercase;font-size:.7rem;letter-spacing:.09em;padding:13px 22px;border:1px solid var(--copper);display:inline-block;transition:.18s}
-.btn:hover{text-decoration:none}
-.b1{background:var(--copper);color:#000}
-.b1:hover{background:transparent;color:var(--copper)}
-.b2{color:var(--copper)}
-.b2:hover{background:var(--copper-dim)}
+/* title page */
+.hero{padding:72px 0 56px}
+.tp-kicker{font-family:var(--monof);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#555;margin-bottom:22px}
+h1{font-family:var(--sans);font-size:clamp(2.4rem,6vw,3.6rem);line-height:1.08;letter-spacing:-.025em;font-weight:500;margin-bottom:20px}
+.lede{font-family:var(--serif);font-size:clamp(1.15rem,2.2vw,1.4rem);line-height:1.45;color:#111;font-weight:400;max-width:760px;margin-bottom:22px}
+.hero .prose{max-width:760px}
+.statusblock{margin:34px 0 30px;border-top:2px solid #111;border-bottom:1px solid #111}
+.statusblock .row{display:grid;grid-template-columns:230px 1fr;gap:6px 24px;padding:14px 0;border-top:1px solid var(--rule)}
+.statusblock .row:first-child{border-top:none}
+.statusblock .k{font-family:var(--monof);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#111;font-weight:500;padding-top:3px}
+.statusblock .v{font-family:var(--sans);font-size:.95rem;color:#222}
+.statusblock .v .mono{font-size:.85rem}
+.statusblock .v .note{display:block;font-size:.84rem;color:#666;margin-top:4px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font-family:var(--sans);font-size:.85rem;padding:10px 18px;border:1px solid #111;display:inline-block;text-decoration:none;color:#111}
+.btn:hover{background:#111;color:#fff;text-decoration:none}
+.b1{background:#111;color:#fff}
+.b1:hover{background:#fff;color:#111}
+.b2{color:#111}
+.vbox{display:none}
+.status,.dot{display:none}
 
 /* definition */
-.defbox{border:1px solid var(--rule);border-left:2px solid var(--copper);background:var(--copper-faint);padding:28px 30px;margin:26px 0}
-.defbox p{font-size:1.14rem;color:var(--white);max-width:820px}
+.defbox{border-left:3px solid #111;background:var(--panel);padding:24px 28px;margin:24px 0}
+.defbox p{font-size:1.1rem;color:#111;max-width:800px}
 .defbox p+p{margin-top:14px}
 
 /* grids */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:26px}
-.card{background:var(--bg);padding:24px;transition:background .18s}
-.card:hover{background:var(--copper-faint)}
-.card h4{font-family:'Geist Mono',monospace;font-size:.92rem;font-weight:500;color:var(--white);margin-bottom:9px}
-.card p{color:var(--sub);font-size:.9rem;line-height:1.55}
-.tag{display:inline-block;font-family:'Geist Mono',monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--copper);border:1px solid var(--copper);padding:3px 6px;margin-top:12px;margin-right:5px}
-.tag-mute{color:var(--gray);border-color:var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:24px}
+.card{background:#fff;padding:22px}
+.card h4{font-family:var(--sans);font-size:.98rem;font-weight:600;color:#111;margin-bottom:8px}
+.card p{color:var(--sub);font-size:.93rem;line-height:1.55}
+.tag{display:inline-block;font-family:var(--monof);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#111;border:1px solid #111;padding:2px 6px;margin-top:12px;margin-right:5px}
+.tag-mute{color:#777;border-color:#bbb}
 
 /* table */
-.tw{overflow-x:auto;margin-top:26px}
-table{width:100%;border-collapse:collapse;font-size:.92rem}
-th,td{border-bottom:1px solid var(--rule);padding:13px 14px 13px 0;text-align:left;vertical-align:top}
-th{font-family:'Geist Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);font-weight:400}
-td{color:var(--sub)}
-td strong{color:var(--white);font-weight:500}
-td.m{font-family:'Geist Mono',monospace;font-size:.8rem;color:var(--white);white-space:nowrap}
+.tw{overflow-x:auto;margin-top:24px}
+table{width:100%;border-collapse:collapse;font-size:.93rem;font-family:var(--sans)}
+thead th{border-bottom:2px solid #111}
+th,td{border-bottom:1px solid var(--rule);padding:12px 14px 12px 0;text-align:left;vertical-align:top}
+th{font-family:var(--monof);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#111;font-weight:500}
+td{color:#333}
+td strong{color:#111;font-weight:600}
+td.m{font-family:var(--monof);font-size:.8rem;color:#111;white-space:nowrap}
 
 /* callout */
-.callout{border:1px solid var(--rule);background:var(--panel);padding:26px 28px;margin-top:26px}
-.callout p{color:var(--sub);font-size:.98rem;max-width:800px}
+.callout{border:1px solid var(--rule);border-left:3px solid #111;background:var(--panel);padding:24px 26px;margin-top:24px}
+.callout p{color:#333;font-size:.98rem;max-width:780px}
 .callout p+p{margin-top:12px}
-.callout strong{color:var(--white);font-weight:500}
+.callout strong{color:#111;font-weight:600}
 
 /* code / meta */
-pre{font-family:'Geist Mono',monospace;font-size:.8rem;border:1px solid var(--rule);border-left:2px solid var(--copper);padding:22px;color:var(--sub);overflow-x:auto;line-height:1.85;margin-top:22px}
-pre .k{color:var(--copper)}
+pre{font-family:var(--monof);font-size:.8rem;border:1px solid var(--rule);background:var(--panel);padding:20px;color:#222;overflow-x:auto;line-height:1.85;margin-top:22px}
+pre .k{color:#111;font-weight:500}
+pre a{text-decoration-color:#999}
 
 /* details */
-details{border-bottom:1px solid var(--rule);padding:18px 0}
-details summary{cursor:pointer;font-size:1.02rem;color:var(--white);font-weight:500;list-style:none}
+details{border-bottom:1px solid var(--rule);padding:16px 0}
+details summary{cursor:pointer;font-family:var(--sans);font-size:1.02rem;color:#111;font-weight:500;list-style:none}
 details summary::-webkit-details-marker{display:none}
-details summary::before{content:'+';color:var(--copper);font-family:'Geist Mono',monospace;margin-right:12px}
-details[open] summary::before{content:'−'}
-details p{color:var(--sub);font-size:.97rem;max-width:800px;margin-top:12px;padding-left:26px}
+details summary::before{content:'+';color:#111;font-family:var(--monof);margin-right:12px}
+details[open] summary::before{content:'\2212'}
+details p{color:var(--sub);font-size:.98rem;max-width:780px;margin-top:12px;padding-left:26px}
+
+/* figures */
+figure.fig{margin-top:26px}
+figure.fig svg{margin-top:0;border:1px solid var(--rule);background:#fff}
+figure.fig figcaption{font-family:var(--sans);font-size:.85rem;color:#444;margin-top:10px}
+figure.fig figcaption b{font-weight:600;color:#111}
 
 /* footer */
-footer{border-top:1px solid var(--rule);padding:44px 0 60px}
-footer .fin{font-family:'Geist Mono',monospace;font-size:.72rem;color:var(--gray);letter-spacing:.05em;line-height:2}
-footer .fin a{color:var(--copper)}
+footer{border-top:2px solid #111;padding:40px 0 60px}
+footer .fin{font-family:var(--monof);font-size:.72rem;color:#555;letter-spacing:.04em;line-height:2}
+footer .fin a{color:#111}
 
 svg{display:block;width:100%;height:auto;margin-top:26px}
 
+@media print{nav{display:none}section{padding:28px 0}}
 @media(max-width:720px){
   .navlinks{display:none}
-  section{padding:52px 0}
-  .hero{padding:56px 0 44px}
+  section{padding:48px 0}
+  .hero{padding:48px 0 36px}
+  .statusblock .row{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -290,12 +306,9 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 <!-- ─────────────────────────── HERO -->
 <div class="wrap">
 <section class="hero">
-  <div class="status">
-    <div class="dot"></div>
-    The Admissibility Protocol &nbsp;·&nbsp; v1.2 in force &nbsp;·&nbsp; v1.3 draft open for comment &nbsp;·&nbsp; Reference runner public
-  </div>
+  <div class="tp-kicker">AP-1 &nbsp;·&nbsp; Open standard &nbsp;·&nbsp; CC BY 4.0</div>
 
-  <h1>Numerical<br>Admissibility.</h1>
+  <h1>The Admissibility Protocol</h1>
 
   <p class="lede">An open standard for evaluating whether a consequential number produced by an AI system can actually be evidenced.</p>
 
@@ -303,10 +316,12 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <p class="prose">It addresses the problem also described as <strong>numerical hallucination</strong>, fabricated figures, tool bypass and ungrounded tool arguments in language models and AI agents, in aerospace, space, defense, robotics, pharmaceuticals, nuclear, finance and any domain where a computed figure is acted upon.</p>
 
-  <div class="vbox">
-    <strong>v1.2</strong> is the version in force. <strong>v1.3</strong> is published as a draft for public comment and is <strong>not adopted</strong>.<br>
-    Comment window closes 30 September 2026. Published CC-BY 4.0 — free to use, cite, implement and apply to any system, including its author's.<br>
-    The <strong>reference runner</strong> is public and MIT-licensed — executable by any party, against any system, without the author.
+  <div class="statusblock" role="table" aria-label="Status">
+    <div class="row" role="row"><div class="k" role="rowheader">Status &mdash; In force</div><div class="v" role="cell">AP-1 v1.2 &nbsp;·&nbsp; 15 July 2026 &nbsp;·&nbsp; <span class="mono"><a href="https://doi.org/10.5281/zenodo.21371684">10.5281/zenodo.21371684</a></span><span class="note">v1.2 was deposited twice on 15 July 2026. The second deposit, 10.5281/zenodo.21371684, is the text v1.3 corrects and is the version of record. See publisher comment C-21.</span></div></div>
+    <div class="row" role="row"><div class="k" role="rowheader">Status &mdash; Draft</div><div class="v" role="cell">AP-1 v1.3 &nbsp;·&nbsp; <strong>Not adopted</strong> &nbsp;·&nbsp; <span class="mono"><a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></span><span class="note">Comment window closed 30 September 2026. Comments are being dispositioned in the public record.</span></div></div>
+    <div class="row" role="row"><div class="k" role="rowheader">Reference instrument</div><div class="v" role="cell">Public, MIT-licensed &nbsp;·&nbsp; executable by any party, against any system, without the author</div></div>
+    <div class="row" role="row"><div class="k" role="rowheader">Licence</div><div class="v" role="cell">CC BY 4.0 &nbsp;·&nbsp; free to use, cite, implement and apply to any system, including its author&rsquo;s</div></div>
+    <div class="row" role="row"><div class="k" role="rowheader">Independent evaluation</div><div class="v" role="cell">None completed to date</div></div>
   </div>
 
   <div class="btns">
@@ -354,48 +369,51 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <p class="prose">Modern AI systems are assembled from models, agents, tools and data sources. Different protocols address different parts of that assembly. AP-1 addresses a distinct question: when such a system emits a consequential number, what evidence establishes how that number was produced?</p>
 
+  <figure class="fig">
   <svg viewBox="0 0 700 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Layer diagram: an AI or agent layer sits above A2A agent-to-agent communication and MCP agent-to-tool interaction, above the tool, data and computation layer. A consequential number then passes through the AP-1 numerical evidence layer before reaching the mission, business or safety system that relies on it.">
     <defs>
       <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M2 1L8 5L2 9" fill="none" stroke="#606672" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#666666" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </marker>
     </defs>
 
-    <rect x="40" y="8" width="620" height="58" fill="none" stroke="#262930"/>
-    <text x="350" y="32" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">AI · FOUNDATION MODEL · AGENT</text>
-    <text x="350" y="52" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">Interpretation, selection, inference</text>
-    <line x1="350" y1="66" x2="350" y2="86" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+    <rect x="40" y="8" width="620" height="58" fill="none" stroke="#BDBDBD"/>
+    <text x="350" y="32" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="2">AI · FOUNDATION MODEL · AGENT</text>
+    <text x="350" y="52" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11.5">Interpretation, selection, inference</text>
+    <line x1="350" y1="66" x2="350" y2="86" stroke="#666666" stroke-width="1.4" marker-end="url(#ar)"/>
 
-    <rect x="40" y="90" width="300" height="54" fill="none" stroke="#262930"/>
-    <text x="190" y="112" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12.5" letter-spacing="2">A2A</text>
-    <text x="190" y="131" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Agent ↔ agent communication</text>
+    <rect x="40" y="90" width="300" height="54" fill="none" stroke="#BDBDBD"/>
+    <text x="190" y="112" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12.5" letter-spacing="2">A2A</text>
+    <text x="190" y="131" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Agent ↔ agent communication</text>
 
-    <rect x="360" y="90" width="300" height="54" fill="none" stroke="#262930"/>
-    <text x="510" y="112" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12.5" letter-spacing="2">MCP</text>
-    <text x="510" y="131" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Agent ↔ tool and context</text>
+    <rect x="360" y="90" width="300" height="54" fill="none" stroke="#BDBDBD"/>
+    <text x="510" y="112" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12.5" letter-spacing="2">MCP</text>
+    <text x="510" y="131" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Agent ↔ tool and context</text>
 
-    <line x1="350" y1="144" x2="350" y2="164" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+    <line x1="350" y1="144" x2="350" y2="164" stroke="#666666" stroke-width="1.4" marker-end="url(#ar)"/>
 
-    <rect x="40" y="168" width="620" height="58" fill="none" stroke="#262930"/>
-    <text x="350" y="192" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">TOOL · DATA · DETERMINISTIC COMPUTATION</text>
-    <text x="350" y="212" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">APIs, databases, calculators, engines</text>
+    <rect x="40" y="168" width="620" height="58" fill="none" stroke="#BDBDBD"/>
+    <text x="350" y="192" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="2">TOOL · DATA · DETERMINISTIC COMPUTATION</text>
+    <text x="350" y="212" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11.5">APIs, databases, calculators, engines</text>
 
-    <line x1="350" y1="226" x2="350" y2="252" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
-    <text x="360" y="245" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11" font-style="italic">a consequential number</text>
+    <line x1="350" y1="226" x2="350" y2="252" stroke="#666666" stroke-width="1.4" marker-end="url(#ar)"/>
+    <text x="360" y="245" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11" font-style="italic">a consequential number</text>
 
-    <rect x="40" y="256" width="620" height="122" fill="rgba(185,138,70,.05)" stroke="#B98A46" stroke-width="1.6"/>
-    <text x="350" y="286" text-anchor="middle" fill="#B98A46" font-family="Geist Mono,monospace" font-size="15" letter-spacing="5">AP-1</text>
-    <text x="350" y="309" text-anchor="middle" fill="#ECEAE3" font-family="Geist Sans,sans-serif" font-size="12.5">The numerical evidence layer</text>
-    <line x1="120" y1="325" x2="580" y2="325" stroke="#262930"/>
-    <text x="350" y="348" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="11.5" letter-spacing="1.5">COMPUTED · TRACEABLE · REPRODUCIBLE · REFUSABLE</text>
-    <text x="350" y="367" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Did the computation run, and were its operands authoritative?</text>
+    <rect x="40" y="256" width="620" height="122" fill="#F4F4F2" stroke="#111111" stroke-width="1.6"/>
+    <text x="350" y="286" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="15" letter-spacing="5">AP-1</text>
+    <text x="350" y="309" text-anchor="middle" fill="#111111" font-family="IBM Plex Sans,sans-serif" font-size="12.5">The numerical evidence layer</text>
+    <line x1="120" y1="325" x2="580" y2="325" stroke="#BDBDBD"/>
+    <text x="350" y="348" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="11.5" letter-spacing="1.5">COMPUTED · TRACEABLE · REPRODUCIBLE · REFUSABLE</text>
+    <text x="350" y="367" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Did the computation run, and were its operands authoritative?</text>
 
-    <line x1="350" y1="378" x2="350" y2="398" stroke="#606672" stroke-width="1.4" marker-end="url(#ar)"/>
+    <line x1="350" y1="378" x2="350" y2="398" stroke="#666666" stroke-width="1.4" marker-end="url(#ar)"/>
 
-    <rect x="40" y="402" width="620" height="58" fill="none" stroke="#262930"/>
-    <text x="350" y="426" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="13" letter-spacing="2">MISSION · BUSINESS · SAFETY SYSTEM</text>
-    <text x="350" y="446" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11.5">A number acted upon, recorded, regulated or relied upon</text>
+    <rect x="40" y="402" width="620" height="58" fill="none" stroke="#BDBDBD"/>
+    <text x="350" y="426" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="13" letter-spacing="2">MISSION · BUSINESS · SAFETY SYSTEM</text>
+    <text x="350" y="446" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11.5">A number acted upon, recorded, regulated or relied upon</text>
   </svg>
+  <figcaption><b>Figure 1</b> &mdash; Where AP-1 sits: the numerical evidence layer between computation and the system that relies on the number.</figcaption>
+</figure>
 
   <div class="callout">
     <p><strong>An MCP implementation can provide evidence that a tool was called. An A2A implementation can provide evidence that agents communicated.</strong></p>
@@ -423,50 +441,53 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <p class="prose">The failure crosses a boundary none of those five controls watch. Controls that check the provenance of each tool argument do watch it, and enforce there (see <a href="#priorart">prior art</a>). AP-1 therefore separates <strong>computation invocation</strong> — did the required computation run — from <strong>operand provenance</strong> — did every value entering it have an evidentiary basis.</p>
 
+  <figure class="fig">
   <svg viewBox="0 0 700 396" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of the operand boundary. Source data supplies one operand and the model supplies a second operand that appears nowhere in the source. Both cross into a deterministic tool, which executes correctly and returns an arithmetically correct but evidentially unsupported result. Five existing controls — invocation verification, execution contracts, entailment checking, data lineage and output review — all pass, because none of them watches the boundary the second operand crosses.">
     <defs>
       <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M2 1L8 5L2 9" fill="none" stroke="#606672" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#666666" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </marker>
       <marker id="aoc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M2 1L8 5L2 9" fill="none" stroke="#B98A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#111111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
       </marker>
     </defs>
 
-    <rect x="18" y="8" width="300" height="52" fill="none" stroke="#262930"/>
-    <text x="168" y="30" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">AUTHORITATIVE SOURCE DATA</text>
-    <text x="168" y="48" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Clean. Lineage intact. Not the failure.</text>
+    <rect x="18" y="8" width="300" height="52" fill="none" stroke="#BDBDBD"/>
+    <text x="168" y="30" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="1.6">AUTHORITATIVE SOURCE DATA</text>
+    <text x="168" y="48" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Clean. Lineage intact. Not the failure.</text>
 
-    <rect x="342" y="8" width="300" height="52" fill="none" stroke="#B98A46"/>
-    <text x="492" y="30" text-anchor="middle" fill="#B98A46" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">GENERATIVE MODEL</text>
-    <text x="492" y="48" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Selects the values it passes onward</text>
+    <rect x="342" y="8" width="300" height="52" fill="none" stroke="#111111"/>
+    <text x="492" y="30" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="1.6">GENERATIVE MODEL</text>
+    <text x="492" y="48" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Selects the values it passes onward</text>
 
-    <line x1="168" y1="60" x2="168" y2="150" stroke="#606672" stroke-width="1.4" marker-end="url(#ao)"/>
-    <text x="178" y="98" fill="#606672" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1">operand A</text>
-    <text x="178" y="114" fill="#606672" font-family="Geist Sans,sans-serif" font-size="10.5">appears in the source</text>
+    <line x1="168" y1="60" x2="168" y2="150" stroke="#666666" stroke-width="1.4" marker-end="url(#ao)"/>
+    <text x="178" y="98" fill="#666666" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1">operand A</text>
+    <text x="178" y="114" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="10.5">appears in the source</text>
 
-    <line x1="492" y1="60" x2="492" y2="150" stroke="#B98A46" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#aoc)"/>
-    <text x="502" y="98" fill="#B98A46" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1">operand B</text>
-    <text x="502" y="114" fill="#B98A46" font-family="Geist Sans,sans-serif" font-size="10.5">appears nowhere in the source</text>
+    <line x1="492" y1="60" x2="492" y2="150" stroke="#111111" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#aoc)"/>
+    <text x="502" y="98" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1">operand B</text>
+    <text x="502" y="114" fill="#111111" font-family="IBM Plex Sans,sans-serif" font-size="10.5">appears nowhere in the source</text>
 
-    <line x1="18" y1="152" x2="642" y2="152" stroke="#B98A46" stroke-width="1.4"/>
-    <text x="18" y="144" fill="#B98A46" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="2.4">THE OPERAND BOUNDARY</text>
+    <line x1="18" y1="152" x2="642" y2="152" stroke="#111111" stroke-width="1.4"/>
+    <text x="330" y="144" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="2.4">THE OPERAND BOUNDARY</text>
 
-    <rect x="18" y="166" width="624" height="56" fill="none" stroke="#262930"/>
-    <text x="330" y="189" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">DETERMINISTIC COMPUTATION</text>
-    <text x="330" y="208" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Invoked correctly. Executes exactly as specified. Arithmetic is exact.</text>
+    <rect x="18" y="166" width="624" height="56" fill="none" stroke="#BDBDBD"/>
+    <text x="330" y="189" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="1.6">DETERMINISTIC COMPUTATION</text>
+    <text x="330" y="208" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Invoked correctly. Executes exactly as specified. Arithmetic is exact.</text>
 
-    <line x1="330" y1="222" x2="330" y2="246" stroke="#606672" stroke-width="1.4" marker-end="url(#ao)"/>
+    <line x1="330" y1="222" x2="330" y2="246" stroke="#666666" stroke-width="1.4" marker-end="url(#ao)"/>
 
-    <rect x="18" y="250" width="624" height="56" fill="rgba(185,138,70,.05)" stroke="#B98A46" stroke-width="1.4"/>
-    <text x="330" y="273" text-anchor="middle" fill="#ECEAE3" font-family="Geist Mono,monospace" font-size="12" letter-spacing="1.6">RELEASED FIGURE</text>
-    <text x="330" y="292" text-anchor="middle" fill="#606672" font-family="Geist Sans,sans-serif" font-size="11">Arithmetically consistent with its inputs. Evidentially unsupported.</text>
+    <rect x="18" y="250" width="624" height="56" fill="#F4F4F2" stroke="#111111" stroke-width="1.4"/>
+    <text x="330" y="273" text-anchor="middle" fill="#111111" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="1.6">RELEASED FIGURE</text>
+    <text x="330" y="292" text-anchor="middle" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="11">Arithmetically consistent with its inputs. Evidentially unsupported.</text>
 
-    <line x1="18" y1="330" x2="642" y2="330" stroke="#262930"/>
-    <text x="18" y="352" fill="#606672" font-family="Geist Mono,monospace" font-size="10.5" letter-spacing="1.6">CONTROLS THAT PASS THIS CASE</text>
-    <text x="18" y="374" fill="#9AA0AC" font-family="Geist Sans,sans-serif" font-size="11">Invocation verification · Execution contracts · Output grounding and entailment · Data lineage · Output review</text>
-    <text x="18" y="390" fill="#606672" font-family="Geist Sans,sans-serif" font-size="10.5" font-style="italic">Each is correct within its own scope. None watches the boundary operand B crosses.</text>
+    <line x1="18" y1="330" x2="642" y2="330" stroke="#BDBDBD"/>
+    <text x="18" y="352" fill="#666666" font-family="IBM Plex Mono,monospace" font-size="10.5" letter-spacing="1.6">CONTROLS THAT PASS THIS CASE</text>
+    <text x="18" y="374" fill="#444444" font-family="IBM Plex Sans,sans-serif" font-size="11">Invocation verification · Execution contracts · Output grounding and entailment · Data lineage · Output review</text>
+    <text x="18" y="390" fill="#666666" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-style="italic">Each is correct within its own scope. None watches the boundary operand B crosses.</text>
   </svg>
+  <figcaption><b>Figure 2</b> &mdash; The operand boundary: a correct computation over an operand the model supplied.</figcaption>
+</figure>
 
   <p class="small" style="margin-top:18px">The quantitative operand-provenance findings remain <strong style="color:var(--white);font-weight:500">withdrawn under Erratum E3</strong>. Corrected figures will be published only once they can be reproduced from a published release. The mechanism described above is not in question; the measured rates are. See the correction record below.</p>
 </section>
@@ -615,10 +636,10 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
     <tbody>
       <tr><td class="m">v1.0</td><td class="m">Jul 2026</td><td>Initial publication</td><td>Superseded — permanently citable</td></tr>
       <tr><td class="m">v1.1</td><td class="m">Jul 2026</td><td>D7 prior-work citation; capability vs control</td><td>Superseded — permanently citable</td></tr>
-      <tr><td class="m">v1.2</td><td class="m">15 Jul 2026</td><td><strong>In force</strong></td><td>Deposited · <a href="https://doi.org/10.5281/zenodo.21371684">10.5281/zenodo.21371684</a></td></tr>
+      <tr><td class="m">v1.2</td><td class="m">15 Jul 2026</td><td><strong>In force</strong></td><td>Deposited · <a href="https://doi.org/10.5281/zenodo.21371684">10.5281/zenodo.21371684</a><br><span class="small">v1.2 was deposited twice on 15 July 2026. The second deposit, 10.5281/zenodo.21371684, is the text v1.3 corrects and is the version of record. See publisher comment C-21.</span></td></tr>
       <tr><td class="m">OSF registration</td><td class="m">15 Aug 2026</td><td>Measurement method and analysis plan, registered after the V1 and reference runs. Registers the method, not any individual evaluation run.</td><td><a href="https://osf.io/y97d8">OSF · timestamped, immutable</a></td></tr>
       <tr><td class="m">Erratum V1</td><td class="m">26 Jul 2026</td><td>Eight defect classes recorded; affected findings withdrawn</td><td>Published in full</td></tr>
-      <tr><td class="m">v1.3</td><td class="m">30 Jul 2026</td><td>Draft for public comment — <strong>not adopted</strong></td><td>Comment window closes 30 Sep 2026 · <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></td></tr>
+      <tr><td class="m">v1.3</td><td class="m">30 Jul 2026</td><td>Draft — comment window closed; <strong>not adopted</strong></td><td>Comment window closed 30 Sep 2026 · <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></td></tr>
       <tr><td class="m">Reference runner</td><td class="m">29 Aug 2026</td><td>Tagged release <span class="mono">ap1-runner-v1.0.0</span>, published under MIT licence. Suite and check totals are reported by the runner at execution.</td><td><a href="https://github.com/zorrzai/ap1-run">github.com/zorrzai/ap1-run</a></td></tr>
     </tbody>
   </table>
@@ -630,8 +651,8 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 <span class="k">V1.3 DEPOSIT</span>    <a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a>  (draft for comment, not adopted)
 <span class="k">OSF REGISTRATION</span> <a href="https://osf.io/y97d8">osf.io/y97d8</a>  (registers the method, not any individual run)
 <span class="k">IN FORCE</span>        v1.2
-<span class="k">DRAFT</span>           v1.3 — public comment, not adopted
-<span class="k">WINDOW</span>          Closes 30 September 2026
+<span class="k">DRAFT</span>           v1.3 — comment window closed, not adopted
+<span class="k">WINDOW</span>          Closed 30 September 2026; comments being dispositioned
 <span class="k">LICENCE</span>         Creative Commons Attribution 4.0 (CC-BY 4.0)
 <span class="k">AUTHOR</span>          Marcus Rupp
 <span class="k">PUBLISHER</span>       ZORRZ Financial Inc.
@@ -895,7 +916,7 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
 <div class="wrap">
 <section id="comment">
   <h2>How to comment on v1.3</h2>
-  <h3>The window closes 30 September 2026. Every substantive comment receives a published disposition.</h3>
+  <h3>The window closed 30 September 2026. Every substantive comment receives a published disposition.</h3>
 
   <p class="prose">AP-1 v1.3 is a draft. It is not adopted, and it will not be adopted without a public comment period. Comments received in this window shape what becomes v1.4. The standard is not revised silently, retroactively, or to accommodate any single system's result.</p>
 
@@ -922,7 +943,7 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
   <table>
     <thead><tr><th>Item</th><th>Position</th></tr></thead>
     <tbody>
-      <tr><td class="m">Window</td><td>Opens on publication of the v1.3 draft; closes <strong>30 September 2026</strong>. Late comments are recorded and carried to the following revision rather than discarded.</td></tr>
+      <tr><td class="m">Window</td><td>Opened on publication of the v1.3 draft; closed <strong>30 September 2026</strong>. Late comments are recorded and carried to the following revision rather than discarded.</td></tr>
       <tr><td class="m">Attribution</td><td>Comments are public and attributed to the sender by name and, where given, affiliation. Anonymity is available on request and does not reduce the weight given to a comment.</td></tr>
       <tr><td class="m">Affiliation</td><td>Stating an employer is optional. A comment made in a personal capacity is recorded as such and implies no institutional position or endorsement.</td></tr>
       <tr><td class="m">Scope</td><td>Any part of the draft, including the framing, the versioning decision, and whether a proposed change belongs in a successor protocol rather than a point release.</td></tr>
@@ -977,10 +998,10 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
       <div style="color:var(--white);letter-spacing:.16em">AP-1 — THE ADMISSIBILITY PROTOCOL</div>
       <div>Open standard for evaluating numerical admissibility in AI systems</div>
       <div>CC-BY 4.0 &nbsp;·&nbsp; v1.2 <a href="https://doi.org/10.5281/zenodo.21371684">10.5281/zenodo.21371684</a> &nbsp;·&nbsp; concept <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21324954</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/admissibility-protocol">Repository</a> &nbsp;·&nbsp; <a href="https://github.com/zorrzai/ap1-run">Instrument (MIT)</a></div>
-      <div style="color:var(--meta);margin-top:14px;max-width:820px;line-height:1.7;text-transform:none;letter-spacing:0;font-family:'Geist Sans',sans-serif;font-size:.8rem">
+      <div style="color:var(--meta);margin-top:14px;max-width:820px;line-height:1.7;text-transform:none;letter-spacing:0;font-family:'IBM Plex Sans',sans-serif;font-size:.8rem">
         AP-1 is an openly published, versioned standard authored by Marcus Rupp and published by ZORRZ Financial Inc. It is not an accredited or consensus standard and has no independent implementations to date. It is not endorsed by or affiliated with any agency, institution or standards body referenced on this page. Nothing here constitutes regulatory, engineering, safety, financial, medical or legal certification. Descriptions of external regulatory instruments are indicative, are not legal advice, and should be confirmed with qualified counsel.
       </div>
-      <div style="color:var(--meta);margin-top:14px">Regulatory descriptions on this page last reviewed 26 September 2026. Standard v1.2 in force; v1.3 draft open for comment.</div>
+      <div style="color:var(--meta);margin-top:14px">Regulatory descriptions on this page last reviewed 26 September 2026. Standard v1.2 in force; v1.3 comment window closed 30 September 2026.</div>
       <div style="color:var(--meta);margin-top:14px">OPEN &nbsp;·&nbsp; VERSIONED &nbsp;·&nbsp; AUTHOR-TESTED</div>
     </div>
   </div>
