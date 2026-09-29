@@ -9,10 +9,10 @@
 > Published CC-BY 4.0 by ZORRZ Financial Inc. Cite v1.2, the version in force, by its
 > version DOI 10.5281/zenodo.21371684.
 
-Status as of 27 September 2026:
+Status as of 1 October 2026:
 
-- v1.2 is in force. v1.3 is a draft for public comment and is NOT adopted; the comment window closes 30 September 2026.
-- Citation rule: cite v1.2 by its version DOI, 10.5281/zenodo.21371684. The concept DOI, 10.5281/zenodo.21324954, refers to the standard generally and currently resolves to the v1.3 draft.
+- v1.2 is in force. v1.3 is a draft and is NOT adopted; its comment window closed 30 September 2026, and comments are being dispositioned in the public record.
+- Citation rule: cite v1.2 by its version DOI, 10.5281/zenodo.21371684. The concept DOI, 10.5281/zenodo.21324954, refers to the standard generally and currently resolves to the v1.3 draft. v1.2 was deposited twice on 15 July 2026. The second deposit, 10.5281/zenodo.21371684, is the text v1.3 corrects and is the version of record. See publisher comment C-21.
 - The reference runner is public under the MIT licence (release ap1-runner-v1.0.0, 29 August 2026). A run against the fixture shipped with it is a demonstration, not a conformant evaluation.
 - AP-1 issues no certification, keeps no registry, charges no fee, and produces no aggregate score or pass mark. It confers no regulatory compliance.
 - AP-1 does not use an LLM-as-a-judge: no language model executes in its scoring path.
@@ -49,4 +49,4 @@ Not to be confused with:
 - [Canonical site](https://numericaladmissibility.org/): the human-readable page, including the publication record, correction record, prior art and governance status.
 - [OSF registration](https://doi.org/10.17605/OSF.IO/Y97D8): registers the measurement method and analysis plan, not any individual evaluation run. Filed 15 August 2026, after the V1 and reference runs. Timestamped and immutable.
 - [Standard repository](https://github.com/zorrzai/admissibility-protocol): frozen run artifact, evaluation harness, sealed question set, disposition record, citation metadata.
-- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): open until 30 September 2026.
+- [Comment on v1.3](https://github.com/zorrzai/admissibility-protocol/issues): comment window closed 30 September 2026; late comments are carried to the following revision.
