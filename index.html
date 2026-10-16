@@ -318,7 +318,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 
   <div class="statusblock" role="table" aria-label="Status">
     <div class="row" role="row"><div class="k" role="rowheader">Status &mdash; In force</div><div class="v" role="cell">AP-1 v1.2 &nbsp;·&nbsp; 15 July 2026 &nbsp;·&nbsp; <span class="mono"><a href="https://doi.org/10.5281/zenodo.21371684">10.5281/zenodo.21371684</a></span><span class="note">v1.2 was deposited twice on 15 July 2026. The second deposit, 10.5281/zenodo.21371684, is the text v1.3 corrects and is the version of record. See publisher comment C-21.</span></div></div>
-    <div class="row" role="row"><div class="k" role="rowheader">Status &mdash; Draft</div><div class="v" role="cell">AP-1 v1.3 &nbsp;·&nbsp; <strong>Not adopted</strong> &nbsp;·&nbsp; <span class="mono"><a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></span><span class="note">Comment window closed 30 September 2026. Comments are being dispositioned in the public record.</span></div></div>
+    <div class="row" role="row"><div class="k" role="rowheader">Status &mdash; Draft</div><div class="v" role="cell">AP-1 v1.3 &nbsp;·&nbsp; <strong>Not adopted</strong> &nbsp;·&nbsp; <span class="mono"><a href="https://doi.org/10.5281/zenodo.21755443">10.5281/zenodo.21755443</a></span><span class="note">Comment window closed 30 September 2026. Every comment received in the window is dispositioned in the public record; one late comment is carried to the v1.4 cycle.</span></div></div>
     <div class="row" role="row"><div class="k" role="rowheader">Reference instrument</div><div class="v" role="cell">Public, MIT-licensed &nbsp;·&nbsp; executable by any party, against any system, without the author</div></div>
     <div class="row" role="row"><div class="k" role="rowheader">Licence</div><div class="v" role="cell">CC BY 4.0 &nbsp;·&nbsp; free to use, cite, implement and apply to any system, including its author&rsquo;s</div></div>
     <div class="row" role="row"><div class="k" role="rowheader">Independent evaluation</div><div class="v" role="cell">None completed to date</div></div>
@@ -652,7 +652,7 @@ svg{display:block;width:100%;height:auto;margin-top:26px}
 <span class="k">OSF REGISTRATION</span> <a href="https://osf.io/y97d8">osf.io/y97d8</a>  (registers the method, not any individual run)
 <span class="k">IN FORCE</span>        v1.2
 <span class="k">DRAFT</span>           v1.3 — comment window closed, not adopted
-<span class="k">WINDOW</span>          Closed 30 September 2026; comments being dispositioned
+<span class="k">WINDOW</span>          Closed 30 September 2026; comments dispositioned in the public record
 <span class="k">LICENCE</span>         Creative Commons Attribution 4.0 (CC-BY 4.0)
 <span class="k">AUTHOR</span>          Marcus Rupp
 <span class="k">PUBLISHER</span>       ZORRZ Financial Inc.
@@ -730,7 +730,7 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
       <tr><td class="m" colspan="4" style="color:var(--copper);padding-top:26px">Series 2 — published findings &nbsp;·&nbsp; <a href="https://github.com/zorrzai/ap1-run/blob/main/FINDINGS_ERRATA.md">ap1-run / FINDINGS_ERRATA.md</a></td></tr>
       <tr><td class="m">E1</td><td class="m">12 Aug 2026</td><td>F6 per-item summary attributed originated operands to the wrong mechanisms.</td><td>None. Prose corrected by generating per-item breakdowns from the artifact.</td></tr>
       <tr><td class="m">E2</td><td class="m">28 Aug 2026</td><td>F3 stated the platform rejected <span class="mono">temperature=0</span>; temperature was never transmitted.</td><td>None. The OBSERVED-ONLY classification stands; its stated basis was wrong.</td></tr>
-      <tr><td class="m">E3</td><td class="m">28 Aug 2026</td><td>The Q07 derivation declared a constant its computation never used, so D7.2(a) grounding was inflated.</td><td><strong>D7.2(a) operand-provenance counts and percentages withdrawn for both runs.</strong> Not to be cited.</td></tr>
+      <tr><td class="m">E3</td><td class="m">28 Aug 2026</td><td>At the seal, Q07 declared the constant 4 as a domain constant (quarters per year), and every August use of it divided an annual figure by four, a route the instrument&rsquo;s tests accepted. The figures are not shown to overstate grounding. What was wrong is how 4 entered the declared set: it was added during construction to make a development run of gpt-5.6-sol resolve, the class of change disposition C-2 addresses. Corrected by addition (C10).</td><td><strong>D7.2(a) operand-provenance counts and percentages withdrawn for both runs.</strong> Not to be cited.</td></tr>
       <tr><td class="m">E3 Addendum</td><td class="m">8 Sep 2026</td><td>Addendum to E3 concerning restoration of the D7.2(a) figures.</td><td>In effect from 3 October 2026, when the code state of the two fresh runs was published as release <code>e7-quantise-fix</code>. The original runs&rsquo; figures remain withdrawn; the restored figures come from the fresh runs. One statement in the Addendum is corrected by addition (C5).</td></tr>
       <tr><td class="m">E4</td><td class="m">29 Aug 2026</td><td>The run disclaimer stated R2.4 was not built; R2.4 is built and reported.</td><td>None. The disclaimer understated the instrument.</td></tr>
       <tr><td class="m">E5</td><td class="m">7 Sep 2026</td><td>The D7.2(b) classifier scored valid alternative derivations as WRONG-OPERATION.</td><td>Published D7.2(b) WRONG-OPERATION figures affected (F5, F7, F9).</td></tr>
@@ -738,19 +738,20 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
       <tr><td class="m">E7</td><td class="m">8 Sep 2026</td><td>The D7.3 transcription check existed in code but was never called on the run path; replaced by a release-coverage check.</td><td>No valid D7.3 measurement in the original runs. Release coverage is reported as a new measure.</td></tr>
       <tr><td class="m">F10</td><td class="m">8 Sep 2026</td><td>Amendment: supplementary run data.</td><td>New findings section, from the September runs. In effect with the E3 Addendum from 3 October 2026.</td></tr>
       <tr><td class="m">F11</td><td class="m">8 Sep 2026</td><td>Amendment: models transcribe clean calculator returns faithfully.</td><td>New findings section.</td></tr>
+      <tr><td class="m">C1&ndash;C10</td><td class="m">3&ndash;16 Oct 2026</td><td>Corrections by addition to E3, the E3 Addendum, E5, E6, E7 and F11, each with the commands that check it. C10 corrects the stated basis of the E3 withdrawal: AP-1 &sect;5.8 does not govern re-scoring.</td><td>No published figure, verdict or withdrawal changes. Original entries are left as published.</td></tr>
     </tbody>
   </table>
   </div>
 
   <div class="callout">
     <p><strong>Why E3 was withdrawn rather than corrected.</strong></p>
-    <p>The obvious remedy is to re-score the stored transcripts against the corrected constant set. That remedy is not available. The provenance classifier changed across three commits since the runs, one of them during the second run's execution, so re-scoring would apply the constant correction and every classifier change since, and could not separate them. The classifier's tool-call grouping also changed, which alters the invocation population itself rather than only the per-invocation outcome. Two re-scoring attempts produced materially different results, and one produced a grounded-plus-originated total exceeding the invocation population.</p>
-    <p>AP-1 §5.8 requires re-execution rather than re-scoring across a ground-truth revision. That clause was applied to the publisher's own evaluation, at the cost of withdrawing the most prominent quantitative findings from the published record.</p>
+    <p>The obvious remedy is to re-score the stored transcripts against the corrected constant set. When E3 was written, no classification change had followed the runs that would have prevented this (C7, C10), and under disposition C-7 a change to the declared constant set is a scoring change, for which re-analysis is valid. Two re-scoring attempts produced materially different results, and one produced a grounded-plus-originated total exceeding the invocation population. That impossible total came from a record-pairing defect in the second attempt&rsquo;s script (C10).</p>
+    <p>The withdrawal stands because 4 entered the declared set during construction to make a run resolve, and because the two attempts were not reconciled at the time. It does not rest on a finding that those operands were inadmissible. AP-1 §5.8 is the burned-set rule and says nothing about re-scoring (C10).</p>
   </div>
 
   <div class="callout">
     <p><strong>How E3 was found, which is the part that matters.</strong></p>
-    <p>It was found by <span class="mono">verify_run_seal.py</span> on its first execution, checking whether a published run's seal reproduced from its published artifacts. It reported a ground-truth hash mismatch on both runs, which led to the diff and then to the unused constant. <strong>Twelve adversarial review passes over the same repository did not find it.</strong> The constant had been removed eight days earlier as a documentation cleanup, with no mechanism indicating that the edit invalidated two sealed runs.</p>
+    <p>It was found by <span class="mono">verify_run_seal.py</span> on its first execution, checking whether a published run's seal reproduced from its published artifacts. It reported a ground-truth hash mismatch on both runs, which led to the diff and then to the unused constant. <strong>Twelve adversarial review passes over the same repository did not find it.</strong> The constant had been removed on 16 August 2026, twelve days earlier, as a documentation cleanup, with no mechanism indicating that the edit invalidated two sealed runs.</p>
     <p>This is the argument for mechanical verification stated against the publisher's own work: a seal that is checked catches what careful reading does not. It is also the reason the seal verifier exits non-zero on these runs and will continue to, rather than being reset to green.</p>
   </div>
 
@@ -867,7 +868,7 @@ Concept DOI: <a href="https://doi.org/10.5281/zenodo.21324954">10.5281/zenodo.21
     <div class="card"><h4>Observation versus structure</h4><p>An observed rate is not treated as a universal guarantee. A structural mechanism that makes a failure unrepresentable is stronger evidence than an absence of failure in a finite sample.</p></div>
     <div class="card"><h4>Ground truth is a separate question</h4><p>Deterministic scoring does not imply independent ground truth. The fixture and expected values published with the runner were authored by an AI coding agent, not derived from an independent source. Independent construction of expected values is therefore treated as a separate conformance requirement, and is currently unmet.</p></div>
     <div class="card"><h4>Declared authority, measured conformance</h4><p>AP-1 does not designate which sources are authoritative, nor does it establish whether a source is correct. The source hierarchy, permitted transformations and declared constants must be fixed before execution; AP-1 measures conformance to that declared evidence chain.</p></div>
-    <div class="card"><h4>Re-execution, not re-scoring</h4><p>Results are not portable across a revision of the ground truth. Where the fixture or its expected values change after a seal, the correct remedy is re-execution — as applied to the author's own withdrawn findings.</p></div>
+    <div class="card"><h4>Re-analysis or re-execution</h4><p>Transcripts are portable across scoring changes &mdash; the declared constant set, the permitted transformations, the ground-truth derivation &mdash; where re-analysis is valid. They are not portable across fixture changes, where re-execution is required. This is disposition C-7, accepted for v1.4.</p></div>
   </div>
 </section>
 </div>
